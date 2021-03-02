@@ -16,6 +16,15 @@
 */
 class ilObjLanguageAccess
 {
+    
+      /**
+     * Cached result of permission check for page translation
+     * @var bool
+     */
+    protected static $cached_check_translate;
+
+
+
     /**
     * Permission check for translations
     *
@@ -33,16 +42,28 @@ class ilObjLanguageAccess
         $ilSetting = $DIC->settings();
         $ilUser = $DIC->user();
         $rbacsystem = $DIC->rbac()->system();
+        
+          if (isset(self::$cached_check_translate)) {
+            return self::$cached_check_translate;
+        }
 
         if (!$ilSetting->get("lang_translate_" . $lng->getLangKey())) {
-            return false;
+//            return false;
+            self::$cached_check_translate = false;
         }
 
         if ($ilUser->getId()) {
             $ref_id = self::_lookupLangFolderRefId();
-            return $rbacsystem->checkAccess("read,write", (int) $ref_id);
+//            return $rbacsystem->checkAccess("read,write", (int) $ref_id);
+             self::$cached_check_translate =  $rbacsystem->checkAccess("read,write", (int) $ref_id);
         }
-        return false;
+//        return false;
+              else {
+            self::$cached_check_translate = false;
+        }
+
+        return self::$cached_check_translate;
+        
     }
 
 
@@ -139,15 +160,23 @@ class ilObjLanguageAccess
 
 
     /**
-     * Store the collected usages in the user session
+     * Store the collected language variable usages in the user session
+     * This should be called as late as possible in a request
+     * 
+     * 
      */
     public static function _saveUsages()
     {
         global $DIC;
         $lng = $DIC->language();
 
-        $_SESSION['lang_ext_maintenance']['used_modules'] = array_keys($lng->getUsedModules());
-        $_SESSION['lang_ext_maintenance']['used_topics'] = array_keys($lng->getUsedTopics());
+//        $_SESSION['lang_ext_maintenance']['used_modules'] = array_keys($lng->getUsedModules());
+//        $_SESSION['lang_ext_maintenance']['used_topics'] = array_keys($lng->getUsedTopics());
+        if (self::_checkTranslate() and !self::_isPageTranslation()) {
+           $_SESSION['lang_ext_maintenance']['used_modules'] = array_keys($lng->getUsedModules());
+           $_SESSION['lang_ext_maintenance']['used_topics'] = array_keys($lng->getUsedTopics());
+        }
+        
     }
 
     /**

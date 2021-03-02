@@ -32,6 +32,27 @@ class ilObjLanguageFolderGUI extends ilObjectGUI
         $this->lng->loadLanguageModule('lng');
     }
 
+    
+//    public function base()
+//    {
+//        global $DIC;
+//        $factory = $DIC->ui()->factory();
+//        $renderer = $DIC->ui()->renderer();
+//
+//        $message1 = 'Toggle Button has been turned on';
+//        $message2 = 'Toggle Button has been turned off';
+//        $form_action = $DIC->ctrl()->getFormActionByClass('ilsystemstyledocumentationgui');
+//
+//        $modal = $factory->modal()->interruptive('ON', $message1, $form_action);
+//        $modal2 = $factory->modal()->interruptive('OFF', $message2, $form_action);
+//
+//        //Note, important do not miss to set a proper aria-label (see rules above).
+//        //Note that aria-pressed is taken care off by the default implementation.
+//        $button = $factory->button()->toggle("", $modal->getShowSignal(), $modal2->getShowSignal())
+//            ->withAriaLabel("Switch the State of XY");
+//
+//        return $renderer->render([$button, $modal, $modal2]);
+//    }
     /**
      * show installed languages
      *
@@ -54,20 +75,31 @@ class ilObjLanguageFolderGUI extends ilObjectGUI
             $check->setCaption("check_languages");
             $this->toolbar->addButtonInstance($check);
 
-
+            
+            
+            
             if (!$this->settings->get('lang_detection')) {
                 $detect = ilLinkButton::getInstance();
                 $detect->setUrl($this->ctrl->getLinkTarget($this, "enableLanguageDetection"));
                 $detect->setCaption("lng_enable_language_detection");
                 $this->toolbar->addButtonInstance($detect);
+                
+                //BFX-0029675
+                $this->toolbar->addText($this->toogleButtonAutomatLangDetection("disableLanguageDetection", "enableLanguageDetection"), true);
+
+                
             } else {
                 $detect = ilLinkButton::getInstance();
                 $detect->setUrl($this->ctrl->getLinkTarget($this, "disableLanguageDetection"));
                 $detect->setCaption("lng_disable_language_detection");
                 $this->toolbar->addButtonInstance($detect);
-            }
-        }
 
+                //BFX-0029675
+                $this->toolbar->addText($this->toogleButtonAutomatLangDetection( "enableLanguageDetection", "disableLanguageDetection"), true);
+            }
+            
+        }
+        
         $ilClientIniFile = $DIC['ilClientIniFile'];
         if ($ilClientIniFile->variableExists('system', 'LANGUAGE_LOG')) {
             $download = ilLinkButton::getInstance();
@@ -75,11 +107,36 @@ class ilObjLanguageFolderGUI extends ilObjectGUI
             $download->setCaption("lng_download_deprecated");
             $this->toolbar->addButtonInstance($download);
         }
-
         $ltab = new ilLanguageTableGUI($this, "view", $this->object);
         $this->tpl->setContent($ltab->getHTML());
     }
 
+    
+    /**
+     * BFX-0029675
+     * 
+     * @global type $DIC
+     * @param type $fromStatus
+     * @param type $toStatus
+     * @return type                
+     */
+    protected function toogleButtonAutomatLangDetection($fromStatus, $toStatus){
+        
+        global $DIC;
+        
+        $factory = $DIC->ui()->factory();
+        $renderer = $DIC->ui()->renderer();
+
+        $action1 = $DIC->ctrl()->getLinkTarget($this, $fromStatus);
+        $action2 = $DIC->ctrl()->getLinkTarget($this, $toStatus);
+
+        $button = $factory->button()->toggle("", $action2, $action1)->withAriaLabel("Enable/Disable Language Detection");
+        
+        return $renderer->render([$button]);
+    }
+    
+    
+    
     /**
      * install languages
      */
