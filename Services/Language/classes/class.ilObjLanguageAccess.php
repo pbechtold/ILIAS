@@ -17,6 +17,7 @@
 */
 class ilObjLanguageAccess
 {
+
     
       /**
      * Cached result of permission check for page translation
@@ -44,7 +45,7 @@ class ilObjLanguageAccess
         $ilUser = $DIC->user();
         $rbacsystem = $DIC->rbac()->system();
         
-          if (isset(self::$cached_check_translate)) {
+        if (isset(self::$cached_check_translate)) {
             return self::$cached_check_translate;
         }
 
@@ -59,12 +60,11 @@ class ilObjLanguageAccess
              self::$cached_check_translate =  $rbacsystem->checkAccess("read,write", (int) $ref_id);
         }
 //        return false;
-              else {
+        else {
             self::$cached_check_translate = false;
         }
 
         return self::$cached_check_translate;
-        
     }
 
 
@@ -93,7 +93,7 @@ class ilObjLanguageAccess
     /**
     * Lookup the ref_id of the global language folder
     *
-    * @return   int     	language folder ref_id
+    * @return   int         language folder ref_id
     */
     public static function _lookupLangFolderRefId()
     {
@@ -163,8 +163,8 @@ class ilObjLanguageAccess
     /**
      * Store the collected language variable usages in the user session
      * This should be called as late as possible in a request
-     * 
-     * 
+     *
+     *
      */
     public static function _saveUsages()
     {
@@ -174,10 +174,9 @@ class ilObjLanguageAccess
 //        $_SESSION['lang_ext_maintenance']['used_modules'] = array_keys($lng->getUsedModules());
 //        $_SESSION['lang_ext_maintenance']['used_topics'] = array_keys($lng->getUsedTopics());
         if (self::_checkTranslate() and !self::_isPageTranslation()) {
-           $_SESSION['lang_ext_maintenance']['used_modules'] = array_keys($lng->getUsedModules());
-           $_SESSION['lang_ext_maintenance']['used_topics'] = array_keys($lng->getUsedTopics());
+            $_SESSION['lang_ext_maintenance']['used_modules'] = array_keys($lng->getUsedModules());
+            $_SESSION['lang_ext_maintenance']['used_topics'] = array_keys($lng->getUsedTopics());
         }
-        
     }
 
     /**
@@ -257,8 +256,7 @@ class ilObjLanguageAccess
         if ($ilUser->getId()) {
             $ref_id = self::_lookupLangFolderRefId();
             self::$cached_check_translate =  $rbacsystem->checkAccess("read,write", (int) $ref_id);
-        }
-        else {
+        } else {
             self::$cached_check_translate = false;
         }
 
@@ -291,7 +289,7 @@ class ilObjLanguageAccess
     /**
     * Lookup the ref_id of the global language folder
     *
-    * @return   int     	language folder ref_id
+    * @return   int         language folder ref_id
     */
     public static function _lookupLangFolderRefId()
     {

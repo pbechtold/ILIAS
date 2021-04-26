@@ -619,7 +619,6 @@ class ilObjLanguageExtGUI extends ilObjectGUI
         switch ($_POST["maintain"]) {
             // save the global language file for merge after
             case "save_dist":
-
                 // save a copy of the distributed language file
                 $orig_file = $this->object->getLangPath() . '/ilias_' . $this->object->key . '.lang';
                 $copy_file = $this->object->getDataPath() . '/ilias_' . $this->object->key . '.lang';
@@ -661,7 +660,6 @@ class ilObjLanguageExtGUI extends ilObjectGUI
 
             // merge local changes back to the global language file (langmode only)
             case "merge":
-
                 $orig_file = $this->object->getLangPath() . '/ilias_' . $this->object->key . '.lang';
                 $copy_file = $this->object->getCustLangPath() . '/ilias_' . $this->object->key . '.lang';
 
@@ -781,7 +779,7 @@ class ilObjLanguageExtGUI extends ilObjectGUI
      * Get tabs for admin mode
      *(Overwritten from ilObjectGUI, called by prepareOutput)
      *
-     * @param	object	tabs gui object
+     * @param   object  tabs gui object
      */
     public function getAdminTabs()
     {

@@ -5,12 +5,12 @@
 /**
  * Class ilObjLanguageFolderGUI
  *
- * @author	Stefan Meyer <meyer@leifos.com>
- * @version	$Id$
+ * @author  Stefan Meyer <meyer@leifos.com>
+ * @version $Id$
  *
  * @ilCtrl_Calls ilObjLanguageFolderGUI: ilPermissionGUI
  *
- * @extends	ilObject
+ * @extends ilObject
 
  */
 
@@ -24,13 +24,13 @@ class ilObjLanguageFolderGUI extends ilObjectGUI
      *
      * @access public
      */
-    public function __construct($a_data, $a_id, $a_call_by_reference)
-    {
-        $this->type = "lngf";
-        parent::__construct($a_data, $a_id, $a_call_by_reference, false);
-        $_GET["sort_by"] = "language";
-        $this->lng->loadLanguageModule('lng');
-    }
+public function __construct($a_data, $a_id, $a_call_by_reference)
+{
+    $this->type = "lngf";
+    parent::__construct($a_data, $a_id, $a_call_by_reference, false);
+    $_GET["sort_by"] = "language";
+    $this->lng->loadLanguageModule('lng');
+}
 
     
 //    public function base()
@@ -56,9 +56,9 @@ class ilObjLanguageFolderGUI extends ilObjectGUI
     /**
      * show installed languages
      *
-     * @access	public
+     * @access  public
      */
-    public function viewObject()
+public function viewObject()
     {
         global $DIC;
 

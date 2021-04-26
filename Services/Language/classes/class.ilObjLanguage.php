@@ -17,8 +17,8 @@ class ilObjLanguage extends ilObject
      * separator of module, comment separator, identifier & values
      * in language files
      *
-     * @var		string
-     * @access	private
+     * @var     string
+     * @access  private
      */
     public $separator;
     public $comment_separator;
@@ -33,9 +33,9 @@ class ilObjLanguage extends ilObject
     /**
      * Constructor
      *
-     * @access	public
-     * @param	integer	reference_id or object_id
-     * @param	boolean	treat the id as reference_id (true) or object_id (false)
+     * @access  public
+     * @param   integer reference_id or object_id
+     * @param   boolean treat the id as reference_id (true) or object_id (false)
      */
     public function __construct($a_id = 0, $a_call_by_reference = false)
     {
@@ -80,7 +80,7 @@ class ilObjLanguage extends ilObject
     /**
      * get language key
      *
-     * @return	string		language key
+     * @return  string      language key
      */
     public function getKey()
     {
@@ -90,7 +90,7 @@ class ilObjLanguage extends ilObject
     /**
      * get language status
      *
-     * @return	string		language status
+     * @return  string      language status
      */
     public function getStatus()
     {
@@ -154,7 +154,7 @@ class ilObjLanguage extends ilObject
     /**
      * install current language
      *
-     * @return	string	installed language key
+     * @return  string  installed language key
      * @param   string  $scope  empty (global) or "local"
      */
     public function install($scope = '')
@@ -196,7 +196,7 @@ class ilObjLanguage extends ilObject
     /**
      * uninstall current language
      *
-     * @return	string	uninstalled language key
+     * @return  string  uninstalled language key
      */
     public function uninstall()
     {
@@ -263,7 +263,7 @@ class ilObjLanguage extends ilObject
 
     /**
      * Refresh languages of activated plugins
-     * @var array|null	keys of languages to be refreshed (not yet supported, all available will be refreshed)
+     * @var array|null  keys of languages to be refreshed (not yet supported, all available will be refreshed)
      */
     public static function refreshPlugins($a_lang_keys = null)
     {
@@ -298,7 +298,7 @@ class ilObjLanguage extends ilObject
     /**
     * Delete languge data
     *
-    * @param	string		lang key
+    * @param    string      lang key
     */
     public static function _deleteLangData($a_lang_key, $a_keep_local_change = false)
     {
@@ -335,8 +335,8 @@ class ilObjLanguage extends ilObject
 
     /**
     * get locally changed language entries
-    * @param    string  	minimum change date "yyyy-mm-dd hh:mm:ss"
-    * @param    string  	maximum change date "yyyy-mm-dd hh:mm:ss"
+    * @param    string      minimum change date "yyyy-mm-dd hh:mm:ss"
+    * @param    string      maximum change date "yyyy-mm-dd hh:mm:ss"
     * @return   array       [module][identifier] => value
     */
     public function getLocalChanges($a_min_date = "", $a_max_date = "")
@@ -370,7 +370,7 @@ class ilObjLanguage extends ilObject
 
     /**
     * get the date of the last local change
-    * @param    string  	language key
+    * @param    string      language key
     * @return   array       change_date "yyyy-mm-dd hh:mm:ss"
     */
     public static function _getLastLocalChange($a_key)
@@ -395,9 +395,9 @@ class ilObjLanguage extends ilObject
 
     /**
      * Get the local changes of a language module
-     * @param string	$a_key		Language key
-     * @param string	$a_module 	Module key
-     * @return array	identifier => value
+     * @param string    $a_key      Language key
+     * @param string    $a_module   Module key
+     * @return array    identifier => value
      */
     public static function _getLocalChangesByModule($a_key, $a_module)
     {
@@ -466,10 +466,10 @@ class ilObjLanguage extends ilObject
                 
                 foreach ($content as $key => $val) {
                     // split the line of the language file
-                    // [0]:	module
-                    // [1]:	identifier
-                    // [2]:	value
-                    // [3]:	comment (optional)
+                    // [0]: module
+                    // [1]: identifier
+                    // [2]: value
+                    // [3]: comment (optional)
                     $separated = explode($this->separator, trim($val));
                     $pos = strpos($separated[2], $this->comment_separator);
                     if ($pos !== false) {
@@ -574,8 +574,8 @@ class ilObjLanguage extends ilObject
         global $DIC;
         $ilDB = $DIC->database();
 
-	    // avoid flushing the whole cache (see mantis #28818)
-	    ilCachedLanguage::getInstance($a_key)->deleteInCache();
+        // avoid flushing the whole cache (see mantis #28818)
+        ilCachedLanguage::getInstance($a_key)->deleteInCache();
 
         $ilDB->manipulate(sprintf(
             "DELETE FROM lng_modules WHERE lang_key = %s AND module = %s",
@@ -628,8 +628,8 @@ class ilObjLanguage extends ilObject
         global $DIC;
         $ilDB = $DIC->database();
 
-	    // avoid a cache flush here (see mantis #28818)
-	    // ilGlobalCache::flushAll();
+        // avoid a cache flush here (see mantis #28818)
+        // ilGlobalCache::flushAll();
 
         if (isset($a_remarks)) {
             $a_remarks = substr($a_remarks, 0, 250);
@@ -742,7 +742,7 @@ class ilObjLanguage extends ilObject
      * search ILIAS for users which have selected '$lang_key' as their prefered language and
      * reset them to default language (english). A message is sent to all affected users
      *
-     * @param	string		$lang_key	international language key (2 digits)
+     * @param   string      $lang_key   international language key (2 digits)
      */
     public function resetUserLanguage($lang_key)
     {
@@ -761,8 +761,8 @@ class ilObjLanguage extends ilObject
      * This function seeks for a special keyword where the language information starts.
      * if found it returns the plain language information, otherwise returns false
      *
-     * @param	string	$content	expecting an ILIAS lang-file
-     * @return	string	$content	content without header info OR false if no valid header was found
+     * @param   string  $content    expecting an ILIAS lang-file
+     * @return  string  $content    content without header info OR false if no valid header was found
      */
     public static function cut_header($content)
     {
@@ -778,7 +778,7 @@ class ilObjLanguage extends ilObject
     /**
      * optimizes the db-table langdata
      *
-     * @return	boolean	true on success
+     * @return  boolean true on success
      * @deprecated
      */
     public function optimizeData()
@@ -793,7 +793,7 @@ class ilObjLanguage extends ilObject
      * header, and each lang-entry consists of exactly three elements
      * (module, identifier, value).
      *
-     * @return	string	system message
+     * @return  string  system message
      * @param   string  $scope  empty (global) or "local"
      */
     public function check($scope = '')

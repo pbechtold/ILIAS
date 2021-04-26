@@ -76,15 +76,14 @@ class ilLangDeprecated
      */
     protected function getCodeFiles($path)
     {
-        foreach (
-            new \RegexIterator(
-                new \RecursiveIteratorIterator(
-                    new \RecursiveDirectoryIterator($path),
-                    \RecursiveIteratorIterator::SELF_FIRST,
-                    \RecursiveIteratorIterator::CATCH_GET_CHILD
-                ),
-                '/' . self::ILIAS_CLASS_FILE_RE . '/i'
-            ) as $file
+        foreach (new \RegexIterator(
+            new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($path),
+                \RecursiveIteratorIterator::SELF_FIRST,
+                \RecursiveIteratorIterator::CATCH_GET_CHILD
+            ),
+            '/' . self::ILIAS_CLASS_FILE_RE . '/i'
+        ) as $file
         ) {
             yield $file;
         }
@@ -117,7 +116,6 @@ class ilLangDeprecated
 
             $token = $tokens[$i][0];
             switch ($token) {
-
                 case T_STRING:
                 case T_CONSTANT_ENCAPSED_STRING:
                     $lv = str_replace(array("'", '"'), "", $tokens[$i][1]);

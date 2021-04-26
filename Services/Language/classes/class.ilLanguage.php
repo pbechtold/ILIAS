@@ -45,8 +45,8 @@ class ilLanguage
      * indicator for the system language
      * this language must not be deleted
      *
-     * @var		string
-     * @access	private
+     * @var     string
+     * @access  private
      */
     public $lang_default;
 
@@ -55,8 +55,8 @@ class ilLanguage
      * by current user
      * this language must not be deleted
      *
-     * @var		string
-     * @access	private
+     * @var     string
+     * @access  private
      */
     public $lang_user;
 
@@ -65,48 +65,48 @@ class ilLanguage
      * relative path is taken from ini file
      * and added to absolute path of ilias
      *
-     * @var		string
-     * @access	private
+     * @var     string
+     * @access  private
      */
     public $lang_path;
 
     /**
      * language key in use by current user
      *
-     * @var		string	languagecode (two characters), e.g. "de", "en", "in"
-     * @access	private
+     * @var     string  languagecode (two characters), e.g. "de", "en", "in"
+     * @access  private
      */
     public $lang_key;
 
     /**
      * language full name in that language current in use
      *
-     * @var		string
-     * @access	private
+     * @var     string
+     * @access  private
      */
     public $lang_name;
 
     /**
      * separator value between module,identivier & value
      *
-     * @var		string
-     * @access	private
+     * @var     string
+     * @access  private
      */
     public $separator = "#:#";
     
     /**
      * separator value between the content and the comment of the lang entry
      *
-     * @var		string
-     * @access	private
+     * @var     string
+     * @access  private
      */
     public $comment_separator = "###";
 
     /**
      * array of loaded languages
      *
-     * @var		array
-     * @access	private
+     * @var     array
+     * @access  private
      */
     public $loaded_modules;
 
@@ -147,9 +147,9 @@ class ilLanguage
      * the text array is two-dimensional. First dimension is the language.
      * Second dimension is the languagetopic. Content is the translation.
      *
-     * @access	public
-     * @param	string		languagecode (two characters), e.g. "de", "en", "in"
-     * @return	boolean 	false if reading failed
+     * @access  public
+     * @param   string      languagecode (two characters), e.g. "de", "en", "in"
+     * @return  boolean     false if reading failed
      */
     public function __construct($a_lang_key)
     {
@@ -229,10 +229,10 @@ class ilLanguage
      * gets the text for a given topic in a given language
      * if the topic is not in the list, the topic itself with "-" will be returned
      *
-     * @access	public
-     * @param	string	topic
+     * @access  public
+     * @param   string  topic
      * @param string $a_language The language of the output string
-     * @return	string	text clear-text
+     * @return  string  text clear-text
      */
     public function txtlng($a_module, $a_topic, $a_language)
     {
@@ -247,9 +247,9 @@ class ilLanguage
      * gets the text for a given topic
      * if the topic is not in the list, the topic itself with "-" will be returned
      *
-     * @access	public
-     * @param	string	topic
-     * @return	string	text clear-text
+     * @access  public
+     * @param   string  topic
+     * @return  string  text clear-text
      */
     public function txt($a_topic, $a_default_lang_fallback_mod = "")
     {
@@ -473,8 +473,7 @@ class ilLanguage
         }
 
         if (!ilSession::get('lang') && !$_GET['lang']) {
-            if (
-                $ilUser instanceof ilObjUser &&
+            if ($ilUser instanceof ilObjUser &&
                 (!$ilUser->getId() || $ilUser->isAnonymous())
             ) {
                 require_once 'Services/Language/classes/class.ilLanguageDetection.php';
@@ -492,8 +491,7 @@ class ilLanguage
 
         // prefer personal setting when coming from login screen
         // Added check for ilUser->getId > 0 because it is 0 when the language is changed and the terms of service should be displayed
-        if (
-            $ilUser instanceof ilObjUser &&
+        if ($ilUser instanceof ilObjUser &&
             ($ilUser->getId() && !$ilUser->isAnonymous())
         ) {
             ilSession::set('lang', $ilUser->getPref('language'));

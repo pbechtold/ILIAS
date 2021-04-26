@@ -36,75 +36,75 @@ class ilLanguageFile
 {
     /**
      * Created global file objects
-     * @static		array
+     * @static      array
      */
     private static $global_file_objects = array();
     
     /**
      * file name and path
-     * @var		string
+     * @var     string
      */
     private $lang_file;
 
     /**
      * language key
-     * @var		string
+     * @var     string
      */
     private $lang_key;
 
     /**
      * scope of the language file ('global', 'local' or 'unchanged')
-     * @var		string
+     * @var     string
      */
     private $scope;
 
 
     /**
      * header of the language file including the starting line
-     * @var		string
+     * @var     string
      */
     private $header;
 
     /**
      * starting line below the header
-     * @var		string
+     * @var     string
      */
     private $file_start = "<!-- language file start -->";
 
 
     /**
      * separator value between module,identivier & value
-     * @var		string
+     * @var     string
      */
     private $separator;
 
     /**
      * separator value between the content and the comment of the lang entry
-     * @var		string
+     * @var     string
      */
     private $comment_separator;
 
     /**
     * header parameters
-    * @var		array        name => value
+    * @var      array        name => value
     */
     private $params = array();
     
     /**
     * text values
-    * @var		array        module.separator.identifier => value
+    * @var      array        module.separator.identifier => value
     */
     private $values = array();
 
     /**
     * comments
-    * @var		array        module.separator.identifier => comment
+    * @var      array        module.separator.identifier => comment
     */
     private $comments = array();
 
     /**
     * error message of the last read/write operation
-    * @var		string        error message
+    * @var      string        error message
     */
     private $error_message = "";
     
@@ -360,8 +360,8 @@ class ilLanguageFile
 
     /**
     * Get a single parameter
-    * @param    string  	parameter name
-    * @return   string  	parameter value
+    * @param    string      parameter name
+    * @return   string      parameter value
     */
     public function getParam($a_name)
     {
@@ -392,8 +392,8 @@ class ilLanguageFile
 
     /**
     * Set a  parameter
-    * @param    string  	parameter name
-    * @param   	string  	parameter value
+    * @param    string      parameter name
+    * @param    string      parameter value
     */
     public function setParam($a_name, $a_value)
     {

@@ -24,7 +24,7 @@ class ilObjLanguageExt extends ilObjLanguage
     
     /**
     * Read and get the global language file as an object
-    * @return   object  	global language file
+    * @return   object      global language file
     */
     public function getGlobalLanguageFile()
     {
@@ -190,9 +190,9 @@ class ilObjLanguageExt extends ilObjLanguage
     *
     * The returned array contains:
     * 1. all entries that exist globally, with their local values,
-    *	 ordered like in the global language file
+    *    ordered like in the global language file
     * 2. all additional local entries,
-    *	 ordered by module and identifier
+    *    ordered by module and identifier
     *
     * @return   array       module.separator.topic => value
     */
@@ -210,9 +210,9 @@ class ilObjLanguageExt extends ilObjLanguage
     *
     * The returned array contains:
     * 1. all remarks that exist globally, with their local values,
-    *	 ordered like in the global language file
+    *    ordered like in the global language file
     * 2. all additional local remarks,
-    *	 ordered by module and identifier
+    *    ordered by module and identifier
     *
     * @return   array       module.separator.topic => value
     */
@@ -232,8 +232,8 @@ class ilObjLanguageExt extends ilObjLanguage
     /**
     * Import a language file into the ilias database
     *
-    * @param    string  	handling of existing values
-    *						('keepall','keepnew','replace','delete')
+    * @param    string      handling of existing values
+    *                       ('keepall','keepnew','replace','delete')
     */
     public function importLanguageFile($a_file, $a_mode_existing = 'keepnew')
     {

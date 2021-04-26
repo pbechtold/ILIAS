@@ -7,10 +7,10 @@
 * contains all function to manage language support for ILIAS3
 * install, uninstall, checkfiles ....
 *
-* @author	Sascha Hofmann <shofmann@databay.de>
-* @version	$Id$
+* @author   Sascha Hofmann <shofmann@databay.de>
+* @version  $Id$
 *
-* @extends	ilObject
+* @extends  ilObject
 */
 
 require_once "./Services/Object/classes/class.ilObject.php";
@@ -20,8 +20,8 @@ class ilObjLanguageFolder extends ilObject
     /**
     * indicator for the system language
     * this language must not be deleted
-    * @var		string
-    * @access	private
+    * @var      string
+    * @access   private
     */
     public $lang_default;
 
@@ -30,8 +30,8 @@ class ilObjLanguageFolder extends ilObject
     * by current user
     * this language must not be deleted
     *
-    * @var		string
-    * @access	private
+    * @var      string
+    * @access   private
     */
     public $lang_user;
 
@@ -40,31 +40,31 @@ class ilObjLanguageFolder extends ilObject
     * relative path is taken from ini file
     * and added to absolute path of ilias
     *
-    * @var		string
-    * @access	private
+    * @var      string
+    * @access   private
     */
     public $lang_path;
 
     /**
     * separator value between module,identivier & value
-    * @var		string
-    * @access	private
+    * @var      string
+    * @access   private
     */
     public $separator;
 
     /**
     * contians all informations about languages
     *
-    * @var		array
-    * @access	public
+    * @var      array
+    * @access   public
     */
     public $languages;
 
     /**
     * Constructor
-    * @access	public
-    * @param	integer	reference_id or object_id
-    * @param	boolean	treat the id as reference_id (true) or object_id (false)
+    * @access   public
+    * @param    integer reference_id or object_id
+    * @param    boolean treat the id as reference_id (true) or object_id (false)
     */
     public function __construct($a_id, $a_call_by_reference = true)
     {
@@ -86,13 +86,13 @@ class ilObjLanguageFolder extends ilObject
     * This function builds an array with the following structure:
     * $languages[lang_key][long][installed][update][info]
     *
-    * lang_key:		string		international language key (2 digits, i.e. de,en,dk...)
-    * long:			string		full language name in the chosen user language
-    * installed:	boolean		is the language installed (true) or not (false)?
-    * update:		int			contains the timestamp of last db-modification
-    * info:			string		optional information. valid is: 'notfound','new'
+    * lang_key:     string      international language key (2 digits, i.e. de,en,dk...)
+    * long:         string      full language name in the chosen user language
+    * installed:    boolean     is the language installed (true) or not (false)?
+    * update:       int         contains the timestamp of last db-modification
+    * info:         string      optional information. valid is: 'notfound','new'
     *
-    * @return	array	$languages	status information about available languages
+    * @return   array   $languages  status information about available languages
     */
     public function getLanguages()
     {
@@ -180,9 +180,9 @@ class ilObjLanguageFolder extends ilObject
     * This functions checks in $languages for languages with the attribute 'new'
     * and insert these languages in db-table 'languages'
     *
-    * @param	array	$languages		expect $languages
+    * @param    array   $languages      expect $languages
     *
-    * @return	boolean					true: language array is not empty, otherwise false
+    * @return   boolean                 true: language array is not empty, otherwise false
     */
     public function addNewLanguages($a_languages)
     {
@@ -206,7 +206,7 @@ class ilObjLanguageFolder extends ilObject
                                                     "last_update" => $lngObj->getLastUpdateDate());
 
                     $a_languages[$lang_key]["info"] = "new_language";
-                    unset($lngObj);			// better: the objects should be resident in an member array of this class
+                    unset($lngObj);         // better: the objects should be resident in an member array of this class
                 }
             }
         }
@@ -220,9 +220,9 @@ class ilObjLanguageFolder extends ilObject
     * This function removes only the entry in db-table 'languages' and
     * in the array $languages. Does not uninstall a language (see: function flushLanguage())
     *
-    * @access	public
-    * @param	array	$languages
-    * @return	array	$languages	updated status information about available languages
+    * @access   public
+    * @param    array   $languages
+    * @return   array   $languages  updated status information about available languages
     */
     public function removeLanguages($a_languages)
     {
@@ -251,7 +251,7 @@ class ilObjLanguageFolder extends ilObject
     * This function is similar to function checkLanguage() (see below) but checks for all
     * lang-files and outputs more helpful information.
     *
-    * @return	string	system message
+    * @return   string  system message
     */
     public function checkAllLanguages()
     {
@@ -298,15 +298,15 @@ class ilObjLanguageFolder extends ilObject
                                     } else {
                                         $output .= "<br/>" . $lng->txt("err_1_param") . " " . $lng->txt("check_langfile");
                                     }
-                                break;
+                                    break;
 
                                 case 2:
                                     $output .= "<br/>" . $lng->txt("err_2_param") . " " . $lng->txt("check_langfile");
-                                break;
+                                    break;
 
                                 default:
                                     $output .= "<br/>" . $lng->txt("err_over_3_param") . " " . $lng->txt("check_langfile");
-                                break;
+                                    break;
                             }
                         }
                     }
