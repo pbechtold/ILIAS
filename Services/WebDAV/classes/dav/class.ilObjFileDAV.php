@@ -1,8 +1,9 @@
 <?php
 use Sabre\DAV\Exception;
 use Sabre\DAV\Exception\Forbidden;
-use ILIAS\DI\Container;
 use ILIAS\Filesystem\Stream\Streams;
+use ILIAS\ResourceStorage\Manager\Manager;
+use ILIAS\ResourceStorage\Consumer\Consumers;
 
 /**
  * Class ilObjFileDAV
@@ -17,12 +18,8 @@ use ILIAS\Filesystem\Stream\Streams;
  */
 class ilObjFileDAV extends ilObjectDAV implements Sabre\DAV\IFile
 {
-    /**
-     * Application layer object.
-     *
-     * @var $obj ilObjFile
-     */
-    protected $obj;
+    protected $resource_manager;
+    protected $resource_consumer;
 
     /**
      * We need to keep track of versioning.
@@ -43,7 +40,10 @@ class ilObjFileDAV extends ilObjectDAV implements Sabre\DAV\IFile
      */
     public function __construct(ilObjFile $a_obj, ilWebDAVRepositoryHelper $repo_helper, ilWebDAVObjDAVHelper $dav_helper)
     {
+        global $DIC;
         $settings = new ilSetting('webdav');
+        $this->resource_manager = $DIC->resourceStorage()->manage();
+        $this->resource_consumer = $DIC->resourceStorage()->consume();
         $this->versioning_enabled = (bool) $settings->get('webdav_versioning_enabled', true);
         parent::__construct($a_obj, $repo_helper, $dav_helper);
     }
@@ -72,16 +72,13 @@ class ilObjFileDAV extends ilObjectDAV implements Sabre\DAV\IFile
     public function put($data)
     {
         if ($this->repo_helper->checkAccess('write', $this->getRefId())) {
-            $this->setObjValuesForNewFileVersion();
-            if ($this->versioning_enabled === true) {
+            if ($this->versioning_enabled === true ||
+                $this->obj->getVersion() === '1' && $this->getSize() === 0) {
                 // Stolen from ilObjFile->addFileVersion
-                $this->handleFileUpload($data, 'new_version');
+                return $this->handleFileUpload($data, 'new_version');
             } else {
-                $this->handleFileUpload($data, 'replace');
+                return $this->handleFileUpload($data, 'replace');
             }
-
-
-            return $this->getETag();
         }
         throw new Exception\Forbidden("Permission denied. No write access for this file");
     }
@@ -97,13 +94,20 @@ class ilObjFileDAV extends ilObjectDAV implements Sabre\DAV\IFile
     public function get()
     {
         if ($this->repo_helper->checkAccess("read", $this->obj->getRefId())) {
-            $file = $this->getPathToFile();
-
-            if (file_exists($file)) {
-                return fopen($file, 'r');
-            } else {
-                throw new Exception\NotFound("File not found");
+            if ($this->getSize() > 0 &&
+                ($r_id = $this->obj->getResourceId()) &&
+                ($identification = $this->resource_manager->find($r_id))) {
+                return $this->resource_consumer->stream($identification)->getStream()->getContents();
             }
+            
+            /*
+             * @todo: This is legacy and should be removed with ILIAS 8
+             */
+            if ($this->getSize() > 0 && file_exists($file = $this->getPathToFile())) {
+                return fopen($file, 'r');
+            }
+            
+            throw new Exception\NotFound("File not found");
         }
 
         throw new Exception\Forbidden("Permission denied. No read access for this file");
@@ -154,6 +158,14 @@ class ilObjFileDAV extends ilObjectDAV implements Sabre\DAV\IFile
                 filemtime($path)
             ) . '"';
         }
+        
+        if ($this->getSize() > 0) {
+            return '"' . sha1(
+                $this->getSize() .
+                $this->getName() .
+                $this->obj->getCreateDate()
+            ) . '"';
+        }
 
         return null;
     }
@@ -163,12 +175,9 @@ class ilObjFileDAV extends ilObjectDAV implements Sabre\DAV\IFile
      *
      * @return int
      */
-    public function getSize()
+    public function getSize() : int
     {
-        if (file_exists($this->getPathToFile())) {
-            return $this->obj->getFileSize();
-        }
-        return 0;
+        return $this->obj->getFileSize();
     }
 
     /**
@@ -195,15 +204,43 @@ class ilObjFileDAV extends ilObjectDAV implements Sabre\DAV\IFile
      */
     public function handleFileUpload($a_data, $a_file_action)
     {
-        // Set name for uploaded file because due to the versioning, the title can change for different versions. This setter-call here
-        // ensures that the uploaded file is saved with the title of the object. This obj->setFileName() has to be called
-        // before $this->getPathToFile(). Otherwise, the file could be saved under the wrong filename.
-        if ($a_file_action === 'replace') {
-            $this->obj->deleteVersions();
-            $this->obj->clearDataDirectory();
+        /**
+         * These are temporary shenanigans for ILIAS 7. Will be removed with ILIAS 8 as it will be expected that
+         * migration was run.
+         *
+         * @todo: Remove with ILIAS 8
+         */
+        if ($a_file_action != 'create' && file_exists($this->getPathToFile())) {
+            global $DIC;
+            $migration = new ilFileObjectToStorageMigrationRunner(
+                $DIC->fileSystem()->storage(),
+                $DIC->database(),
+                rtrim(CLIENT_DATA_DIR, "/") . '/ilFile/migration_log.csv'
+            );
+            $migration->migrate(new ilFileObjectToStorageDirectory($this->obj->getId(), $this->obj->getDirectory()));
         }
-        $stream = Streams::ofResource($a_data);
-        $this->obj->appendStream($stream, $this->obj->getTitle());
+              
+        $path = ilUtil::ilTempnam();
+        $path_with_file = $path . '/' . $this->obj->getFileName();
+        
+        mkdir($path);
+        file_put_contents($path_with_file, $a_data);
+
+        $upload = fopen($path_with_file, 'read');
+        
+        if (fstat($upload)['size'] === 0) {
+            return null;
+        }
+        
+        $stream = Streams::ofResource($upload);
+        if ($a_file_action === 'replace') {
+            $this->obj->replaceWithStream($stream, $this->obj->getTitle());
+        } else {
+            $this->obj->appendStream($stream, $this->obj->getTitle());
+        }
+        
+        unlink($path_with_file);
+        rmdir($path);
 
         // TODO filename is "input" and metadata etc.
 
@@ -211,6 +248,8 @@ class ilObjFileDAV extends ilObjectDAV implements Sabre\DAV\IFile
             $this->createHistoryAndNotificationForObjUpdate($a_file_action);
             ilPreview::createPreview($this->obj, true);
         }
+        
+        return $this->getETag();
     }
 
 
@@ -220,10 +259,9 @@ class ilObjFileDAV extends ilObjectDAV implements Sabre\DAV\IFile
     }
 
     /**
-     * This method is called in 2 use cases:
+     * This method only exists for legacy reasons
      *
-     * Use case 1: Get the path to an already existing file to download it -> read operation
-     * Use case 2: Get the path to save a new file into or overwrite an existing one -> write operation
+     * @deprecated
      *
      * @throws ilFileUtilsException
      * @return string
@@ -250,20 +288,6 @@ class ilObjFileDAV extends ilObjectDAV implements Sabre\DAV\IFile
     }
 
     /**
-     * Set object values for a new file version
-     */
-    protected function setObjValuesForNewFileVersion()
-    {
-        // This is necessary for windows explorer. Because windows explorer makes always 2 PUT requests. One with a 0 Byte
-        // file to test, if the user has write permissions and the second one to upload the original file.
-        if ($this->obj->getFileSize() > 0) {
-            // Stolen from ilObjFile->addFileVersion
-//            $this->obj->setVersion($this->obj->getMaxVersion() + 1);
-//            $this->obj->setMaxVersion($this->obj->getMaxVersion() + 1);
-        }
-    }
-
-    /**
      * Create history entry and a news notification for file object update
      *
      * @param $a_action
@@ -278,7 +302,7 @@ class ilObjFileDAV extends ilObjectDAV implements Sabre\DAV\IFile
                 break;
         }
 
-        $this->obj->addNewsNotification("file_updated");
+        $this->obj->notifyUpdate($this->obj->getId());
     }
 
     /**

@@ -316,7 +316,11 @@ class ilTestScoringByQuestionsGUI extends ilTestScoringGUI
             if (!$correction_feedback['feedback']) {
                 $correction_feedback['feedback'] = [];
             }
-
+            if($correction_feedback['finalized_evaluation'] == 1) {
+                $correction_feedback['finalized_evaluation'] = $this->lng->txt('yes');
+            } else {
+                $correction_feedback['finalized_evaluation'] = $this->lng->txt('no');
+            }
             echo json_encode([ 'feedback' => $correction_feedback, 'points' => $correction_points, "translation" => ['yes' => $this->lng->txt('yes'), 'no' => $this->lng->txt('no')]]);
             exit();
         } else {
@@ -359,6 +363,22 @@ class ilTestScoringByQuestionsGUI extends ilTestScoringGUI
         $data = $this->object->getCompleteEvaluationData(false);
         $participant = $data->getParticipant($active_id);
         $question_gui = $this->object->createQuestionGUI('', $question_id);
+        $tmp_tpl = new ilTemplate('tpl.il_as_tst_correct_solution_output.html', true, true, 'Modules/Test');
+        if($question_gui instanceof assTextQuestionGUI && $this->object->getAutosave()) {
+            $aresult_output = $question_gui->getAutoSavedSolutionOutput(
+                $active_id,
+                $pass,
+                false,
+                false,
+                false,
+                $this->object->getShowSolutionFeedback(),
+                false,
+                true
+            );
+            $tmp_tpl->setVariable('TEXT_ASOLUTION_OUTPUT', $this->lng->txt('autosavecontent'));
+            $tmp_tpl->setVariable('ASOLUTION_OUTPUT', $aresult_output);
+
+        }
         $result_output = $question_gui->getSolutionOutput(
             $active_id,
             $pass,
@@ -370,7 +390,7 @@ class ilTestScoringByQuestionsGUI extends ilTestScoringGUI
             true
         );
         $max_points = $question_gui->object->getMaximumPoints();
-        $tmp_tpl = new ilTemplate('tpl.il_as_tst_correct_solution_output.html', true, true, 'Modules/Test');
+
         $this->appendUserNameToModal($tmp_tpl, $participant);
         $this->appendQuestionTitleToModal($tmp_tpl, $question_id, $max_points, $question_gui->object->getTitle());
         $this->appendSolutionAndPointsToModal(
@@ -401,6 +421,7 @@ class ilTestScoringByQuestionsGUI extends ilTestScoringGUI
             $question_title . ' (' . $max_points . ' ' . $lng . ')' . $add_title
         );
         $tmp_tpl->setVariable('SOLUTION_OUTPUT', $result_output);
+
         $tmp_tpl->setVariable(
             'RECEIVED_POINTS',
             sprintf(

@@ -98,7 +98,9 @@ export default class PageModel {
       page_components_undo: [],
       sectionFormat: "",
       paragraphFormat: "",
-      addedSection: false
+      addedSection: false,
+      pasting: false,
+      autoSavedPCID: null
     };
 
     this.splitIds = [];
@@ -239,6 +241,20 @@ export default class PageModel {
   }
 
   /**
+   * @param {boolean} b
+   */
+  activatePasting(b) {
+    this.model.pasting = b;
+  }
+
+  /**
+   * @return {boolean}
+   */
+  isPasting() {
+    return this.model.pasting;
+  }
+
+  /**
    * @param {string} cname
    * @param {string} pcid
    * @param {string} hierid
@@ -282,6 +298,20 @@ export default class PageModel {
    */
   getCurrentInsertPCId() {
     return this.model.currentInsertPCID;
+  }
+
+  /**
+   * @param {string} pcid
+   */
+  setAutoSavedPCId(pcid) {
+    this.model.autoSavedPCID = pcid;
+  }
+
+  /**
+   * @return {string}
+   */
+  getAutoSavedPCId() {
+    return this.model.autoSavedPCID;
   }
 
   /**

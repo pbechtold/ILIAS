@@ -104,6 +104,7 @@ class ilUtil
         if (is_object($styleDefinition)) {
             $image_dir = $styleDefinition->getImageDirectory($current_style);
         }
+        $skin_img = "";
         if ($current_skin == "default") {
             $user_img = "." . $module_path . "/templates/default/" . $image_dir . "/" . $img;
             $skin_img = "." . $module_path . "/templates/default/images/" . $img;
@@ -365,7 +366,7 @@ class ilUtil
 
         $size_str = "";
         if ($size > 0) {
-            $size_str = ' size="'.$size.'" ';
+            $size_str = ' size="' . $size . '" ';
         }
         $str = "<select name=\"" . $varname . "\"" . $multiple . " $class " . $size_str . " $attributes $disabled>\n";
 
@@ -1799,6 +1800,7 @@ class ilUtil
      */
     public static function execConvert($args)
     {
+        $args = self::escapeShellCmd($args);
         ilUtil::execQuoted(PATH_TO_CONVERT, $args);
     }
 
@@ -3454,7 +3456,6 @@ class ilUtil
         elseif ($args) {
             $cmd .= " " . $args;
         }
-
         exec($cmd, $arr);
 
         $DIC->logger()->root()->debug("ilUtil::execQuoted: " . $cmd . ".");
@@ -3662,8 +3663,8 @@ class ilUtil
                 $max = $max + 1;
             }
             $random = new \ilRandom();
-            $length  = $random->int($min, $max);
-            $next  = $random->int(1, 2);
+            $length = $random->int($min, $max);
+            $next = $random->int(1, 2);
             $vowels = "aeiou";
             $vowels_uc = strtoupper($vowels);
             $consonants = "bcdfghjklmnpqrstvwxyz";
@@ -3676,12 +3677,12 @@ class ilUtil
                 for ($j = 0; $j < $security->getPasswordNumberOfUppercaseChars(); $j++) {
                     switch ($next) {
                         case 1:
-                            $pw.= $consonants_uc[$random->int(0, strlen($consonants_uc) - 1)];
+                            $pw .= $consonants_uc[$random->int(0, strlen($consonants_uc) - 1)];
                             $next = 2;
                             break;
 
                         case 2:
-                            $pw.= $vowels_uc[$random->int(0, strlen($vowels_uc) - 1)];
+                            $pw .= $vowels_uc[$random->int(0, strlen($vowels_uc) - 1)];
                             $next = 1;
                             break;
                     }
@@ -3689,23 +3690,23 @@ class ilUtil
             }
 
             if ($security->isPasswordCharsAndNumbersEnabled()) {
-                $pw.= $numbers[$random->int(0, strlen($numbers) - 1)];
+                $pw .= $numbers[$random->int(0, strlen($numbers) - 1)];
             }
 
             if ($security->isPasswordSpecialCharsEnabled()) {
-                $pw.= $special[$random->int(0, strlen($special) - 1)];
+                $pw .= $special[$random->int(0, strlen($special) - 1)];
             }
 
             $num_lcase_chars = max($security->getPasswordNumberOfLowercaseChars(), $length - strlen($pw));
             for ($j = 0; $j < $num_lcase_chars; $j++) {
                 switch ($next) {
                     case 1:
-                        $pw.= $consonants[$random->int(0, strlen($consonants) - 1)];
+                        $pw .= $consonants[$random->int(0, strlen($consonants) - 1)];
                         $next = 2;
                         break;
 
                     case 2:
-                        $pw.= $vowels[$random->int(0, strlen($vowels) - 1)];
+                        $pw .= $vowels[$random->int(0, strlen($vowels) - 1)];
                         $next = 1;
                         break;
                 }

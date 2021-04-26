@@ -7,9 +7,9 @@
       "database" : {
        "type" : "innodb",
        "host" : "localhost",
-       "database" : "ilias",
-       "user" : "ilias",
-       "password" : "toor",
+       "database" : "ilias7",
+       "user" : "root",
+       "password" : "root",
        "create_database" : true
       },
       "filesystem" : {

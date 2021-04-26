@@ -172,6 +172,10 @@ class ilCOPageHTMLExport
         } else {
             $style = new ilObjStyleSheet($this->getContentStyleId());
             $style->copyImagesToDir($this->exp_dir . "/" . $style->getImagesDirectory());
+            $this->exportResourceFile(
+                $this->exp_dir,
+                ilObjStyleSheet::getContentStylePath($this->getContentStyleId(), false, false)
+            );
         }
         
         // export syntax highlighting style
@@ -653,9 +657,9 @@ class ilCOPageHTMLExport
         
         include_once("./Modules/File/classes/class.ilObjFile.php");
         $file_obj = new ilObjFile($a_file_id, false);
-        $source_file = $file_obj->getDirectory($file_obj->getVersion()) . "/" . $file_obj->getFileName();
+        $source_file = $file_obj->getFile($file_obj->getVersion());
         if (!is_file($source_file)) {
-            $source_file = $file_obj->getDirectory() . "/" . $file_obj->getFileName();
+            $source_file = $file_obj->getFile();
         }
         if (is_file($source_file)) {
             copy($source_file, $file_dir . "/" . $file_obj->getFileName());

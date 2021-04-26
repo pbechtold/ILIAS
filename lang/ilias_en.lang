@@ -1610,6 +1610,7 @@ assessment#:#tst_title_output_no_title#:#Neither Question Titles nor Available P
 assessment#:#tst_title_output#:#Show Question Title
 assessment#:#tst_type#:#Test Type
 assessment#:#exam_id#:#Testpass ID:
+assessment#:#exam_id_label#:#Exam Id
 assessment#:#examid_in_test_pass#:#Display Test Pass ID
 assessment#:#examid_in_test_pass_desc#:#A test pass ID is displayed in the test. A new ID is generated for every test pass.
 assessment#:#examid_in_test_res#:#ILIAS Test Pass ID
@@ -1755,9 +1756,11 @@ assessment#:#feedback_all#:#Show answer specific feedback for all answers.
 assessment#:#feedback_checked#:#Show answer specific feedback for all chosen/selected answers.
 assessment#:#feedback_correct_sc_mc#:#Show answer specific feedback for all correct answers (Correct answers are those, that lead to a positive score when chosen/selected).
 assessment#:#feedback_correct_kprim#:#Show answer specific feedback for all correct answers (Correct answers are those, for that the positive option is to be chosen/selected).
-assessment#:#tst_add_quest_cont_edit_mode#:#Editor for Feedback and Hints
-assessment#:#tst_add_quest_cont_edit_mode_default#:#Use rich-text editor for editing feedback and hints
-assessment#:#tst_add_quest_cont_edit_mode_page_object#:#Use ILIAS page editor for editing feedback and hints
+assessment#:#tst_add_quest_cont_edit_mode#:#Editor
+assessment#:#tst_add_quest_cont_edit_mode_default#:#Use Rich-Text-Editor (TinyMCE) for editing questions and answers, feedbacks and hints
+assessment#:#tst_add_quest_cont_edit_mode_RTE_info#:#Allows text formatting of questions, answers, feedbacks and hints. But feedback and hints cannot be reused when question is embedded in ILIAS learning module.
+assessment#:#tst_add_quest_cont_edit_mode_page_object#:#Use plain text for questions and answers and ILIAS page editor for feedback and hints
+assessment#:#tst_add_quest_cont_edit_mode_IPE_info#:#No formatting of text in question and answers. No use of LaTex either. But feedback and hints can be reused when question is embedded in ILIAS learning module.
 assessment#:#tst_question_feedback_edit_page#:#Edit Content
 assessment#:#tst_question_feedback_back_to_feedback_form#:#Back To Calling Question
 assessment#:#enable_examview#:#Overview of Answers Given
@@ -1802,6 +1805,7 @@ assessment#:#sign_submission_info#:#If this is activated and a signature plugin 
 assessment#:#tst_corrections_manscore_reset_warning#:#There are %s manual scorings that have been done for the question "%s (ID: %s)". All manual scorings will be reset when saving the question.
 assessment#:#tst_qst_added_to_pool_s#:#Successfully added the question to the selected pool.
 assessment#:#tst_qst_added_to_pool_p#:#Successfully added the questions to the selected pool.
+assessment#:#autosavecontent#:#Autosave Content
 auth#:#auth_account_migration_keep#:#Migrate Existing User Account
 auth#:#auth_account_migration_name#:#Migration
 auth#:#auth_account_migration_new#:#Create New User Account
@@ -3771,7 +3775,7 @@ common#:#shib_department#:#Attribute for department
 common#:#shib_email#:#Attribute for e-mail address
 common#:#shib_federation_name#:#Name of your Shibboleth federation
 common#:#shib_firstname#:#Attribute for first name
-common#:#shib_gender#:#Attribute for salutation (must be ‘m’ or ‘f’)
+common#:#shib_gender#:#Attribute for salutation (must be ‘n’, ‘m’ or ‘f’)
 common#:#shib_general_login_instructions#:#To log in via %s, please click on the login button and choose your organization of the following page.<br>If you have questions concerning this, please ask the
 common#:#shib_general_wayf_login_instructions#:#In case you are not associated with the given organizations and you need access to a course on this server, please contact the
 common#:#shib_idp_list#:#Provide a list of Identity Providers to let the user choose from on the ILIAS login page.<br>On each line there must be a comma-separated tuple for <strong>providerID of IdP</strong> (see the Shibboleth metadata file) and <strong>Name of IdP</strong> as it shall be displayed in the drop-down list.<br>As an optional third parameter you can add the <strong>location of a Shibboleth session initiator</strong> that shall be used in case your ILIAS installation is part of a multi federation setup.
@@ -4192,7 +4196,7 @@ content#:#cont_active#:#Enable Menu
 content#:#cont_add_area#:#Add Area
 content#:#cont_add_change_comment#:#Add change comment
 content#:#cont_add_definition#:#Add Definition
-content#:#cont_add_elements#:#Click on placeholders to add new elements.
+content#:#cont_add_elements#:#Click on a plus symbol to add new elements.
 content#:#cont_add_file#:#Add File
 content#:#cont_add_tab#:#Add Panel
 content#:#cont_added_comment#:#Comment has been added to history.
@@ -4288,12 +4292,14 @@ content#:#cont_dir_created#:#Directory has been created.
 content#:#cont_dir_deleted#:#Directory has been deleted.
 content#:#cont_dir_file#:#Directory/File
 content#:#cont_dir_renamed#:#Directory has been renamed.
-content#:#cont_double_click_to_delete#:#Double-click on content elements to select them for (de-)activation or deletion.
+content#:#cont_shift_click_to_select#:#<b>Shift-click</b> on elements will <b>select</b> them and switch to the selection mode.
+content#:#cont_click_multi_select#:#<b>Click</b> on elements to <b>select</b> or deselect them.
+content#:#cont_click_edit#:#<b>Click</b> on elements to <b>edit</b> its properties.
 content#:#cont_download_title#:#Download Title
 content#:#cont_downloads_desc#:#Offers all public export files for download (e.g. for offline use or import).
 content#:#cont_downloads_public_desc#:#Allow download even for anonymous users (in public area)
 content#:#cont_downloads#:#Enable Download
-content#:#cont_drag_and_drop_elements#:#Drag and drop content elements on placeholders to move elements.
+content#:#cont_drag_and_drop_elements#:#<b>Drag and drop</b> content elements on placeholders to <b>move</b> elements.
 content#:#cont_ed_align_center#:#Align: Center
 content#:#cont_ed_align_left_float#:#Align: Left Float
 content#:#cont_ed_align_left#:#Align: Left
@@ -4705,7 +4711,7 @@ content#:#cont_text_placehl#:#Text Placeholder
 content#:#cont_text_quot#:#Quotation
 content#:#cont_text_str#:#Strong Text
 content#:#cont_text_tex#:#LaTeX Code
-content#:#cont_text_xln_link#:#External Link
+content#:#cont_text_xln#:#External Link
 content#:#cont_time_limit_action#:#adlcp:timelimitaction
 content#:#cont_time#:#Time
 content#:#cont_toc_mode#:#Table of Contents Items
@@ -5562,6 +5568,7 @@ form#:#form_password_not_allowed_for_auth#:#It is not possible to change the pas
 form#:#form_password_required_for_auth#:#Password is required for the chosen authentication method.
 form#:#form_retype_password#:#Retype Password
 form#:#form_seconds#:#Seconds
+form#:#form_msg_max_upload#:#Maximum number of simultaneously uploadable files:
 forum#:#activate_new_posts#:#Approve Postings
 forum#:#activate_only_current#:#Approve Posting
 forum#:#activate_post_txt#:#Would you really like to approve the current posting?
@@ -5843,6 +5850,8 @@ ldap#:#ldap_deleted_rule#:#Deleted selected role assignments.
 ldap#:#ldap_dn_info#:#Enter the distinguished name of the LDAP group.
 ldap#:#ldap_edit_role_ass_rule#:#Edit Role Assignment Rule
 ldap#:#ldap_err_missing_plugin_id#:#Please enter a valid plugin id.
+ldap#:#ldap_escapedn#:#Escape DN
+ldap#:#ldap_escapedn_info#:#If enabled, special characters in the "Distinguished Name (DN)" of user accounts are escaped in queries for group membership.
 ldap#:#ldap_filter_info#:#Filter that will be added to the search filter this way: (&(userattr=username)<strong>(userfilter)</strong>).
 ldap#:#ldap_global_role_assignment#:#ILIAS-Role Assignment
 ldap#:#ldap_global_role_info#:#Please choose an ILIAS Role new users will be assigned to. <span class="asterisk">*</span> The role selection is <b>required</b> in case you chose a type of synchronisation.
@@ -5940,7 +5949,6 @@ ldap#:#ldap_user_scope#:#Search Scope
 ldap#:#ldap_user_sync_info#:#Defines whether new users are automatically created on login or regularly per Cron-Job.
 ldap#:#ldap_user_sync#:#User Synchronization Settings
 mail#:#mail_serial_letter_placeholders#:#Serial-Letter Placeholders
-mail#:#activate_serial_letter_placeholders#:#Activate Serial-Letter Placeholders
 mail#:#bc#:#BCC
 chatroom#:#chat_select_room#:#Select Chat Room
 mail#:#back_to_folder#:#Back to Folder
@@ -6048,7 +6056,7 @@ mail#:#placeholders_advise#:#Personal placeholders are only substituted for reci
 mail#:#search_recipients#:#Search Recipients
 mail#:#send_mail_to#:#Mail to
 mail#:#mail_tbl_head_attachments#:#Attachment
-mail#:#mail_firstname_last_name_superior#:#Eine kommaseparierte Liste von Vor- und Nachname des/der jeweiligen Vorgesetzten.
+mail#:#mail_firstname_last_name_superior#:#Comma separated list for firstname and lastname of the user's superior(s)
 mail#:#mail_email_usr_subject#:#Test E-Mail User Mail
 mail#:#mail_email_usr_body#:#This is a test e-mail to test the delivery of user mails to the external mail account.
 mail#:#mail_email_sys_subject#:#Test E-Mail System Mail
@@ -6056,7 +6064,7 @@ mail#:#mail_email_sys_body#:#This is a test e-mail to test the delivery of syste
 maps#:#maps_enable_maps_info#:#Activates Maps in user profiles, groups and courses.
 maps#:#maps_enable_maps#:#Enable Maps
 maps#:#maps_custom_tile_server_info#:#Server URL to provide tile-data. Multiple inputs should be separated by spaces. Defaults is "%s".
-maps#:#maps_custom_geolocation_server_info#:#Server URL to provide geolocation-data using Nominatim. Your entry should contain the placeholder [QUERY] to define a position for request information. Example: nominatim.example.com/search/[QUERY]?format=json.
+maps#:#maps_custom_geolocation_server_info#:#Server URL to provide geolocation-data using Nominatim. Your entry should contain the placeholder [QUERY] to define a position for request information. Example: https://nominatim.example.com/search/[QUERY]?format=json.
 maps#:#configure_geolocation#:#Please finish the geolocation configuration in the "Third Party Software" administration menu to enable address search.
 maps#:#maps_tile_server#:#Server for Tiles
 maps#:#maps_geolocation_server#:#Server for Reverse Geolocation
@@ -8629,7 +8637,7 @@ sahs#:#sahs_insert_ass#:#Insert Asset
 common#:#obj_ass#:#Asset
 common#:#enable_anonymous_fora_desc#:#If this option is disabled, the feature ‘Posting with pseudonym’ is not available in forums anymore.
 common#:#enable_anonymous_fora#:#Allow posting with pseudonym
-content#:#cont_ed_insert_login_page_element#:#Insert Login Page Element
+content#:#cont_ed_insert_lpe#:#Insert Login Page Element
 sahs#:#sahs_hide_objectives_page#:#Hide Description/Objectives Page
 sahs#:#sahs_hide_objectives_page_info#:#If checked, the SCO description and objectives page will not be included in the presentation.
 sahs#:#sahs_list_info#:#Use leading * for bullet lists or leading # for numbered lists.
@@ -8917,7 +8925,7 @@ prtf#:#prtf_add_page#:#Add Page
 prtf#:#prtf_page_created#:#Page created
 prtf#:#prtf_sure_delete_portfolio_pages#:#Are you sure you want to delete the following portfolio page / blog page?
 prtf#:#prtf_portfolio_page_deleted#:#Portfolio / blog page deleted.
-content#:#cont_ed_insert_profile#:#Insert Personal Data
+content#:#cont_ed_insert_prof#:#Insert Personal Data
 content#:#cont_pc_prof#:#Personal Data
 content#:#cont_insert_profile#:#Publish Personal Data
 content#:#cont_update_profile#:#Edit Published Data
@@ -8926,7 +8934,7 @@ content#:#cont_profile_mode_inherit#:#Automatic
 content#:#cont_profile_mode_inherit_info#:#Use your profile settings
 content#:#cont_profile_mode_manual#:#Manual
 content#:#cont_profile_mode_manual_info#:#Use the following data:
-content#:#cont_ed_insert_verification#:#Insert Certificate
+content#:#cont_ed_insert_vrfc#:#Insert Certificate
 content#:#cont_pc_vrfc#:#Certificate
 content#:#cont_insert_verification#:#Add Certificate
 content#:#cont_update_verification#:#Edit Certificate
@@ -9134,6 +9142,7 @@ skmg#:#skmg_update_order#:#Update Order
 skmg#:#skmg_really_delete_levels#:#Do you really want to delete the following competence levels?
 skmg#:#skmg_skill#:#Competence
 skmg#:#skmg_skill_levels#:#Competence Levels
+skmg#:#skmg_target_levels#:#Target Levels
 skmg#:#skmg_skill_level_trigger#:#Competence Level Trigger
 skmg#:#skmg_no_trigger#:#No Trigger
 skmg#:#skmg_remove_trigger#:#Remove Trigger
@@ -9387,7 +9396,7 @@ scormdebug#:#scormdebug_global_activate#:#Enable SCORM test tool
 scormdebug#:#scormdebug_global_activate_info#:#If enabled, the SCORM test tool can be activated for desired learning modules. If disabled, the test tool is deactivated for all learning modules.
 content#:#cont_debug_deactivate#:#A Test Tool will be displayed in the presentation mode of the learning module. Based on the data provided by it the interaction of the learning module and ILIAS can be evaluated. To use the Test Tool, the navigation tree has to be switched on.
 content#:#cont_debug_deactivate12#:#A Test Tool will be displayed in the presentation mode of the learning module. Based on the data provided by it the interaction of the learning module and ILIAS can be evaluated.
-content#:#cont_debug_deactivated#:#The test tool is currently globally deactivated in the ILIAS administration (Administration » Learning Resources).
+content#:#cont_debug_deactivated#:#The test tool is currently globally deactivated in the ILIAS administration (Administration » Repository and Objects » Learning Modules).
 scormdebug#:#error0#:#No error
 scormdebug#:#error101#:#General Exception
 scormdebug#:#error102#:#General Initialization Failure
@@ -10195,7 +10204,7 @@ dcl#:#dcl_activate_notification#:#Enable Notification
 dcl#:#dcl_table_id#:#Table ID
 dcl#:#dcl_add_new_record#:#Add New Entry
 dcl#:#dcl_list_fields#:#Fields
-dcl#:#dcl_list_visibility_and_filter#:#List
+dcl#:#dcl_list_visibility_and_filter#:#Overview
 dcl#:#dcl_view_settings#:#View Settings
 dcl#:#dcl_view_configuration#:#View Configuration
 dcl#:#dcl_configuration_complete#:#Configuration Complete
@@ -10251,8 +10260,8 @@ dcl#:#dcl_tableviews#:#Views
 dcl#:#dcl_tableviews_table#:#Views of Selected Table
 dcl#:#dcl_tableview#:#View
 dcl#:#dcl_detailed_view#:#Single
-dcl#:#dcl_edit_entry_rules#:#Editing
-dcl#:#dcl_create_entry_rules#:#Creation
+dcl#:#dcl_edit_entry_rules#:#Entry Editing
+dcl#:#dcl_create_entry_rules#:#Entry Creation
 dcl#:#dcl_tableview_copy#:#View successfully copied
 dcl#:#dcl_tableview_default_value_fail#:#Some numeric default values couldn't be saved because they contained letters. Please try again.
 dcl#:#dcl_tableview_add#:#Add New View
@@ -10309,16 +10318,16 @@ trac#:#trac_filter_has_status#:#Show also objects with status ‘not attempted�
 cat#:#cat_import#:#Import Category
 mcst#:#mcst_preview_picture#:#Preview Picture
 mcst#:#mcst_preview_picture_info#:#Only supported by the following main media types:
-objref#:#objref_custom_title#:#Eigenen Titel verwenden
-objref#:#objref_edit_ref#:#Ziel des Links
-objref#:#objref_edit_title#:#Titel
-objref#:#objref_reuse_title#:#Titel des verlinkten Objekts übernehmen
-objref#:#objref_title_settings#:#Titel des verlinkten Objekts
-objref#:#objref_failure_target_type#:#Das Ziel des Links muss vom folgendem Typ sein:
-crs#:#crs_ref_member_update#:#Neue Mitglieder hinzufügen
-crs#:#crs_ref_member_update_info#:#Alle neuen Mitglieder des übergeordneten Kurses werden automatisch in den Kurs, auf den dieser Kurs-Link verweist, eingetragen.
-crs#:#crs_ref_missing_parent_crs#:#Die Option kann nicht ausgewählt werden, da dieser Kurs-Link keinen übergeordneten Kurs besitzt.
-crs#:#crs_ref_missing_access#:#Die Option kann nicht ausgewählt werden, da Sie nicht die Berechtigung "Mitglieder verwalten" für beide Kurse besitzen.
+objref#:#objref_custom_title#:#Use Own Title
+objref#:#objref_edit_ref#:#Link Target
+objref#:#objref_edit_title#:#Title
+objref#:#objref_reuse_title#:#Adopt Title of Linked Object
+objref#:#objref_title_settings#:#Title of Linked Object
+objref#:#objref_failure_target_type#:#Target of link must be of following type:
+crs#:#crs_ref_member_update#:#Add new members
+crs#:#crs_ref_member_update_info#:#All new members of the parent course are automatically entered in the course to which this course link refers.
+crs#:#crs_ref_missing_parent_crs#:#The option cannot be selected because this course link does not have a parent course.
+crs#:#crs_ref_missing_access#:#The option cannot be selected because you do not have "Manage Members" permission for either course.
 crs#:#crs_ref_delete_confirmation_info#:#Would you like to remove the following members from this course? If these members are to be removed from courses linked into this course, please activate the respective checkboxes.
 news#:#news_keep_minimal_x_items#:#Keeping Older Items
 news#:#news_keep_minimal_x_items_info#:#Number of older items held available regardless of the system wide defined RSS period.
@@ -10341,12 +10350,12 @@ dateplaner#:#cal_type_local#:#Local Calendar
 dateplaner#:#cal_type_remote#:#Web Calendar
 dateplaner#:#cal_remote_url#:#URL
 dateplaner#:#cal_cal_synchronize#:#Synchronise Calendar
-dateplaner#:#cal_cal_sync_success#:#Successfully synchronised calendar
+dateplaner#:#cal_cal_sync_success#:#Synchronised calendar successfully
 style#:#sty_substyle#:#Substyle
 style#:#sty_cat_assignments#:#Style/Category Assignments
 style#:#sty_add_assignment#:#Add Assignment
 administration#:#adm_user_starting_point#:#Personal Starting Point
-administration#:#adm_user_starting_point_info#:#Select the page or object which is shown after login.
+administration#:#adm_user_starting_point_info#:#Select page or object which is shown after login.
 content#:#cont_AdvancedKnowledge#:#Advanced Knowledge
 content#:#cont_show_adv#:#Show Advanced Knowledge
 content#:#cont_hide_adv#:#Hide Advanced Knowledge
@@ -10432,6 +10441,7 @@ content#:#cont_resources_of_type#:#Resources of Type
 content#:#cont_element_refers_removed_itgr#:#This content element refers to an item group that has been removed in the meantime.
 common#:#search_globally#:#Globally
 common#:#search_at_current_position#:#At Current Position
+common#:#label_search_options#:#Search Area
 ecs#:#ecs_crs_export#:#Course Releases
 ecs#:#ecs_crs_export_obj_settings#:#Course Release Settings
 ecs#:#ecs_crs_export_disabled#:#Do not release this Course
@@ -10852,7 +10862,7 @@ tos#:#tos_crit_type_usr_country_info#:#The criterion is fulfilled if the selecte
 tos#:#tos_account_reg_not_possible#:#A self registration is not possible because of a missing user agreement. Please contact your <a href="%1$s">system administrator</a> for further information.
 tos#:#tos_reevaluate_on_login#:#Reevaluate on Successful Login
 tos#:#tos_reevaluate_on_login_desc#:#If enabled, ILIAS checks if the user has to accept a new document after successful login. This applies for the cased, where the criteria of a signed document do not match anymore, and a new document can be determined based on the current user criteria.
-tos#:#tos_withdrawal_usr_deletion#:#Account Deletion on Terms Of Service Withdrawal 
+tos#:#tos_withdrawal_usr_deletion#:#Account Deletion on Terms Of Service Withdrawal
 tos#:#tos_withdrawal_usr_deletion_info#:#If enabled, the withdrawal of the 'Terms of Service' provokes a deletion of the user account.
 ecs#:#ecs_sync_trees#:#Synchronise Directory Trees
 rbac#:#chtr_delete#:#User can move or delete chat room
@@ -11122,16 +11132,16 @@ survey#:#survey_360_add_self_appraisee#:#Add yourself as appraisee to this surve
 survey#:#survey_360_list_title#:#360° Mode
 survey#:#survey_360_select_appraisee#:#Select
 survey#:#survey_360_appraisee#:#Appraisee
-skmg#:#skmg_skill_profiles#:#Profiles
+skmg#:#skmg_skill_profiles#:#Competence Profiles
 skmg#:#skmg_add_local_profile#:#Add Local Profile
 skmg#:#skmg_add_profile#:#Add Profile
 skmg#:#skmg_edit_profile#:#Edit Profile
 skmg#:#skmg_delete_profiles#:#Do you really want to delete the following profiles?
-skmg#:#skmg_assigned_skill_levels#:#Assigned Competence Levels
+skmg#:#skmg_assigned_skill_levels#:#Assigned Target Levels
 skmg#:#skmg_assign_level#:#Assign Level
 skmg#:#skmg_profile#:#Profile
 skmg#:#skmg_remove_levels#:#Remove Levels
-skmg#:#skmg_select_skill_level_assign#:#Please select a skill.
+skmg#:#skmg_select_skill_level_assign#:#Please select a competence.
 skmg#:#skmg_confirm_remove_level_ass#:#So you really want to remove the following competence levels from the profile?
 skmg#:#skmg_assigned_users#:#Assigned Roles and Users
 skmg#:#skmg_assign_user#:#Assign User
@@ -11197,6 +11207,7 @@ survey#:#survey_reminder_frequency_days#:#Days
 survey#:#survey_notification_target_group#:#Target Group
 survey#:#survey_notification_target_group_parent_course#:#All members of parent course/group
 survey#:#survey_notification_target_group_parent_course_inactive#:#No parent course/group given - no reminders will be sent!
+survey#:#survey_notification_target_group_invited#:#All users manually invited to the survey
 survey#:#survey_notification_target_group_invited_info#:#Number of current recipients: %s
 survey#:#survey_notification_tutor_setting#:#One E-Mail after all Participants Finished
 survey#:#survey_notification_tutor_recipients#:#Tutors (Login[s])
@@ -11788,7 +11799,7 @@ crs#:#crs_mail_all#:#For all Participants
 grp#:#grp_mail_type#:#Mail to Members
 grp#:#grp_mail_tutors_only#:#For Administrators only
 grp#:#grp_mail_all#:#For all Participants
-content#:#cont_ed_insert_consultation_hours#:#Insert Consultation Hours
+content#:#cont_ed_insert_cach#:#Insert Consultation Hours
 content#:#cont_insert_consultation_hours#:#Insert Consultation Hours
 content#:#cont_update_consultation_hours#:#Edit Consultation Hours
 content#:#cont_cach_mode#:#Mode
@@ -12001,8 +12012,8 @@ book#:#book_reservation_failed_overbooked#:#The booking failed because the objec
 common#:#obj_wiks#:#Wiki
 common#:#obj_wiks_desc#:#Global Wiki Settings
 blog#:#blog_edit_posting#:#Edit Posting
-sop#:#sop_check_system_requirements#:#Checking system requirements
-sop#:#sop_system_check_error#:#Your Browser does not support the required HTML5 features.
+sop#:#sop_check_system_requirements#:#Checking system requirements. Please note: Since Firefox Version 81 browser.cache.offline.storage.enable must be enabled. Please navigate to "about:config", search for "browser.cache.offline.storage.enable" and toggle to true.
+sop#:#sop_system_check_error#:#Your Browser does not support the required HTML5 features. Please use Mozilla Firefox.
 sop#:#sop_system_check_https#:#You should use https instead of http for the required HTML5 features.
 sop#:#sop_lm_not_exists#:#The Learning Module does not exist in the offline storage of this browser. <br />Please use use same device and browser as on Learning Module export.<br /><br />If this is the right device and right browser maybe the Learning Module was removed by deleting the browser cache. Please contact your admininstrator.
 sop#:#sop_already_exported#:#This Learning Module has already been exported. Please open it with the computer on which you have installed Firefox with the SCORM Offline Player addon.
@@ -12096,8 +12107,8 @@ skmg#:#skmg_number#:#Number
 skmg#:#skmg_usage_type_info_gen#:#General Use in Repository Objects
 skmg#:#skmg_usage_type_info_mat#:#Users assigned material from their personal resources
 skmg#:#skmg_usage_type_info_user#:#Assigned to Users
-skmg#:#skmg_usage_type_info_pers#:#Selected by Users as Personal Skill
-skmg#:#skmg_usage_type_info_prof#:#Used in Skill Profiles
+skmg#:#skmg_usage_type_info_pers#:#Selected by Users as Personal Competence
+skmg#:#skmg_usage_type_info_prof#:#Used in Competence Profiles
 skmg#:#skmg_usage_type_info_res#:#Repository Objects Assigned as Suggested Resource
 skmg#:#skmg_usage_obj_objects#:#Object(s)
 skmg#:#skmg_usage_obj_users#:#User(s)
@@ -12136,9 +12147,9 @@ skmg#:#skmg_cannot_delete_nodes_in_use#:#Some items cannot be deleted, because t
 skmg#:#skmg_status_draft#:#Draft (Offline)
 skmg#:#skmg_status_draft_info#:#Item will be hidden.
 skmg#:#skmg_status_publish#:#Published
-skmg#:#skmg_status_publish_info#:#Item can be used if all parents are published, too. Once items are used, the status cannot be set to draft anymore, neither can they be deleted.
+skmg#:#skmg_status_publish_info#:#Item can be used if all parents are published, too.
 skmg#:#skmg_status_outdated#:#Outdated
-skmg#:#skmg_status_outdated_info#:#Item cannot be newly selected by users as personal skill, or newly assigned to repository objects or skill profiles. However existing assignments and data are still presented.
+skmg#:#skmg_status_outdated_info#:#Item cannot be newly selected by users as personal competence, or newly assigned to repository objects or competence profiles. However existing assignments and data are still presented.
 skmg#:#skmg_status#:#Status
 ldap#:#ldap_choose_role#:#Choose Role
 skmg#:#skmg_no_nodes_selectable#:#Currently there are no competences selectable.
@@ -12146,7 +12157,8 @@ skmg#:#skmg_suggested_resources#:#Suggested Resources
 cntr#:#exc_next_deadline_single#:#Deadline
 trac#:#trac_object_statistics_info#:#If activated, the basic data for the usage statistics will be gathered and processed.
 ldap#:#ldap_user_sync_cron_info#:#If activated, user accounts will be imported from the LDAP directory and synchronised continuously as an option.
-survey#:#survey_reminder_cron_info#:#If activated, users will be reminded to participate in surveys.
+survey#:#survey_reminder_cron#:#Remind users to participate / Send results to tutors
+survey#:#survey_reminder_cron_info#:#If activated, users will be reminded to participate in surveys and results will be sent to tutors.
 cron#:#cron_action_activate_sure_multi#:#Are you sure you want to activate the following cron-jobs?
 cron#:#cron_action_deactivate_sure_multi#:#Are you sure you want to deactivate the following cron-jobs?
 cron#:#cron_action_reset_sure_multi#:#Are you sure you want to reset the following cron-jobs?
@@ -12250,7 +12262,7 @@ blog#:#blog_abstract_image_info#:#Images which are smaller will not be used.
 blog#:#blog_abstract_image_width#:#Width
 blog#:#blog_abstract_image_height#:#Height
 blog#:#blog_abstract_image_pixels#:#Px
-content#:#cont_ed_insert_my_courses#:#Insert My Courses
+content#:#cont_ed_insert_mcrs#:#Insert My Courses
 content#:#cont_insert_my_courses#:#Insert My Courses
 content#:#cont_update_my_courses#:#Edit My Courses
 prtf#:#prtf_page_element_teaser_my_courses#:#The portfolio will display a list of your current courses here.
@@ -12348,7 +12360,7 @@ survey#:#svy_mail_own_results_subject#:#Survey "%s" - Your Answers
 survey#:#svy_results_view_own#:#Participants can View Own Answers
 wiki#:#wiki_wpg#:#Wiki Page
 wiki#:#wiki_advmd_block_title#:#Advanced Metadata of Page
-content#:#cont_ed_insert_amd_page_list#:#Insert Page List
+content#:#cont_ed_insert_amdpl#:#Insert Page List
 content#:#cont_insert_amd_page_list#:#Insert Page List
 content#:#cont_update_amd_page_list#:#Edit Page List
 obj#:#obj_tool_setting_taxonomies#:#Taxonomies
@@ -13219,6 +13231,7 @@ note#:#note_comment_notification_subject#:#A comment has been added to "%s"
 note#:#note_comment_notification_subjectc#:#A comment has been changed in "%s"
 note#:#note_comment_notification_salutation#:#Hello %s,
 note#:#note_comment_notification_link#:#Link
+lng#:#language_detection#:#Language Detection
 lng#:#lng_enable_language_detection#:#Enable Language Detection
 lng#:#lng_disable_language_detection#:#Disable Language Detection
 trac#:#trac_mode_content_visited#:#Visited
@@ -13802,7 +13815,7 @@ rbac#:#sty_write_page_layout#:#Edit Page Layouts
 rbac#:#stys_sty_write_page_layout#:#Edit Page Layouts
 skmg#:#skmg_import_skills#:#Import
 skmg#:#skmg_input_file#:#Import File
-skmg#:#skmg_skill_in_use#:#This skill is used by users or content. Not all commands are available. Please keep in mind that any changes that are made will affect the existing usages.
+skmg#:#skmg_skill_in_use#:#This competence is used by users or content. Not all commands are available. Please keep in mind that any changes that are made will affect the existing usages.
 form#:#form_no_link#:#No Link
 copg#:#copg_sec_link_info#:#If you set a link on the whole section, please ensure that no other interactive elements are included within the section. Otherwise their behaviour may be erratically.
 logging#:#log_error_message#:#Sorry, an error occured. A logfile has been created which can be identified via the code "%s".
@@ -14219,7 +14232,7 @@ iass#:#iass_internal_note#:#Internal record note
 iass#:#iass_status_completed#:#Completed
 iass#:#iass_status_failed#:#Failed
 iass#:#iass_status_pending#:#Status pending
-iass#:#iass_notify#:#Notify participant after finalization
+iass#:#iass_notify#:#Make Result available to Participant
 iass#:#iass_finalize#:#Finalize
 iass#:#il_iass_member#:#Participant
 iass#:#il_iass_members#:#Participants
@@ -14320,7 +14333,7 @@ chatroom#:#chat_osc_subs_rej_msgs_p#:#The following chat partners of your conver
 chatroom#:#chat_osc_self_rej_msgs#:#You currently cannot take part in this conversation because you suppressed receiving messages in your settings.
 chatroom#:#chat_osc_search_modal_info#:#Here you can search for users you would like to add to a conversation. If the search dialogue was opened within a group chat, the new user will be added to this chat. If you started the search within a 1:1 chat, a new group chat window will be opened.
 chatroom#:#chtr_server_status#:#Server Status
-chatroom#:#chtr_ban_actor_tbl_head#:#Akteur
+chatroom#:#chtr_ban_actor_tbl_head#:#locked by
 chatroom#:#chtr_ban_ts_tbl_head#:#Timestamp
 chatroom#:#chat_osc_head_grp_x_persons#:#%s Users
 common#:#chtr_import#:#Import Chatroom
@@ -14519,6 +14532,7 @@ auth#:#auth_saml_idp#:#IDP
 auth#:#auth_saml_configure_idp#:#Configure SAML IDP: %s
 auth#:#saml_tab_head_idp#:#IDP
 auth#:#auth_saml_idp_settings#:#IDP Settings
+auth#:#auth_saml_err_sqlite_driver#:#The SAML authentication requires the SQLite driver for PHP. Please install the SQLite package and try again.
 dateplaner#:#cal_download_all_files#:#Download all Files
 dateplaner#:#cal_owner#:#Owner
 dateplaner#:#cal_contained_in#:#Contained in
@@ -14562,10 +14576,10 @@ mail#:#mail_both_email#:#Both E-Mail Addresses
 common#:#second_email#:#Second E-Mail
 survey#:#svy_print_show_labels#:#Show labels
 survey#:#svy_print_hide_labels#:#Hide labels
-skmg#:#skmg_assigned_profiles#:#Assigned Profiles
+skmg#:#skmg_assigned_profiles#:#Assigned Competence Profiles
 skmg#:#skmg_selected_skills#:#Competence Records
-skmg#:#skmg_hide_profile_self_eval#:#Hide Profile without Self Evaluation
-skmg#:#skmg_hide_profile_self_eval_info#:#Profile target values will not be shown to a user, if no self evaluation has been done for a specific skill.
+skmg#:#skmg_hide_profile_self_eval#:#Hide Profile Target Level without Self Evaluation
+skmg#:#skmg_hide_profile_self_eval_info#:#Profile Target Level will not be shown to a user, if no self evaluation has been done for a specific competence.
 skmg#:#skmg_local_assignment_profiles#:#Allow Local Assignment of Global Profiles
 skmg#:#skmg_allow_local_profiles#:#Allow Creation of Local Profiles
 skmg#:#skmg_allow_local_profiles_info#:#Users with permission 'Edit Settings' in Courses and Groups can create local competence profiles using globally defined competences.
@@ -15123,7 +15137,7 @@ prtf#:#prtf_decl_authorship#:#Declaration of Authorship
 pd#:#pd_achievements#:#Achievements
 content#:#cont_got_lock_release#:#This page has been locked for your editing until %1. Please release the page after you have done all your changes.
 prtf#:#prtf_download_submission#:#Download Submission
-content#:#cont_ed_insert_learning_history#:#Insert Learning History
+content#:#cont_ed_insert_lhist#:#Insert Learning History
 lhist#:#lhist_all#:#All
 lhist#:#lhist_selected#:#Selected
 lhist#:#lhist_manual#:#Manual
@@ -15666,7 +15680,7 @@ trac#:#cmix_lp_mode_with_failed#:#Also consider failed
 trac#:#cmix_lp_mode_with_failed_info#:#The status could be 'failed' instead of 'in progress'.
 trac#:#cmix_lp_mode_when_passed#:#Completed when 'passed'
 trac#:#cmix_lp_mode_when_passed_info#:#ILIAS status 'completed' is set when verb of last relevant xAPI-Statement is 'passed' or 'satisfied'.
-trac#:#cmix_lp_mode_when_passed_or_completed#:#Completed when passed or completed
+trac#:#cmix_lp_mode_when_passed_or_completed#:#Completed when 'passed' or 'completed'
 trac#:#cmix_lp_mode_when_passed_or_completed_info#:#ILIAS status 'completed' is set when verb of last relevant xAPI-Statement is 'completed' or 'passed' or 'satisfied'.
 trac#:#trac_mode_lti_outcome#:#Mastery Score Must be reached
 trac#:#trac_mode_lti_outcome_info#:#The Learning Progress will be evaluated from the LTI outcome and the mastery score threshold.
@@ -15765,26 +15779,26 @@ lti#:#lti_con_prov_keywords#:#Keywords
 lti#:#lti_con_prov_keywords_info#:#The keywords must be separated by a Semicolon (;). The Keywords are automatically taken to the Metadata as Keywords.
 lti#:#lti_con_prov_category#:#Category
 lti#:#lti_con_prov_category_info#:#Category to filter entries when LTI Consumer Object is created.
-lti#:#conf_user_ident#:#User identification
-lti#:#conf_user_ident_info#:#Standard is frequently the email address. The unique ILIAS platform id is:
-lti#:#conf_user_ident_il_uuid_user_id#:#ILIAS user id combined with a unique ILIAS platform id formated as an email adress.
-lti#:#conf_user_ident_il_uuid_user_id_info#:#This is identical to each call, but doesn't allow a direct conclusion about the ILIAS user.
-lti#:#conf_user_ident_il_uuid_login#:#ILIAS Login combined with a unique ILIAS platform id formated as an email adress.
-lti#:#conf_user_ident_il_uuid_login_info#:#This is identical to each call, but may allow a direct conclusion about the ILIAS user.
-lti#:#conf_user_ident_il_uuid_ext_account#:#External User Id combined with a unique ILIAS platform id formated as an email adress.
-lti#:#conf_user_ident_il_uuid_ext_account_info#:#This is identical to each call, but may allow a direct conclusion about the user.
-lti#:#conf_user_ident_real_email#:#E-Mail Address
-lti#:#conf_user_ident_real_email_info#:#Sends E-Mail Address of user as identification (Warning: an E-Mail Address might be used by multiple users!)
-lti#:#conf_user_name#:#User name
-lti#:#conf_user_name_info#:#Sending an user name is usually not required.
-lti#:#conf_user_name_none#:#No one
-lti#:#conf_user_name_none_info#:#Sends '-' instead of a name
-lti#:#conf_user_name_firstname#:#First name
-lti#:#conf_user_name_firstname_info#:#Sends the first name of the user name from ILIAS
-lti#:#conf_user_name_lastname#:#Title and last name
-lti#:#conf_user_name_lastname_info#:#Sends Mister or Ms/Mrs. (unless otherwise specified) and the last name
-lti#:#conf_user_name_fullname#:#Entire name
-lti#:#conf_user_name_fullname_info#:#Sends title, first name and last name
+lti#:#conf_privacy_ident#:#User identification
+lti#:#conf_privacy_ident_info#:#Standard is frequently the email address. The unique ILIAS platform id is:
+lti#:#conf_privacy_ident_il_uuid_user_id#:#ILIAS user id combined with a unique ILIAS platform id formated as an email adress.
+lti#:#conf_privacy_ident_il_uuid_user_id_info#:#This is identical to each call, but doesn't allow a direct conclusion about the ILIAS user.
+lti#:#conf_privacy_ident_il_uuid_login#:#ILIAS Login combined with a unique ILIAS platform id formated as an email adress.
+lti#:#conf_privacy_ident_il_uuid_login_info#:#This is identical to each call, but may allow a direct conclusion about the ILIAS user.
+lti#:#conf_privacy_ident_il_uuid_ext_account#:#External User Id combined with a unique ILIAS platform id formated as an email adress.
+lti#:#conf_privacy_ident_il_uuid_ext_account_info#:#This is identical to each call, but may allow a direct conclusion about the user.
+lti#:#conf_privacy_ident_real_email#:#E-Mail Address
+lti#:#conf_privacy_ident_real_email_info#:#Sends E-Mail Address of user as identification (Warning: an E-Mail Address might be used by multiple users!)
+lti#:#conf_privacy_name#:#User name
+lti#:#conf_privacy_name_info#:#Sending an user name is usually not required.
+lti#:#conf_privacy_name_none#:#No one
+lti#:#conf_privacy_name_none_info#:#Sends '-' instead of a name
+lti#:#conf_privacy_name_firstname#:#First name
+lti#:#conf_privacy_name_firstname_info#:#Sends the first name of the user name from ILIAS
+lti#:#conf_privacy_name_lastname#:#Title and last name
+lti#:#conf_privacy_name_lastname_info#:#Sends Mister or Ms/Mrs. (unless otherwise specified) and the last name
+lti#:#conf_privacy_name_fullname#:#Entire name
+lti#:#conf_privacy_name_fullname_info#:#Sends title, first name and last name
 lti#:#lti_con_prov_privacy_setting_conf#:#Configuration Options
 lti#:#lti_con_prov_privacy_setting_info#:#Configuration Options for Privacy Settings
 lti#:#lti_con_prov_privacy_setting_default#:#Default Settings, changeable for Objects
@@ -15947,28 +15961,28 @@ cmix#:#conf_keep_lp#:#Keep Learning Progress
 cmix#:#conf_keep_lp_info#:#The ILIAS learning progress status completed would be freezed.
 cmix#:#conf_external_lrs#:#External LRS
 cmix#:#info_external_lrs#:#A hint will be shown to users when dealing with an external LRS. An external LRS is characterized by insufficient influence on the LRS the by the operator of the ILIAS-installation. This is the case when there are no rights to delete.
-cmix#:#conf_user_ident#:#User identification
-cmix#:#conf_user_ident_info#:#Standard is frequently the email address. The unique ILIAS platform id is:
-cmix#:#conf_user_ident_il_uuid_user_id#:#ILIAS user id combined with a unique ILIAS platform id formatted as an E-Mail adress
-cmix#:#conf_user_ident_il_uuid_user_id_info#:#This is identical to each call, but doesn't allow a direct conclusion about the ILIAS user.
-cmix#:#conf_user_ident_il_uuid_login#:#ILIAS Login combined with a unique ILIAS platform id formatted as an E-Mail adress
-cmix#:#conf_user_ident_il_uuid_login_info#:#This is identical to each call, but may allow a direct conclusion about the ILIAS user.
-cmix#:#conf_user_ident_il_uuid_ext_account#:#External User Id combined with a unique ILIAS platform id formatted as an E-Mail adress
-cmix#:#conf_user_ident_il_uuid_ext_account_info#:#This is identical to each call, but may allow a direct conclusion about the user.
-cmix#:#conf_user_ident_il_uuid_random#:#Random ID combined with a unique ILIAS platform ID formatted as an E-Mail address
-cmix#:#conf_user_ident_il_uuid_random_info#:#For each ILIAS object and ILIAS user a random ID is generated which remains identical for each call. Conclusions about a user are very limited because it is practically impossible to create user profiles across objects.
-cmix#:#conf_user_ident_real_email#:#E-Mail Address
-cmix#:#conf_user_ident_real_email_info#:#Sends E-Mail Address of user as identification (Warning: an E-Mail Address might be used by multiple users!)
-cmix#:#conf_user_name#:#User name
-cmix#:#conf_user_name_info#:#Sending an user name is usually not required.
-cmix#:#conf_user_name_none#:#No one
-cmix#:#conf_user_name_none_info#:#Sends '-' instead of a name
-cmix#:#conf_user_name_firstname#:#First name
-cmix#:#conf_user_name_firstname_info#:#Sends the first name of the user name from ILIAS
-cmix#:#conf_user_name_lastname#:#Title and last name
-cmix#:#conf_user_name_lastname_info#:#Sends Mister or Ms/Mrs. (unless otherwise specified) and the last name
-cmix#:#conf_user_name_fullname#:#Entire name
-cmix#:#conf_user_name_fullname_info#:#Sends title, first name and last name
+cmix#:#conf_privacy_ident#:#User identification
+cmix#:#conf_privacy_ident_info#:#Standard is frequently the email address. The unique ILIAS platform id is:
+cmix#:#conf_privacy_ident_il_uuid_user_id#:#ILIAS user id combined with a unique ILIAS platform id formatted as an E-Mail adress
+cmix#:#conf_privacy_ident_il_uuid_user_id_info#:#This is identical to each call, but doesn't allow a direct conclusion about the ILIAS user.
+cmix#:#conf_privacy_ident_il_uuid_login#:#ILIAS Login combined with a unique ILIAS platform id formatted as an E-Mail adress
+cmix#:#conf_privacy_ident_il_uuid_login_info#:#This is identical to each call, but may allow a direct conclusion about the ILIAS user.
+cmix#:#conf_privacy_ident_il_uuid_ext_account#:#External User Id combined with a unique ILIAS platform id formatted as an E-Mail adress
+cmix#:#conf_privacy_ident_il_uuid_ext_account_info#:#This is identical to each call, but may allow a direct conclusion about the user.
+cmix#:#conf_privacy_ident_il_uuid_random#:#Random ID combined with a unique ILIAS platform ID formatted as an E-Mail address
+cmix#:#conf_privacy_ident_il_uuid_random_info#:#For each ILIAS object and ILIAS user a random ID is generated which remains identical for each call. Conclusions about a user are very limited because it is practically impossible to create user profiles across objects.
+cmix#:#conf_privacy_ident_real_email#:#E-Mail Address
+cmix#:#conf_privacy_ident_real_email_info#:#Sends E-Mail Address of user as identification (Warning: an E-Mail Address might be used by multiple users!)
+cmix#:#conf_privacy_name#:#User name
+cmix#:#conf_privacy_name_info#:#Sending an user name is usually not required.
+cmix#:#conf_privacy_name_none#:#No one
+cmix#:#conf_privacy_name_none_info#:#Sends '-' instead of a name
+cmix#:#conf_privacy_name_firstname#:#First name
+cmix#:#conf_privacy_name_firstname_info#:#Sends the first name of the user name from ILIAS
+cmix#:#conf_privacy_name_lastname#:#Title and last name
+cmix#:#conf_privacy_name_lastname_info#:#Sends Mister or Ms/Mrs. (unless otherwise specified) and the last name
+cmix#:#conf_privacy_name_fullname#:#Entire name
+cmix#:#conf_privacy_name_fullname_info#:#Sends title, first name and last name
 cmix#:#conf_privacy_setting_conf#:#Configuration Options
 cmix#:#conf_privacy_setting_info#:#Configuration Options for Privacy Settings
 cmix#:#conf_privacy_setting_default#:#Default Settings, changeable for Objects
@@ -16304,6 +16318,10 @@ survey#:#svy_sum_score#:#Sum Score
 survey#:#svy_max_sum_score#:#Maximum Sum Score
 content#:#cont_select_none#:#Clear Selection
 feed#:#feed_no_local_url#:#The URL could not be verified. Please enter a valid external Feed URL.
+common#:#lso_admin_form_title#:#Settings
+common#:#lso_admin_form_byline#:#General Settings for Learning Sequences
+common#:#lso_admin_interval_label#:#Learning Progress Polling Interval (seconds)
+common#:#lso_admin_interval_byline#:#Poll Learning Progress every x seconds. Be careful! A low value will increase server-requests and have an impact on overall system performance. Please choose highest value possible! 
 common#:#mainbar_more_label#:#More
 common#:#obj_wbdv#:#WebDAV
 common#:#obj_wbdv_desc#:#Configuration of WebDAV Settings.
@@ -16388,6 +16406,7 @@ adn#:#administrative_notification#:#Administrative Notifications
 adn#:#administrative_notification_description#:#Provide system-wide notifications in topbar of ILIAS
 common#:#obj_adn#:#Administrative Notifications
 adn#:#main#:#Notifications
+adn#:#msg_type_0#:#Notice
 adn#:#msg_type_1#:#Notice
 adn#:#msg_type_2#:#Important
 adn#:#msg_type_3#:#Breaking News
@@ -16414,6 +16433,7 @@ adn#:#msg_limit_to_roles_info#:#Only the selected roles will see the notificatio
 adn#:#msg_form_title#:#Notification
 adn#:#msg_table_title#:#Notifications
 adn#:#common_actions#:#Actions
+adn#:#msg_error_false_date_configuration#:#Can't create a notification with this configuration of dates. The event must be within the display time.
 adn#:#common_add_msg#:#Add Notification
 adn#:#btn_reset#:#Reset
 adn#:#btn_reset_confirm#:#Would you like to reset this Notification for all Users?
@@ -16424,6 +16444,7 @@ adn#:#btn_edit#:#Edit
 adn#:#msg_success_deleted#:#Notification sucessfully deleted
 adn#:#msg_success_created#:#Notification created
 adn#:#msg_success_reset#:#Notification reset
+adn#:#msg_success_updated#:#Notification updated
 content#:#cont_delete_content#:#Delete Content
 adve#:#adve_autosave#:#Automatic Saving Intervall
 adve#:#adve_autosave_info#:#Auto-save for text content. With shorter intervals, the server load increases and the performance of the system decreases.
@@ -16500,3 +16521,37 @@ rbac#:#cmis_write#:#User can edit settings of xAPI/cmi5 administration.
 rbac#:#cmis_edit_permissions#:#User can change permission settings of xAPI/cmi5 administration.
 prg#:#no_srctype_or_id#:#Id and type may not be empty.
 prg#:#auto_add_success#:#Add automatism successfully.
+maps#:#maps_https_for_reverse_lookup#:#Https for Reverse Lookup
+tagging#:#no_tag_text_1#:#You have not yet used any tags. To do this, you must take two steps:
+tagging#:#no_tag_text_2#:#Click on '%s' and select a learning object from the available offer, e.g. a learning module or a forum.
+tagging#:#no_tag_text_3#:#To attach any tags to the object select 'Set Tags' from the actions menu.
+form#:#form_invalid_uri#:#Invalid URI format.
+common#:#installation_status#:#Installation Status
+copg#:#copg_an_error_occured#:#An error occured.
+copg#:#copg_details#:#Details
+copg#:#copg_error#:#Error
+copg#:#copg_page_element_not_found#:#Page element not found.
+adve#:#adve_autosave_info_min_10#:#Please choose a value of minimal 10 seconds if you activated this feature.
+content#:#cont_keyword#:#Keyword
+content#:#cont_footnote#:#Footnote
+content#:#cont_Book#:#Book
+content#:#cont_Numbers#:#Numbers
+content#:#cont_Verse#:#Verse/Stanza
+content#:#cont_choose_from_clipboard#:#Choose from Clipboard
+content#:#cont_open_clipboard#:#Open Clipboard
+common#:#user_avatar#:#User Avatar
+common#:#current_user_avatar#:#Your User Avatar
+common#:#user_avatar_of#:#User Avatar of
+awrn#:#awrn_filter#:#User Filter
+help#:#help_search_label#:#Search Help
+rbac#:#delete_xapi_data#:#Delete xAPI/cmi5 Data
+trac#:#trac_mode_cmix_completed#:#Completed when verb 'completed' was sent. Verb 'failed' sets status of ILIAS to 'In Progress'.
+trac#:#trac_mode_cmix_compl_with_failed#:#Completed when verb 'completed' was sent. Verb 'failed' sets status of ILIAS to 'Failed'.
+trac#:#trac_mode_cmix_passed#:#Completed when verb 'passed' or 'satisfied' was sent. Verb 'failed' sets status of ILIAS to 'In Progress'.
+trac#:#trac_mode_cmix_passed_with_failed#:#Completed when verb 'passed' or 'satisfied' was sent. Verb 'failed' sets status of ILIAS to 'Failed'.
+trac#:#trac_mode_cmix_completed_or_passed#:#Completed when verb 'completed' or 'passed' or 'satisfied' was sent. Verb 'failed' sets status of ILIAS to 'In Progress'.
+trac#:#trac_mode_cmix_compl_or_passed_with_failed#:#Completed when verb 'completed' or 'passed' or 'satisfied' was sent. Verb 'failed' sets status of ILIAS to 'Failed'.
+cmix#:#toplist_top_n_results#:#Top Ranking
+cmix#:#toplist_your_result#:#Own Rank
+lti#:#toplist_top_n_results#:#Top Ranking
+lti#:#toplist_your_result#:#Own Rank

@@ -23,6 +23,11 @@ class ilPCParagraph extends ilPageContent
     public $dom;
     public $par_node;			// node of Paragraph element
 
+    /**
+     * @var \ilLanguage
+     */
+    protected $lng;
+
     protected static $bb_tags = array(
             "com" => "Comment",
             "emp" => "Emph",
@@ -45,6 +50,7 @@ class ilPCParagraph extends ilPageContent
         global $DIC;
 
         $this->user = $DIC->user();
+        $this->lng = $DIC->language();
         $this->setType("par");
     }
 
@@ -1325,8 +1331,14 @@ class ilPCParagraph extends ilPageContent
     {
         $ilUser = $this->user;
 
+        $a_content = str_replace("<br>", "<br />", $a_content);
+
         $this->log->debug("step 1: " . substr($a_content, 0, 1000));
-        $t = self::handleAjaxContent($a_content);
+        try {
+            $t = self::handleAjaxContent($a_content);
+        } catch (Exception $ex) {
+            return $ex->getMessage() . ": " . htmlentities($a_content);
+        }
         $this->log->debug("step 2: " . substr($t["text"], 0, 1000));
         if ($t === false) {
             return false;
@@ -1343,15 +1355,19 @@ class ilPCParagraph extends ilPageContent
             $par->writePCId($pc_id[1]);
         } else {
             $par = $a_pg_obj->getContentObject($pc_id[0], $pc_id[1]);
+
+            if (!$par) {
+                return $this->lng->txt("copg_page_element_not_found") . " (saveJS): " . $pc_id[0] . ":" . $pc_id[1] . ".";
+            }
         }
-/*
-        if ($a_insert_at != "") {
-            $pc_id = $a_pg_obj->generatePCId();
-            $par->writePCId($pc_id);
-            $this->inserted_pc_id = $pc_id;
-        } else {
-            $this->inserted_pc_id = $pc_id[1];
-        }*/
+        /*
+                if ($a_insert_at != "") {
+                    $pc_id = $a_pg_obj->generatePCId();
+                    $par->writePCId($pc_id);
+                    $this->inserted_pc_id = $pc_id;
+                } else {
+                    $this->inserted_pc_id = $pc_id[1];
+                }*/
 
         $par->setLanguage($ilUser->getLanguage());
         $par->setCharacteristic($t["class"]);
@@ -1880,7 +1896,7 @@ class ilPCParagraph extends ilPageContent
             " page_parent_type = " . $ilDB->quote($a_parent_type, "text") .
             " AND page_id = " . $ilDB->quote($a_page_id, "integer") .
             " AND page_lang = " . $ilDB->quote($a_page_lang, "text")
-            );
+        );
     }
 
     /**
@@ -1919,7 +1935,7 @@ class ilPCParagraph extends ilPageContent
             " WHERE page_parent_type = " . $ilDB->quote($a_parent_type, "text") .
             " AND page_id = " . $ilDB->quote($a_page_id, "integer") .
             $and_lang
-            );
+        );
         $anchors = array();
         while ($rec = $ilDB->fetchAssoc($set)) {
             $anchors[] = $rec["anchor_name"];
@@ -2054,7 +2070,13 @@ class ilPCParagraph extends ilPageContent
         $ilUser = $this->user;
 
         $this->log->debug("step 1: " . substr($a_content, 0, 1000));
-        $t = self::handleAjaxContent($a_content);
+
+        try {
+            $t = self::handleAjaxContent($a_content);
+        } catch (Exception $ex) {
+            return $ex->getMessage() . ": " . htmlentities($a_content);
+        }
+
         $this->log->debug("step 2: " . substr($t["text"], 0, 1000));
         if ($t === false) {
             return false;
@@ -2102,5 +2124,4 @@ class ilPCParagraph extends ilPageContent
         //$updated = $a_pg_obj->update();
         return $updated;
     }
-
 }

@@ -26,13 +26,9 @@ trait ilObjFileMetadata
             return true;
         }
 
-        // not upload mode
-        ilHistory::_createEntry($this->getId(), "create", $this->getFileName() . ",1" . ",1");
-        $this->addNewsNotification("file_created");
-
         // New Item
         $default_visibility = ilNewsItem::_getDefaultVisibilityForRefId($_GET['ref_id']);
-        if ($default_visibility == "public") {
+        if ($default_visibility === "public") {
             ilBlockSetting::_write("news", "public_notifications", 1, 0, $this->getId());
         }
 
@@ -44,16 +40,6 @@ trait ilObjFileMetadata
         $this->log->logStack(ilLogLevel::DEBUG);
 
         $DIC->database()->insert('file_data', $this->getArrayForDatabase());
-
-        //add metadata to database
-        $metadata = [
-            'meta_lifecycle_id' => ['integer', $DIC->database()->nextId('il_meta_lifecycle')],
-            'rbac_id' => ['integer', $this->getId()],
-            'obj_id' => ['integer', $this->getId()],
-            'obj_type' => ['text', "file"],
-            'meta_version' => ['integer', (int) $this->getVersion()],
-        ];
-        $DIC->database()->insert('il_meta_lifecycle', $metadata);
 
         // no meta data handling for file list files
         if ($this->getMode() != self::MODE_FILELIST) {

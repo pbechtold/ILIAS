@@ -125,7 +125,7 @@ class ilTrMatrixTableGUI extends ilLPTableBaseGUI
 
         $lng = $DIC['lng'];
 
-        $item = $this->addFilterItemByMetaType("name", ilTable2GUI::FILTER_TEXT);
+        $item = $this->addFilterItemByMetaType("name", ilTable2GUI::FILTER_TEXT, false, $lng->txt('login'));
         $this->filter["name"] = $item->getValue();
         
         // #14949 - is called before constructor, so we have to do it ourselves
@@ -484,8 +484,15 @@ class ilTrMatrixTableGUI extends ilLPTableBaseGUI
         foreach ($this->getSelectedColumns() as $c) {
             if (substr($c, 0, 4) == "obj_") {
                 $obj_id = substr($c, 4);
+
                 $type = $ilObjDataCache->lookupType($obj_id);
-                $a_excel->setCell($a_row, $cnt, "(" . $this->lng->txt($type) . ") " . $labels[$c]["txt"]);
+                if ($DIC['objDefinition']->isPlugin($type)) {
+                    $type_text = ilObjectPlugin::lookupTxtById($type, 'obj_' . $type);
+                } else {
+                    $type_text = $this->lng->txt($type);
+                }
+
+                $a_excel->setCell($a_row, $cnt, "(" . $type_text . ") " . $labels[$c]["txt"]);
                 
                 if (is_array($this->perc_map) && $this->perc_map[$obj_id]) {
                     $cnt++;
@@ -556,8 +563,15 @@ class ilTrMatrixTableGUI extends ilLPTableBaseGUI
         foreach ($this->getSelectedColumns() as $c) {
             if (substr($c, 0, 4) == "obj_") {
                 $obj_id = substr($c, 4);
+
                 $type = $ilObjDataCache->lookupType($obj_id);
-                $a_csv->addColumn("(" . $this->lng->txt($type) . ") " . $labels[$c]["txt"]);
+                if ($DIC['objDefinition']->isPlugin($type)) {
+                    $type_text = ilObjectPlugin::lookupTxtById($type, 'obj_' . $type);
+                } else {
+                    $type_text = $this->lng->txt($type);
+                }
+
+                $a_csv->addColumn("(" . $type_text . ") " . $labels[$c]["txt"]);
                 
                 if (is_array($this->perc_map) && $this->perc_map[$obj_id]) {
                     $a_csv->addColumn($this->lng->txt("trac_percentage") . " (%)");

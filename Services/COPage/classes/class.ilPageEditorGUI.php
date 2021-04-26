@@ -75,6 +75,11 @@ class ilPageEditorGUI
     protected $request;
 
     /**
+     * @var \ILIAS\GlobalScreen\ScreenContext\ContextServices
+     */
+    protected $tool_context;
+
+    /**
     * Constructor
     *
     * @param	object		$a_page_object		page object
@@ -97,6 +102,8 @@ class ilPageEditorGUI
         $this->request = $DIC->http()->request();
 
         $this->log = ilLoggerFactory::getLogger('copg');
+
+        $this->tool_context = $DIC->globalScreen()->tool()->context();
 
         // initiate variables
         $this->ctrl = $ilCtrl;
@@ -246,7 +253,7 @@ class ilPageEditorGUI
             // Step CM (creation mode handling)
             $cmd = $com[0];
             $ctype = $com[1];				// note ctype holds type if cmdclass is empty, but also subcommands if not (e.g. applyFilter in ilpcmediaobjectgui)
-            $add_type = $com[2];
+            $add_type = $_POST["pluginName"];
             if ($ctype == "mob") {
                 $ctype = "media";
             }
@@ -352,6 +359,8 @@ class ilPageEditorGUI
         // Step FC (forward command)
         $this->log->debug("before FC: next_class:" . $next_class . ", pc_id:" . $pc_id .
                 ", hier_id:" . $hier_id . ", ctype:" . $ctype . ", cmd:" . $cmd . ", _GET[cmd]: " . $_GET["cmd"]);
+
+
         switch ($next_class) {
             case "ilinternallinkgui":
                 $link_gui = new ilInternalLinkGUI(
@@ -847,6 +856,12 @@ class ilPageEditorGUI
         include_once("./Services/Clipboard/classes/class.ilEditClipboardGUI.php");
         $ids = ilEditClipboardGUI::_getSelectedIDs();
         include_once("./Services/COPage/classes/class.ilPCMediaObject.php");
+
+        $hier_id = $this->page->getHierIDForPCId($_GET["pc_id"]);
+        if ($hier_id == "") {
+            $hier_id = "pg";
+        }
+
         if ($ids != "") {
             foreach ($ids as $id2) {
                 $id = explode(":", $id2);
@@ -855,13 +870,13 @@ class ilPageEditorGUI
                 if ($type == "mob") {
                     $this->content_obj = new ilPCMediaObject($this->page);
                     $this->content_obj->readMediaObject($id);
-                    $this->content_obj->createAlias($this->page, $_GET["hier_id"]);
+                    $this->content_obj->createAlias($this->page, $hier_id);
                     $this->updated = $this->page->update();
                 }
                 if ($type == "incl") {
                     include_once("./Services/COPage/classes/class.ilPCContentInclude.php");
                     $this->content_obj = new ilPCContentInclude($this->page);
-                    $this->content_obj->create($this->page, $_GET["hier_id"]);
+                    $this->content_obj->create($this->page, $hier_id);
                     $this->content_obj->setContentType("mep");
                     $this->content_obj->setContentId($id);
                     $this->updated = $this->page->update();

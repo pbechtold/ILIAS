@@ -8,6 +8,7 @@ use ILIAS\User\Export\UserHtmlExport;/**
  * Wiki HTML exporter class
  * @author Alex Killing <alex.killing@gmx.de>
  */
+
 class WikiHtmlExport
 {
     /**
@@ -169,6 +170,10 @@ class WikiHtmlExport
         $this->export_util->exportCOPageFiles($this->wiki->getStyleSheetId(), "wiki");
 
         $this->co_page_html_export = new \ilCOPageHTMLExport($this->export_dir);
+        $this->co_page_html_export->setContentStyleId(\ilObjStyleSheet::getEffectiveContentStyleId(
+            $this->wiki->getStyleSheetId(),
+            "wiki"
+        ));
 
         // export pages
         $this->log->debug("export pages");
@@ -191,8 +196,8 @@ class WikiHtmlExport
             $this->log->debug("zip: " . $zip_file);
             //var_dump($zip_file);
             //exit;
-            $this->log->debug("zip, export dir: ".$this->export_dir);
-            $this->log->debug("zip, export file: ".$zip_file);
+            $this->log->debug("zip, export dir: " . $this->export_dir);
+            $this->log->debug("zip, export file: " . $zip_file);
             \ilUtil::zip($this->export_dir, $zip_file);
             \ilUtil::delDir($this->export_dir);
         }
@@ -288,7 +293,7 @@ class WikiHtmlExport
         $page_content = $wpg_gui->showPage();
 
         // export template: page content
-        $this->log->debug("init page gui-".$this->getMode()."-");
+        $this->log->debug("init page gui-" . $this->getMode() . "-");
         $ep_tpl = new \ilTemplate(
             "tpl.export_page.html",
             true,
@@ -352,6 +357,9 @@ class WikiHtmlExport
         $exp_dir =
             \ilExport::_getExportDirectory($this->wiki->getId(), $this->getMode(), "wiki");
         $this->log->debug("dir: " . $exp_dir);
+        if (!is_dir($exp_dir)) {
+            return "";
+        }
         foreach (new \DirectoryIterator($exp_dir) as $fileInfo) {
             $this->log->debug("file: " . $fileInfo->getFilename());
             if (pathinfo($fileInfo->getFilename(), PATHINFO_EXTENSION) == "zip") {

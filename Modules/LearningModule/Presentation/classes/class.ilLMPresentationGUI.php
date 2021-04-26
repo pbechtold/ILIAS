@@ -80,7 +80,11 @@ class ilLMPresentationGUI
      */
     protected $lm;
 
+    /**
+     * @var ilTemplate
+     */
     public $tpl;
+
     public $lng;
     public $layout_doc;
     public $offline;
@@ -168,6 +172,16 @@ class ilLMPresentationGUI
      */
     protected $ui;
 
+    /**
+     * @var ilToolbarGUI
+     */
+    protected $toolbar;
+
+    /**
+     * @var string[]
+     */
+    protected $additional_content = [];
+
     public function __construct(
         $a_export_format = "",
         $a_all_languages = false,
@@ -176,6 +190,7 @@ class ilLMPresentationGUI
         $query_params = null,
         $embed_mode = false
     ) {
+        /** @var ILIAS\DI\Container $DIC */
         global $DIC;
 
         $this->offline = ($a_export_format != "");
@@ -184,6 +199,7 @@ class ilLMPresentationGUI
         $this->offline_directory = $a_export_dir;
 
         $this->tabs = $DIC->tabs();
+        $this->toolbar = $DIC->toolbar();
         $this->user = $DIC->user();
         $this->rbacsystem = $DIC->rbac()->system();
         $this->error = $DIC["ilErr"];
@@ -225,7 +241,6 @@ class ilLMPresentationGUI
 
         if ($claim_repo_context) {
             $DIC->globalScreen()->tool()->context()->claim()->repository();
-
         }
 
         if (!$ilCtrl->isAsynch()) {
@@ -300,7 +315,7 @@ class ilLMPresentationGUI
      * Get service
      * @return ilLMPresentationService
      */
-    public function getService(): \ilLMPresentationService
+    public function getService() : \ilLMPresentationService
     {
         return $this->service;
     }
@@ -483,18 +498,6 @@ class ilLMPresentationGUI
     
     public function resume()
     {
-        $ilUser = $this->user;
-        
-        if ($ilUser->getId() != ANONYMOUS_USER_ID && ((int) $this->focus_id == 0)) {
-            $last_accessed_page = ilObjLearningModuleAccess::_getLastAccessedPage($this->requested_ref_id, $ilUser->getId());
-
-            // if last accessed page was final page do nothing, start over
-            if ($last_accessed_page &&
-                $last_accessed_page != $this->lm_tree->getLastActivePage()) {
-                $this->requested_obj_id = $last_accessed_page;
-            }
-        }
-            
         $this->layout();
     }
         
@@ -506,10 +509,7 @@ class ilLMPresentationGUI
         global $DIC;
 
         $tpl = $this->tpl;
-        $ilSetting = $this->settings;
-        $ilCtrl = $this->ctrl;
         $ilUser = $this->user;
-
         $layout = $this->determineLayout();
 
         // xmldocfile is deprecated! Use domxml_open_file instead.
@@ -624,7 +624,8 @@ class ilLMPresentationGUI
                         $this->addHeaderAction();
                         $content = $this->getContent();
                         $content .= $this->ilLMNotes();
-                        $this->tpl->setContent($content);
+                        $additional = $this->ui->renderer() ->render($this->additional_content);
+                        $this->tpl->setContent($content.$additional);
                         break;
 
                     case "ilGlossary":
@@ -752,7 +753,6 @@ class ilLMPresentationGUI
             //				$this->tpl->addJavascript("./Services/JavaScript/js/Basic.js");
             $this->tpl->addJavascript("./Services/Navigation/js/ServiceNavigation.js");
             ilYuiUtil::initConnection($this->tpl);
-
         }
     }
 
@@ -903,6 +903,7 @@ class ilLMPresentationGUI
         $fac = new ilLMTOCExplorerGUIFactory();
         $exp = $fac->getExplorer($this->service, "ilTOC");
         $exp->handleCommand();
+        return $exp;
     }
 
     /**
@@ -978,7 +979,7 @@ class ilLMPresentationGUI
             $page_id = $this->getCurrentPageId();
 
             // permanent link
-            $this->tpl->setPermanentLink("pg", "",  $page_id . "_" . $this->lm->getRefId());
+            $this->tpl->setPermanentLink("pg", "", $page_id . "_" . $this->lm->getRefId());
         }
 
         $this->tpl->setVariable("SUBMENU", $tpl_menu->get());
@@ -1446,7 +1447,6 @@ class ilLMPresentationGUI
     {
         $this->fill_on_load_code = true;
         $this->setContentStyles();
-
 
         $tpl = new ilTemplate("tpl.lm_content.html", true, true, "Modules/LearningModule/Presentation");
 
@@ -2010,12 +2010,12 @@ class ilLMPresentationGUI
         $tpl = new ilTemplate("tpl.lm_print_selection.html", true, true, "Modules/LearningModule");
 
 //        $this->ilLocator(true);
-/*        $this->tpl->addBlockFile(
-            "ADM_CONTENT",
-            "adm_content",
-            "tpl.lm_print_selection.html",
-            "Modules/LearningModule"
-        );*/
+        /*        $this->tpl->addBlockFile(
+                    "ADM_CONTENT",
+                    "adm_content",
+                    "tpl.lm_print_selection.html",
+                    "Modules/LearningModule"
+                );*/
 
         // set title header
 //        $this->tpl->setTitle($this->getLMPresentationTitle());
@@ -2992,8 +2992,7 @@ class ilLMPresentationGUI
         $lang = $this->lang;
         if (!ilPageObject::_exists($type, $a_id, $lang)) {
             $lang = "-";
-            if ($this->lang != "-" && ilPageObject::_exists($type
-                    , $a_id, $this->ot->getFallbackLanguage())) {
+            if ($this->lang != "-" && ilPageObject::_exists($type, $a_id, $this->ot->getFallbackLanguage())) {
                 $lang = $this->ot->getFallbackLanguage();
             }
         }
@@ -3045,8 +3044,8 @@ class ilLMPresentationGUI
     /**
      * Render tabs
      *
-     * @param
-     * @return
+     * @param $active_tab
+     * @param $current_page_id
      */
     protected function renderTabs($active_tab, $current_page_id)
     {
@@ -3054,7 +3053,9 @@ class ilLMPresentationGUI
         $menu_editor->setObjId($this->lm->getId());
 
         $navigation_renderer = new ilLMMenuRendererGUI(
+            $this->getService(),
             $this->tabs,
+            $this->toolbar,
             $current_page_id,
             $active_tab,
             (string) $this->getExportFormat(),
@@ -3066,7 +3067,11 @@ class ilLMPresentationGUI
             $this->ctrl,
             $this->access,
             $this->user,
-            $this->lng
+            $this->lng,
+            $this->tpl,
+            function ($additional_content) {
+                $this->additional_content[] = $additional_content;
+            }
         );
         $navigation_renderer->render();
     }
@@ -3091,5 +3096,4 @@ class ilLMPresentationGUI
         }
         return "";
     }
-
 }

@@ -7,7 +7,6 @@ use ILIAS\UI\Component\Breadcrumbs\Breadcrumbs;
 use ILIAS\UI\Component\Image\Image;
 use ILIAS\UI\Component\Layout\Page;
 use ILIAS\UI\Component\MainControls\Footer;
-use ILIAS\UI\Component\MainControls\HeadInfo;
 use ILIAS\UI\Component\MainControls\MainBar;
 use ILIAS\UI\Component\MainControls\MetaBar;
 use ILIAS\UI\Component\MainControls\ModeInfo;
@@ -71,7 +70,14 @@ class Standard implements Page\Standard
      * @var    bool
      */
     private $ui_demo = false;
+    /**
+     * @var array
+     */
     protected $system_infos = [];
+    /**
+     * @var string
+     */
+    protected $text_direction = "ltr";
 
     /**
      * Standard constructor.
@@ -96,23 +102,23 @@ class Standard implements Page\Standard
         $allowed = [\ILIAS\UI\Component\Component::class];
         $this->checkArgListElements("content", $content, $allowed);
 
-        $this->content     = $content;
-        $this->metabar     = $metabar;
-        $this->mainbar     = $mainbar;
+        $this->content = $content;
+        $this->metabar = $metabar;
+        $this->mainbar = $mainbar;
         $this->breadcrumbs = $locator;
-        $this->logo        = $logo;
-        $this->footer      = $footer;
-        $this->title       = $title;
+        $this->logo = $logo;
+        $this->footer = $footer;
+        $this->title = $title;
         $this->short_title = $short_title;
-        $this->view_title  = $view_title;
+        $this->view_title = $view_title;
     }
 
     /**
      * @inheritDoc
      */
-    public function withMetabar(Metabar $meta_bar) : Page\Standard
+    public function withMetabar(MetaBar $meta_bar) : Page\Standard
     {
-        $clone          = clone $this;
+        $clone = clone $this;
         $clone->metabar = $meta_bar;
         return $clone;
     }
@@ -120,9 +126,9 @@ class Standard implements Page\Standard
     /**
      * @inheritDoc
      */
-    public function withMainbar(Mainbar $main_bar) : Page\Standard
+    public function withMainbar(MainBar $main_bar) : Page\Standard
     {
-        $clone          = clone $this;
+        $clone = clone $this;
         $clone->mainbar = $main_bar;
         return $clone;
     }
@@ -132,7 +138,7 @@ class Standard implements Page\Standard
      */
     public function withLogo(Image $logo) : Page\Standard
     {
-        $clone       = clone $this;
+        $clone = clone $this;
         $clone->logo = $logo;
         return $clone;
     }
@@ -142,7 +148,7 @@ class Standard implements Page\Standard
      */
     public function withFooter(Footer $footer) : Page\Standard
     {
-        $clone         = clone $this;
+        $clone = clone $this;
         $clone->footer = $footer;
         return $clone;
     }
@@ -229,11 +235,11 @@ class Standard implements Page\Standard
 
     /**
      * @param bool $use_headers
-     * @return    Page
+     * @return    Page\Standard
      */
-    public function withHeaders($use_headers) : Page
+    public function withHeaders($use_headers) : Page\Standard
     {
-        $clone               = clone $this;
+        $clone = clone $this;
         $clone->with_headers = $use_headers;
         return $clone;
     }
@@ -259,14 +265,14 @@ class Standard implements Page\Standard
      */
     public function withUIDemo(bool $switch = true) : Standard
     {
-        $clone          = clone $this;
+        $clone = clone $this;
         $clone->ui_demo = $switch;
         return $clone;
     }
 
     public function withTitle(string $title) : Page\Standard
     {
-        $clone        = clone $this;
+        $clone = clone $this;
         $clone->title = $title;
         return $clone;
     }
@@ -278,7 +284,7 @@ class Standard implements Page\Standard
 
     public function withShortTitle(string $title) : Page\Standard
     {
-        $clone              = clone $this;
+        $clone = clone $this;
         $clone->short_title = $title;
         return $clone;
     }
@@ -290,7 +296,7 @@ class Standard implements Page\Standard
 
     public function withViewTitle(string $title) : Page\Standard
     {
-        $clone             = clone $this;
+        $clone = clone $this;
         $clone->view_title = $title;
         return $clone;
     }
@@ -302,7 +308,7 @@ class Standard implements Page\Standard
 
     public function withModeInfo(ModeInfo $mode_info) : \ILIAS\UI\Component\Layout\Page\Standard
     {
-        $clone            = clone $this;
+        $clone = clone $this;
         $clone->mode_info = $mode_info;
         return $clone;
     }
@@ -319,7 +325,7 @@ class Standard implements Page\Standard
 
     public function withNoFooter() : Standard
     {
-        $clone         = clone $this;
+        $clone = clone $this;
         $clone->footer = null;
         return $clone;
     }
@@ -340,5 +346,24 @@ class Standard implements Page\Standard
     public function hasSystemInfos() : bool
     {
         return count($this->system_infos) > 0;
+    }
+
+
+    public function withTextDirection(string $text_direction) : \ILIAS\UI\Component\Layout\Page\Standard
+    {
+        $this->checkArgIsElement(
+            "Text Direction",
+            $text_direction,
+            [self::LTR,self::RTL],
+            implode('/', [self::LTR,self::RTL])
+        );
+        $clone = clone $this;
+        $clone->text_direction = $text_direction;
+        return $clone;
+    }
+
+    public function getTextDirection() : string
+    {
+        return $this->text_direction;
     }
 }

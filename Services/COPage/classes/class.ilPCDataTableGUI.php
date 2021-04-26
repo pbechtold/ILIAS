@@ -168,7 +168,6 @@ class ilPCDataTableGUI extends ilPCTableGUI
                 
                 // cell
                 if ($res2->nodeset[$j]->get_attribute("Hidden") != "Y") {
-
                     $dtpl->setCurrentBlock("cell");
                     
                     if (is_array($_POST["cmd"]) && key($_POST["cmd"]) == "update") {
@@ -399,10 +398,7 @@ class ilPCDataTableGUI extends ilPCTableGUI
         $this->pg_obj->addHierIDs();
         $ilCtrl->setParameter($this, "hier_id", $this->content_obj->readHierId());
         $ilCtrl->setParameter($this, "pc_id", $this->content_obj->readPCId());
-        $this->content_obj->setHierId($this->content_obj->readHierId());
-        $this->setHierId($this->content_obj->readHierId());
-        $this->content_obj->setPCId($this->content_obj->readPCId());
-        $this->editData();
+        $ilCtrl->redirect($this, "editData");
     }
     
     /**
@@ -436,7 +432,5 @@ class ilPCDataTableGUI extends ilPCTableGUI
         $ilTabs = $this->tabs;
         
         parent::setTabs("cont_ed_edit_data");
-        
     }
-
 }

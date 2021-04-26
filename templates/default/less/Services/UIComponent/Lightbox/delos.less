@@ -16,12 +16,12 @@ a.ilMediaLightboxClose {
 	float: right;
 	margin: 5px 0 10px 10px;
 	cursor: pointer;
-	color: #808080;
+	color: @il-text-color;
 	font-size: 140%;
 }
 
 a.ilMediaLightboxClose:hover {
-	color: #a0a0a0;
+	color: @il-text-hover-color;
 	text-decoration: none;
 }
 
@@ -29,4 +29,11 @@ a.ilMediaLightboxClose:hover {
 	margin: 50px auto 0;
 	width: 640px;
 	max-width: 100%;
+}
+
+.ilLightboxContent {
+	iframe {
+		width: 100%;
+		min-height: 400px;
+	}
 }

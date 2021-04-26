@@ -20,14 +20,16 @@ class ilGroupedListGUI
     protected $items = array();
     protected $as_dropdown = false;
     protected $dd_pullright = false;
+    protected $id;
     
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($id = "")
     {
         global $DIC;
 
+        $this->id = $id;
         $this->ctrl = $DIC->ctrl();
     }
     
@@ -207,13 +209,19 @@ class ilGroupedListGUI
             $tpl->parseCurrentBlock();
         }
 
+        if ($this->id != "") {
+            $tpl->setCurrentBlock("id");
+            $tpl->setVariable("ID", $this->id);
+            $tpl->parseCurrentBlock();
+        }
+
         if ($this->getAsDropDown()) {
             if ($this->dd_pullright) {
                 $tpl->setVariable("LIST_CLASS", "dropdown-menu pull-right");
             } else {
                 $tpl->setVariable("LIST_CLASS", "dropdown-menu");
             }
-            $tpl->setVariable("LIST_ROLE", "menu");
+            $tpl->setVariable("LIST_ROLE", 'role="menu"');
         } else {
             $tpl->setVariable("LIST_CLASS", "");
             $tpl->setVariable("LIST_ROLE", "");

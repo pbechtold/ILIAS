@@ -454,3 +454,350 @@ foreach ($columns as $column) {
     }
 }
 ?>
+<#24>
+<?php
+    $ilCtrlStructureReader->getStructure();
+?>
+<#25>
+<?php
+    $ilCtrlStructureReader->getStructure();
+?>
+<#26>
+<?php
+    $ilCtrlStructureReader->getStructure();
+?>
+<#27>
+<?php
+$ilDB->manipulate('delete from log_components where component_id = ' . $ilDB->quote('btsk', ilDBConstants::T_TEXT));
+?>
+<#28>
+<?php
+if ( !$ilDB->tableColumnExists('cmix_users', 'privacy_ident') ) {
+    $ilDB->addTableColumn('cmix_users', 'privacy_ident', array(
+        'type' => 'integer',
+        'length' => 2,
+        'notnull' => true,
+        'default' => 0
+    ));
+    $ilDB->dropPrimaryKey('cmix_users');
+    $ilDB->addPrimaryKey('cmix_users', array('obj_id', 'usr_id', 'privacy_ident'));
+}
+if ( !$ilDB->tableColumnExists('cmix_settings', 'privacy_ident') ) {
+    $ilDB->addTableColumn('cmix_settings', 'privacy_ident', array(
+        'type' => 'integer',
+        'length' => 2,
+        'notnull' => true,
+        'default' => 0
+    ));
+}
+if ( !$ilDB->tableColumnExists('cmix_settings', 'privacy_name') ) {
+    $ilDB->addTableColumn('cmix_settings', 'privacy_name', array(
+        'type' => 'integer',
+        'length' => 2,
+        'notnull' => true,
+        'default' => 0
+    ));
+}
+if ( !$ilDB->tableColumnExists('lti_ext_provider', 'privacy_ident') ) {
+    $ilDB->addTableColumn('lti_ext_provider', 'privacy_ident', array(
+        'type' => 'integer',
+        'length' => 2,
+        'notnull' => true,
+        'default' => 0
+    ));
+}
+if ( !$ilDB->tableColumnExists('lti_ext_provider', 'privacy_name') ) {
+    $ilDB->addTableColumn('lti_ext_provider', 'privacy_name', array(
+        'type' => 'integer',
+        'length' => 2,
+        'notnull' => true,
+        'default' => 0
+    ));
+}
+?>
+<#29>
+<?php
+$set = $ilDB->query("SELECT obj_id, user_ident, user_name FROM cmix_settings");
+while ($row = $ilDB->fetchAssoc($set)) {
+    $ident = 0;
+    $name = 0;
+    if ($row['user_ident'] == 'il_uuid_ext_account') {$ident = 1;}
+    if ($row['user_ident'] == 'il_uuid_login') {$ident = 2;}
+    if ($row['user_ident'] == 'real_email') {$ident = 3;}
+    if ($row['user_ident'] == 'il_uuid_random') {$ident = 4;}
+    if ($row['user_name'] == 'firstname') {$name = 1;}
+    if ($row['user_name'] == 'lastname') {$name = 2;}
+    if ($row['user_name'] == 'fullname') {$name = 3;}
+    
+    $ilDB->update(
+        "cmix_users",
+        [
+            "privacy_ident" => ["integer", $ident]
+        ],
+        [	// where
+            "obj_id" => ["integer", $row['obj_id']]
+        ]
+    );
+    $ilDB->update(
+        "cmix_settings",
+        [
+            "privacy_ident" => ["integer", $ident],
+            "privacy_name"   => ["integer", $name]
+        ],
+        [	// where
+            "obj_id" => ["integer", $row['obj_id']]
+        ]
+    );
+}
+?>
+<#30>
+<?php
+$set = $ilDB->query("SELECT id, user_ident, user_name FROM lti_ext_provider");
+while ($row = $ilDB->fetchAssoc($set)) {
+    $ident = 0;
+    $name = 0;
+    if ($row['user_ident'] == 'il_uuid_ext_account') {$ident = 1;}
+    if ($row['user_ident'] == 'il_uuid_login') {$ident = 2;}
+    if ($row['user_ident'] == 'real_email') {$ident = 3;}
+    if ($row['user_ident'] == 'il_uuid_random') {$ident = 4;}
+    if ($row['user_name'] == 'firstname') {$name = 1;}
+    if ($row['user_name'] == 'lastname') {$name = 2;}
+    if ($row['user_name'] == 'fullname') {$name = 3;}
+    
+    $ilDB->update(
+        "lti_ext_provider",
+        [
+            "privacy_ident" => ["integer", $ident],
+            "privacy_name"   => ["integer", $name]
+        ],
+        [	// where
+            "id" => ["integer", $row['id']]
+        ]
+    );
+}
+?>
+<#31>
+<?php
+    $ilCtrlStructureReader->getStructure();
+?>
+<#32>
+<?php
+if ( !$ilDB->tableColumnExists('cmix_lrs_types', 'privacy_ident') ) {
+    $ilDB->addTableColumn('cmix_lrs_types', 'privacy_ident', array(
+        'type' => 'integer',
+        'length' => 2,
+        'notnull' => true,
+        'default' => 0
+    ));
+}
+if ( !$ilDB->tableColumnExists('cmix_lrs_types', 'privacy_name') ) {
+    $ilDB->addTableColumn('cmix_lrs_types', 'privacy_name', array(
+        'type' => 'integer',
+        'length' => 2,
+        'notnull' => true,
+        'default' => 0
+    ));
+}
+$set = $ilDB->query("SELECT type_id, user_ident, user_name FROM cmix_lrs_types");
+while ($row = $ilDB->fetchAssoc($set)) {
+    $ident = 0;
+    $name = 0;
+    if ($row['user_ident'] == 'il_uuid_ext_account') {$ident = 1;}
+    if ($row['user_ident'] == 'il_uuid_login') {$ident = 2;}
+    if ($row['user_ident'] == 'real_email') {$ident = 3;}
+    if ($row['user_ident'] == 'il_uuid_random') {$ident = 4;}
+    if ($row['user_name'] == 'firstname') {$name = 1;}
+    if ($row['user_name'] == 'lastname') {$name = 2;}
+    if ($row['user_name'] == 'fullname') {$name = 3;}
+    
+    $ilDB->update(
+        "cmix_lrs_types",
+        [
+            "privacy_ident" => ["integer", $ident],
+            "privacy_name"   => ["integer", $name]
+        ],
+        [	// where
+            "type_id" => ["integer", $row['type_id']]
+        ]
+    );
+}
+?>
+<#33>
+<?php
+$ilDB->dropTableColumn("cmix_lrs_types", "user_ident");
+$ilDB->dropTableColumn("cmix_lrs_types", "user_name");
+$ilDB->dropTableColumn("cmix_settings", "user_ident");
+$ilDB->dropTableColumn("cmix_settings", "user_name");
+$ilDB->dropTableColumn("lti_ext_provider", "user_ident");
+$ilDB->dropTableColumn("lti_ext_provider", "user_name");
+?>
+<#34>
+<?php
+$ilDB->replace(
+    'settings',
+    [
+        'module' => ['text', 'adve'],
+        'keyword' => ['text', 'autosave']
+    ],
+    [
+        'value' => ['text', '30']
+    ]
+);
+?>
+<#35>
+<?php
+$query = 'select value from settings where  module = ' . $ilDB->quote('common', ilDBConstants::T_TEXT) . ' ' .
+    'and keyword = ' . $ilDB->quote('language', ilDBConstants::T_TEXT);
+$res = $ilDB->query($query);
+$default = 'en';
+while ($row  = $res->fetchRow(ilDBConstants::FETCHMODE_OBJECT)) {
+    $default = $row->value;
+}
+$query = 'update adv_md_record set lang_default = ' . $ilDB->quote($default, ilDBConstants::T_TEXT) . ' ' .
+    'where lang_default = ' . $ilDB->quote('', ilDBConstants::T_TEXT);
+$ilDB->manipulate($query);
+
+// update md_record_int
+$query = 'select record_id from adv_md_record_int where lang_code = ' . $ilDB->quote('', ilDBConstants::T_TEXT);
+$res = $ilDB->query($query);
+while ($row = $res->fetchRow(ilDBConstants::FETCHMODE_OBJECT)) {
+    $query = 'select record_id from adv_md_record_int where lang_code = ' . $ilDB->quote($default, ilDBConstants::T_TEXT) . ' ' .
+        'and record_id = ' . $ilDB->quote($row->record_id, ilDBConstants::T_INTEGER);
+    $setres = $ilDB->query($query);
+    if ($setres->numRows()) {
+        $query = 'delete from adv_md_record_int where lang_code = ' . $ilDB->quote('', ilDBConstants::T_TEXT) . ' ' .
+            'and record_id = ' . $ilDB->quote($row->record_id, ilDBConstants::T_INTEGER);
+        $ilDB->manipulate($query);
+    }
+}
+$query = 'update adv_md_record_int set lang_code = ' . $ilDB->quote($default, ilDBConstants::T_TEXT) . ' ' .
+    'where lang_code = ' . $ilDB->quote('', ilDBConstants::T_TEXT);
+$ilDB->manipulate($query);
+
+// update md_field_int
+$query = 'select field_id from adv_md_field_int where lang_code = ' . $ilDB->quote('', ilDBConstants::T_TEXT);
+$res = $ilDB->query($query);
+while ($row = $res->fetchRow(ilDBConstants::FETCHMODE_OBJECT)) {
+    $query = 'select field_id from adv_md_field_int where lang_code = ' . $ilDB->quote($default, ilDBConstants::T_TEXT) . ' ' .
+        'and field_id = ' . $ilDB->quote($row->field_id, ilDBConstants::T_INTEGER);
+    $setres = $ilDB->query($query);
+    if ($setres->numRows()) {
+        $query = 'delete from adv_md_field_int where lang_code = ' . $ilDB->quote('', ilDBConstants::T_TEXT) . ' ' .
+            'and field_id = ' . $ilDB->quote($row->field_id, ilDBConstants::T_INTEGER);
+        $ilDB->manipulate($query);
+    }
+}
+$query = 'update adv_md_field_int set lang_code = ' . $ilDB->quote($default, ilDBConstants::T_TEXT) . ' ' .
+    'where lang_code = ' . $ilDB->quote('', ilDBConstants::T_TEXT);
+$ilDB->manipulate($query);
+
+// update adv_mdf_enum
+$query = 'select field_id, lang_code, idx from adv_mdf_enum ' .
+    'where lang_code = ' . $ilDB->quote('', ilDBConstants::T_TEXT);
+$res = $ilDB->query($query);
+while ($row = $res->fetchRow(ilDBConstants::FETCHMODE_OBJECT)) {
+    $query = 'select field_id, lang_code, idx from  adv_mdf_enum where lang_code = ' . $ilDB->quote($default, ilDBConstants::T_TEXT) . ' ' .
+        'and field_id = ' . $ilDB->quote($row->field_id, ilDBConstants::T_INTEGER) . ' ' .
+        'and idx = ' . $ilDB->quote($row->idx, ilDBConstants::T_INTEGER);
+    $setres = $ilDB->query($query);
+    if ($setres->numRows()) {
+        $query = 'delete from  adv_mdf_enum where lang_code = ' . $ilDB->quote('', ilDBConstants::T_TEXT) . ' ' .
+            'and field_id = ' . $ilDB->quote($row->field_id, ilDBConstants::T_INTEGER) . ' ' .
+            'and idx = ' . $ilDB->quote($row->idx, ilDBConstants::T_INTEGER);
+        $ilDB->manipulate($query);
+    }
+}
+$query = 'update adv_mdf_enum set lang_code = ' . $ilDB->quote($default, ilDBConstants::T_TEXT) . ' ' .
+    'where lang_code = ' . $ilDB->quote('', ilDBConstants::T_TEXT);
+$ilDB->manipulate($query);
+?>
+<#36>
+<?php
+if (!$ilDB->tableColumnExists('ldap_server_settings', 'escape_dn')) {
+    $ilDB->addTableColumn(
+        'ldap_server_settings',
+        'escape_dn',
+        [
+            'type' => ilDBConstants::T_INTEGER,
+            'length' => 1,
+            'notnull' => true,
+            'default' => 0
+        ]
+    );
+}
+?>
+<#37>
+<?php
+    $ilCtrlStructureReader->getStructure();
+?>
+<#38>
+<?php
+if (!$ilDB->indexExistsByFields('exc_returned', array('filetitle'))) {
+    $ilDB->addIndex('exc_returned', array('filetitle'), 'i3');
+}
+?>
+<#39>
+<?php
+if ($ilDB->uniqueConstraintExists('cmi_gobjective', array('user_id','objective_id','scope_id'))) {
+    $ilDB->dropUniqueConstraintByFields('cmi_gobjective', array('user_id','objective_id','scope_id'));
+}
+$query = "show index from cmi_gobjective where Key_name = 'PRIMARY'";
+$res = $ilDB->query($query);
+if (!$ilDB->numRows($res)) {
+    $ilDB->addPrimaryKey('cmi_gobjective', array('user_id', 'scope_id', 'objective_id'));
+}
+?>
+<#40>
+<?php
+if ($ilDB->uniqueConstraintExists('cp_suspend', array('user_id','obj_id'))) {
+    $ilDB->dropUniqueConstraintByFields('cp_suspend', array('user_id','obj_id'));
+}
+$query = "show index from cp_suspend where Key_name = 'PRIMARY'";
+$res = $ilDB->query($query);
+if (!$ilDB->numRows($res)) {
+    $ilDB->addPrimaryKey('cp_suspend', array('user_id', 'obj_id'));
+}
+?>
+<#41>
+<?php
+$read_learning_progress = 0;
+$read_outcomes = 0;
+$res = $ilDB->queryF(
+    "SELECT ops_id FROM rbac_operations WHERE operation = %s",
+    array('text'),
+    array('read_learning_progress')
+    );
+while ($row = $res->fetchRow(ilDBConstants::FETCHMODE_OBJECT)) {
+    $read_learning_progress = $row->ops_id;
+}
+$res = $ilDB->queryF(
+    "SELECT ops_id FROM rbac_operations WHERE operation = %s",
+    array('text'),
+    array('read_outcomes')
+    );
+while ($row = $res->fetchRow(ilDBConstants::FETCHMODE_OBJECT)) {
+    $read_outcomes = $row->ops_id;
+}
+if ($read_outcomes > 0 && $read_learning_progress > 0) {
+    $res = $ilDB->queryF(
+        "SELECT rol_id, parent, type FROM rbac_templates WHERE (type=%s OR type=%s) AND ops_id=%s",
+        array('text', 'text', 'integer'),
+        array('cmix', 'lti', $read_learning_progress)
+        );
+    while ($row = $res->fetchRow(ilDBConstants::FETCHMODE_OBJECT)) {
+        $resnum = $ilDB->queryF(
+            "SELECT rol_id FROM rbac_templates WHERE rol_id = %s AND type = %s AND ops_id = %s AND parent = %s",
+            array('integer', 'text', 'integer', 'integer'),
+            array($row->rol_id, $row->type, $read_outcomes, $row->parent)
+        );
+        if (!$ilDB->numRows($resnum)) {
+            $ilDB->insert('rbac_templates', array(
+                    'rol_id' => array('integer', $row->rol_id),
+                    'type' => array('text', $row->type),
+                    'ops_id' => array('integer', $read_outcomes),
+                    'parent' => array('integer', $row->parent)
+                ));
+        }
+    }
+}
+?>

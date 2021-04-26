@@ -895,7 +895,7 @@ abstract class ilPageObject
         $content_object = $this->getContentObjectForPcId($pcid);
         $node = $content_object->getNode();
         $node = $node->parent_node();
-        while($node) {
+        while ($node) {
             if ($node->node_name() == "PageContent") {
                 $pcid = $node->get_attribute("PCID");
                 if ($pcid != "") {
@@ -1422,7 +1422,7 @@ abstract class ilPageObject
         if ($this->dom) {
             require_once("./Services/COPage/classes/class.ilPCParagraph.php");
             $xpc = xpath_new_context($this->dom);
-            $path = "//PageContent[@PCID='".$pcid."']/Paragraph[1]";
+            $path = "//PageContent[@PCID='" . $pcid . "']/Paragraph[1]";
             $res = xpath_eval($xpc, $path);
             if (count($res->nodeset) > 0) {
                 $cont_node = $res->nodeset[0]->parent_node();
@@ -1926,6 +1926,11 @@ abstract class ilPageObject
         return $ret;
     }
 
+    public function getPCIdForHierId($hier_id)
+    {
+        $hier_ids = $this->getPCIdsForHierIds([$hier_id]);
+        return $hier_ids[$hier_id];
+    }
 
     /**
      * add file sizes
@@ -2657,7 +2662,7 @@ abstract class ilPageObject
             include_once("./Services/User/classes/class.ilUserUtil.php");
             $lock = $this->getEditLockInfo();
             $errors[0] = array(0 => 0,
-                               1 => "nocontent#" . $this->lng->txt("cont_not_saved_edit_lock_expired") . "<br />" .
+                               1 => $this->lng->txt("cont_not_saved_edit_lock_expired") . "<br />" .
                                    $this->lng->txt("obj_usr") . ": " .
                                    ilUserUtil::getNamePresentation($lock["edit_lock_user"]) . "<br />" .
                                    $this->lng->txt("content_until") . ": " .
@@ -3179,7 +3184,7 @@ abstract class ilPageObject
     public function deleteContents($a_hids, $a_update = true, $a_self_ass = false)
     {
         if (!is_array($a_hids)) {
-            return;
+            return true;
         }
         foreach ($a_hids as $a_hid) {
             $a_hid = explode(":", $a_hid);
@@ -3201,6 +3206,7 @@ abstract class ilPageObject
         if ($a_update) {
             return $this->update();
         }
+        return true;
     }
 
     /**
@@ -3313,8 +3319,7 @@ abstract class ilPageObject
                 //var_dump($error);
             }
         }
-        $e = $this->update();
-        //var_dump($e);
+        return $this->update();
     }
 
     /**
@@ -3323,9 +3328,8 @@ abstract class ilPageObject
     public function switchEnableMultiple($a_hids, $a_update = true, $a_self_ass = false)
     {
         if (!is_array($a_hids)) {
-            return;
+            return true;
         }
-        $obj = &$this->content_obj;
 
         foreach ($a_hids as $a_hid) {
             $a_hid = explode(":", $a_hid);
@@ -3348,6 +3352,7 @@ abstract class ilPageObject
         if ($a_update) {
             return $this->update();
         }
+        return true;
     }
 
     /**
@@ -5231,5 +5236,4 @@ abstract class ilPageObject
         }
         return true;
     }
-
 }

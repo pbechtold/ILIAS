@@ -527,9 +527,9 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
     public function setTitleAndDescription()
     {
         if (ilContainer::_lookupContainerSetting($this->object->getId(), "hide_header_icon_and_title")) {
-            $this->tpl->setTitle($this->object->getTitle(), true);
+            $this->tpl->setTitle((string) $this->object->getTitle(), true);
         } else {
-            $this->tpl->setTitle($this->object->getTitle());
+            $this->tpl->setTitle((string) $this->object->getTitle());
             $this->tpl->setDescription($this->object->getLongDescription());
     
             // set tile icon
@@ -548,6 +548,9 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
     */
     public function showPossibleSubObjects()
     {
+        if ($this->isActiveAdministrationPanel() || $this->isActiveOrdering()) {
+            return;
+        }
         include_once "Services/Object/classes/class.ilObjectAddNewItemGUI.php";
         $gui = new ilObjectAddNewItemGUI($this->object->getRefId());
         $gui->render();
@@ -601,11 +604,12 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
     */
     public function renderObject()
     {
-        $ilDB = $this->db;
-        $tpl = $this->tpl;
         $ilTabs = $this->tabs;
         $ilCtrl = $this->ctrl;
         $ilSetting = $this->settings;
+        $user = $this->user;
+        $toolbar = $this->toolbar;
+        $lng = $this->lng;
 
         $container_view = $this->getContentGUI();
         
@@ -625,6 +629,20 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
         if ($ilCtrl->getNextClass() != "ilcolumngui") {
             $this->showAdministrationPanel();
             $this->showPossibleSubObjects();
+
+            if ($user->getId() != ANONYMOUS_USER_ID &&
+                is_object($this->object) &&
+                $this->rbacsystem->checkAccess("write", $this->object->getRefId())
+            ) {
+                if ($ilSetting->get("enable_cat_page_edit")) {
+                    if (!$this->isActiveAdministrationPanel() &&
+                        !$this->isActiveOrdering()) {
+                        $toolbar->addButton($lng->txt("cntr_text_media_editor"),
+                            $ilCtrl->getLinkTarget($this, "editPageFrame")
+                        );
+                    }
+                }
+            }
         }
 
         $this->showContainerFilter();
@@ -705,23 +723,23 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
                 $toolbar->setLeadingImage(
                     ilUtil::getImagePath("arrow_upright.svg"),
                     $lng->txt("actions")
-                    );
+                );
                 $toolbar->addFormButton(
                     $this->lng->txt('delete_selected_items'),
                     'delete'
-                    );
+                );
                 $toolbar->addFormButton(
                     $this->lng->txt('move_selected_items'),
                     'cut'
-                    );
+                );
                 $toolbar->addFormButton(
                     $this->lng->txt('copy_selected_items'),
                     'copy'
-                    );
+                );
                 $toolbar->addFormButton(
                     $this->lng->txt('link_selected_items'),
                     'link'
-                    );
+                );
                 // add download button if multi download enabled
                 $folder_set = new ilSetting('fold');
                 if ((bool) $folder_set->get('enable_multi_download') === true) {
@@ -729,7 +747,7 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
                     $toolbar->addFormButton(
                         $this->lng->txt('download_selected_items'),
                         'download'
-                        );
+                    );
                 }
             }
             if ($this->object->getType() == 'crs' or $this->object->getType() == 'grp') {
@@ -742,8 +760,8 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
                     $this->ctrl->getLinkTargetByClass(
                         'ilObjectCopyGUI',
                         'adoptContent'
-                        )
-                    );
+                    )
+                );
             }
             //			}
             /*else
@@ -1344,19 +1362,6 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
             $this->object->getOrderType() == ilContainer::SORT_MANUAL */ // always on because of custom block order
             ) {
             $ilTabs->addSubTab("ordering", $lng->txt("cntr_ordering"), $ilCtrl->getLinkTarget($this, "editOrder"));
-        }
-        if ($ilUser->getId() != ANONYMOUS_USER_ID &&
-            is_object($this->object) &&
-            $this->rbacsystem->checkAccess("write", $this->object->getRefId())
-            ) {
-            if ($ilSetting->get("enable_cat_page_edit")) {
-                $ilTabs->addSubTab(
-                    "page_editor",
-                    $lng->txt("cntr_text_media_editor"),
-                    $ilCtrl->getLinkTarget($this, "editPageFrame"),
-                    ilFrameTargetInfo::_getFrame("MainContent")
-                );
-            }
         }
     }
     
@@ -3257,17 +3262,17 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
      */
     public function initFormTitleDescription(ilPropertyFormGUI $form)
     {
-        /** @var ilObjectTranslation $trans */
-        $trans = $this->object->getObjectTranslation();
-
+        if ($this->getCreationMode() != true) {
+            /** @var ilObjectTranslation $trans */
+            $trans = $this->object->getObjectTranslation();
+        }
         $title = new ilTextInputGUI($this->lng->txt("title"), "title");
         $title->setRequired(true);
         $title->setSize(min(40, ilObject::TITLE_LENGTH));
         $title->setMaxLength(ilObject::TITLE_LENGTH);
-        $title->setValue($trans->getDefaultTitle());
         $form->addItem($title);
 
-        if (sizeof($trans->getLanguages()) > 1) {
+        if ($this->getCreationMode() != true && sizeof($trans->getLanguages()) > 1) {
             include_once('Services/MetaData/classes/class.ilMDLanguageItem.php');
             $languages = ilMDLanguageItem::_getLanguages();
             $title->setInfo($this->lng->txt("language") . ": " . $languages[$trans->getDefaultLanguage()] .
@@ -3276,12 +3281,15 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
 
             unset($languages);
         }
-
         $desc = new ilTextAreaInputGUI($this->lng->txt("description"), "desc");
         $desc->setRows(2);
         $desc->setCols(40);
-        $desc->setValue($trans->getDefaultDescription());
         $form->addItem($desc);
+
+        if ($this->getCreationMode() != true) {
+            $title->setValue($trans->getDefaultTitle());
+            $desc->setValue($trans->getDefaultDescription());
+        }
     }
 
 
@@ -3305,7 +3313,7 @@ class ilContainerGUI extends ilObjectGUI implements ilDesktopItemHandling
                     ' (' . ilContainerSortingSettings::sortModeToString(
                         ilContainerSortingSettings::lookupSortModeFromParentContainer(
                             $this->object->getId()
-                            )
+                        )
                     ) . ') '
             );
             $sort_inherit->setValue(ilContainer::SORT_INHERIT);

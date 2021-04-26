@@ -79,7 +79,7 @@ export default class PageUI {
 
     this.debug = true;
     this.droparea = "<div class='il_droparea'></div>";
-    this.add = "<span class='glyphicon glyphicon-plus'></span>";
+    this.add = "<span class='glyphicon glyphicon-plus-sign'></span>";
     this.model = {};
     this.uiModel = {};
 
@@ -178,7 +178,7 @@ export default class PageUI {
           this.log("add dropdown: click");
           this.log(model);
 
-          const pasting = this.uiModel.pasting;
+          const pasting = model.isPasting();
 
           if (pasting) {
             li = li_templ.cloneNode(true);
@@ -195,14 +195,22 @@ export default class PageUI {
 
           // add each components
           for (const [ctype, txt] of Object.entries(uiModel.addCommands)) {
+            let cname, pluginName;
             li = li_templ.cloneNode(true);
             li.querySelector("a").innerHTML = txt;
-            let cname = this.getPCNameForType(ctype);
+            if (ctype.substr(0, 5) === "plug_") {
+              cname = "Plugged";
+              pluginName = ctype.substr(5);
+            } else {
+              cname = this.getPCNameForType(ctype);
+              pluginName = "";
+            }
             li.querySelector("a").addEventListener("click", (event) => {
               event.isDropDownSelectionEvent = true;
               dispatch.dispatch(action.page().editor().componentInsert(cname,
                 area.dataset.pcid,
-                hier_id));
+                hier_id,
+                pluginName));
             });
             ul.appendChild(li);
           }
@@ -262,9 +270,11 @@ export default class PageUI {
         this.log("*** Component click event");
         // start editing from page state
         if (this.model.getState() === this.model.STATE_PAGE) {
-          dispatch.dispatch(action.page().editor().componentEdit(area.dataset.cname,
-            area.dataset.pcid,
-            area.dataset.hierid));
+          if (area.dataset.cname !== "ContentInclude") {
+            dispatch.dispatch(action.page().editor().componentEdit(area.dataset.cname,
+                area.dataset.pcid,
+                area.dataset.hierid));
+          }
         } else if (this.model.getState() === this.model.STATE_COMPONENT) {
 
           // Invoke switch action, if click is on other component of same type
@@ -314,7 +324,7 @@ export default class PageUI {
 
     $(draggableSelector).draggable({
         cursor: 'move',
-        revert: true,
+        revert: false,
         scroll: true,
         distance: 3,
         cursorAt: { top: 5, left:20 },
@@ -324,10 +334,10 @@ export default class PageUI {
           dispatch.dispatch(action.page().editor().dndDrag());
         },
         stop: function( event, ui ) {
-
+          dispatch.dispatch(action.page().editor().dndStopped());
         },
         helper: (() => {
-          return $("<div style='width: 40px; border: 1px solid blue;'>&nbsp;</div>");
+          return $("<div class='il-copg-drag'>&nbsp;</div>");
         })		/* temp helper */
       }
     );
@@ -429,15 +439,17 @@ export default class PageUI {
     const model = this.model;
     const multi = document.querySelector("[data-copg-ed-type='view-control'][data-copg-ed-action='switch.multi']");
     const single = document.querySelector("[data-copg-ed-type='view-control'][data-copg-ed-action='switch.single']");
-    if (model.getState() === model.STATE_PAGE) {
-      multi.disabled = false;
-      single.disabled = true;
-    } else {
-      multi.disabled = true;
-      single.disabled = false;
-    }
     multi.classList.remove("engaged");
     single.classList.remove("engaged");
+    if (model.getState() === model.STATE_PAGE) {
+      //multi.disabled = false;
+      //single.disabled = true;
+      single.classList.add("engaged");
+    } else {
+      //multi.disabled = true;
+      //single.disabled = false;
+      multi.classList.add("engaged");
+    }
   }
 
   initFormatButtons() {
@@ -564,7 +576,7 @@ export default class PageUI {
         break;
 
       default:
-        this.toolSlate.setContent(this.uiModel.pageTopActions + this.uiModel.multiActions);
+        this.toolSlate.setContent(this.uiModel.pageTopActions + this.uiModel.multiActions + this.uiModel.multiEditHelp);
         this.initTopActions();
         this.initMultiButtons();
         break;

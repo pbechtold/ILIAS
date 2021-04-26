@@ -64,14 +64,15 @@ class ilObjAdvancedEditingGUI extends ilObjectGUI
         parent::__construct($a_data, $a_id, $a_call_by_reference, false);
         $this->lng->loadLanguageModule('adve');
         $this->lng->loadLanguageModule('meta');
-
-        if (!$rbacsystem->checkAccess('read', $this->object->getRefId())) {
-            $this->ilias->raiseError($this->lng->txt("msg_no_perm_read_adve"), $this->ilias->error_obj->WARNING);
-        }
     }
     
     public function executeCommand()
     {
+        if (!$this->rbacsystem->checkAccess('read', $this->object->getRefId())) {
+            $mess = str_replace("%s", $this->object->getTitle(), $this->lng->txt("msg_no_perm_read_item"));
+            $this->ilias->raiseError($mess, $this->ilias->error_obj->WARNING);
+        }
+
         $next_class = $this->ctrl->getNextClass($this);
         $cmd = $this->ctrl->getCmd();
         $this->prepareOutput();
@@ -702,26 +703,37 @@ class ilObjAdvancedEditingGUI extends ilObjectGUI
         
         $form = $this->initGeneralPageSettingsForm();
         if ($form->checkInput()) {
-            $aset = new ilSetting("adve");
-            $aset->set("use_physical", $_POST["use_physical"]);
-            if ($_POST["block_mode_act"]) {
-                $aset->set("block_mode_minutes", (int) $_POST["block_mode_minutes"]);
-            } else {
-                $aset->set("block_mode_minutes", 0);
+            $autosave = (int) $form->getInput("autosave");
+            $ok = true;
+
+            // autosave must be greater 10, if activated
+            if ($autosave > 0 && $autosave < 10) {
+                $form->getItemByPostVar("autosave")->setAlert($this->lng->txt("adve_autosave_info_min_10"));
+                $ok = false;
             }
-            $aset->set("auto_url_linking", $_POST["auto_url_linking"]);
 
-            $aset->set("autosave", $_POST["autosave"]);
-
-            $def = new ilCOPageObjDef();
-            foreach ($def->getDefinitions() as $key => $def) {
-                if (in_array($key, $this->getPageObjectKeysWithOptionalHTML())) {
-                    $aset->set("act_html_" . $key, (int) $_POST["act_html_" . $key]);
+            if ($ok) {
+                $aset = new ilSetting("adve");
+                $aset->set("use_physical", $_POST["use_physical"]);
+                if ($_POST["block_mode_act"]) {
+                    $aset->set("block_mode_minutes", (int) $_POST["block_mode_minutes"]);
+                } else {
+                    $aset->set("block_mode_minutes", 0);
                 }
-            }
+                $aset->set("auto_url_linking", $_POST["auto_url_linking"]);
 
-            ilUtil::sendSuccess($lng->txt("msg_obj_modified"), true);
-            $ilCtrl->redirect($this, "showGeneralPageEditorSettings");
+                $aset->set("autosave", $form->getInput("autosave"));
+
+                $def = new ilCOPageObjDef();
+                foreach ($def->getDefinitions() as $key => $def) {
+                    if (in_array($key, $this->getPageObjectKeysWithOptionalHTML())) {
+                        $aset->set("act_html_" . $key, (int) $_POST["act_html_" . $key]);
+                    }
+                }
+
+                ilUtil::sendSuccess($lng->txt("msg_obj_modified"), true);
+                $ilCtrl->redirect($this, "showGeneralPageEditorSettings");
+            }
         }
         
         $form->setValuesByPost();

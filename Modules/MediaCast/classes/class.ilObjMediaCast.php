@@ -595,9 +595,11 @@ class ilObjMediaCast extends ilObject
         // see ilLPListOfSettingsGUI assign
         $collection = $lp->getCollectionInstance();
         if ($collection && $collection->hasSelectableItems()) {
+            /* not yet...
             $collection->activateEntries([$mob_id]);
             $lp->resetCaches();
             ilLPStatusWrapper::_refreshStatus($this->getId());
+            */
         }
         return $mc_item->getId();
     }
@@ -609,7 +611,7 @@ class ilObjMediaCast extends ilObject
      */
     protected function getPlaytimeForSeconds(int $seconds)
     {
-        $hours = floor($seconds/3600);
+        $hours = floor($seconds / 3600);
         $minutes = floor(($seconds % 3600) / 60);
         $seconds = $seconds % 60;
         $duration = str_pad($hours, 2, "0", STR_PAD_LEFT) . ":" .
@@ -617,5 +619,4 @@ class ilObjMediaCast extends ilObject
             str_pad($seconds, 2, "0", STR_PAD_LEFT);
         return $duration;
     }
-
 }

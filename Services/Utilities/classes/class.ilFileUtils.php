@@ -45,18 +45,7 @@ class ilFileUtils
 
 
     /**
-     * unzips in given directory and processes uploaded zip for use as single files
-     *
-     * @param string  $a_directory Directory to unzip
-     * @param string  $a_file      Filename of archive
-     * @param boolean structure  True if archive structure is to be overtaken
-     * @param integer $ref_id      ref_id of parent object, if null, files wont be included in system (just checked)
-     * @param string containerType object type of created containerobjects (folder or category)
-     *
-     * @throws ilFileUtilsException
-     * @throws ilException
-     * @author  Jan Hippchen
-     * @version 1.6.9.07
+     * @deprecated Will be removed with ILIAS 8
      */
 
     public static function processZipFile($a_directory, $a_file, $structure, $ref_id = null, $containerType = null, $tree = null, $access_handler = null)
@@ -179,21 +168,8 @@ class ilFileUtils
         closedir($dirlist);
     }
 
-
     /**
-     * Recursively scans a given directory and creates file and folder/category objects
-     *
-     * Calls createContainer & createFile to store objects in tree
-     *
-     * @param string  $dir    Directory to start from
-     * @param boolean structure  True if archive structure is to be overtaken (otherwise flat inclusion)
-     * @param integer $ref_id ref_id of parent object, if null, files won�t be included in system (just checked)
-     * @param string containerType object type of created containerobjects (folder or category)
-     *
-     * @return integer errorcode
-     * @throws ilFileUtilsException
-     * @author  Jan Hippchen
-     * @version 1.6.9.07
+     * @deprecated Will be removed with ILIAS 8
      */
     public static function createObjects($dir, $structure, $ref_id, $containerType, $tree = null, $access_handler = null)
     {
@@ -223,15 +199,7 @@ class ilFileUtils
 
 
     /**
-     * Creates and inserts container object (folder/category) into tree
-     *
-     * @param string  $name          Name of the object
-     * @param integer $ref_id        ref_id of parent
-     * @param string  $containerType Fold or Cat
-     *
-     * @return integer ref_id of containerobject
-     * @author  Jan Hippchen
-     * @version 1.6.9.07
+     * @deprecated Will be removed with ILIAS 8
      */
     public static function createContainer($name, $ref_id, $containerType, $tree = null, $access_handler = null)
     {
@@ -550,8 +518,10 @@ class ilFileUtils
         static $fileadmin_ref_id;
 
         if ($fileadmin_ref_id === null) {
-            $id = (int) reset(ilObject2::_getObjectsByType('facs'))['obj_id'];
-            $fileadmin_ref_id = (int) reset(ilObject2::_getAllReferences($id));
+            $objects_by_type = ilObject2::_getObjectsByType('facs');
+            $id = (int) reset($objects_by_type)['obj_id'];
+            $references = ilObject2::_getAllReferences($id);
+            $fileadmin_ref_id = (int) reset($references);
         }
         if ($DIC->rbac()->system()->checkAccess('upload_blacklisted_files', $fileadmin_ref_id)) {
             return array();
@@ -889,11 +859,12 @@ class ilFileUtils
      *
      * @return bool
      */
-    public static function hasValidExtension($a_filename)
+    public static function hasValidExtension($a_filename) : bool
     {
         $pi = pathinfo($a_filename);
 
-        return (in_array(strtolower($pi["extension"]), self::getValidExtensions()));
+        return in_array(strtolower($pi["extension"]), self::getValidExtensions())
+            && !in_array(strtolower($pi["extension"]), self::getExplicitlyBlockedFiles());
     }
 
 

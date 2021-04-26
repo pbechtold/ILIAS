@@ -329,7 +329,7 @@ abstract class ilContainerContentGUI
     /**
     * Get columngui output
     */
-    final private function __forwardToColumnGUI()
+    private function __forwardToColumnGUI()
     {
         $ilCtrl = $this->ctrl;
         $ilAccess = $this->access;
@@ -919,7 +919,7 @@ abstract class ilContainerContentGUI
         $items = ilObjectActivation::getItemsByItemGroup($a_itgr['ref_id']);
 
         // get all valid ids (this is filtered)
-        $all_ids = array_map(function($i) {
+        $all_ids = array_map(function ($i) {
             return $i["child"];
         }, $this->items["_all"]);
 

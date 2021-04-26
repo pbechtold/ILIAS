@@ -1,13 +1,12 @@
 <?php
-/* Copyright (c) 1998-2009 ILIAS open source, Extended GPL, see docs/LICENSE */
+
+/* Copyright (c) 1998-2021 ILIAS open source, GPLv3, see LICENSE */
 
 /**
-* Page editor settings
-*
-* @author Alex Killing <alex.killing@gmx.de>
-* @version $Id$
-* @ingroup ServicesCOPage
-*/
+ * Page editor settings
+ *
+ * @author Alexander Killing <killing@leifos.de>
+ */
 class ilPageEditorSettings
 {
     // settings groups. each group contains one or multiple
@@ -18,7 +17,7 @@ class ilPageEditorSettings
         "scorm" => array("sahs"),
         "glo" => array("gdf"),
         "test" => array("qpl"),
-        "rep" => array("root", "cat", "grp", "crs", "fold"),
+        "rep" => array("cont"),
         "copa" => array("copa"),
         );
         
@@ -43,7 +42,7 @@ class ilPageEditorSettings
             "DELETE FROM page_editor_settings WHERE " .
             "settings_grp = " . $ilDB->quote($a_grp, "text") .
             " AND name = " . $ilDB->quote($a_name, "text")
-            );
+        );
         
         $ilDB->manipulate("INSERT INTO page_editor_settings " .
             "(settings_grp, name, value) VALUES (" .
@@ -66,7 +65,7 @@ class ilPageEditorSettings
             "SELECT value FROM page_editor_settings " .
             " WHERE settings_grp = " . $ilDB->quote($a_grp, "text") .
             " AND name = " . $ilDB->quote($a_name, "text")
-            );
+        );
         if ($rec = $ilDB->fetchAssoc($set)) {
             return $rec["value"];
         }

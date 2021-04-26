@@ -16,7 +16,7 @@ class PageContentGUI
     private $template_file;
 
     /**
-     * @var bool 
+     * @var bool
      */
     private $hiddenTitle = false;
 
@@ -491,10 +491,8 @@ class PageContentGUI
             }
         }
 
-        // fix #9992: save language usages as late as possible
-        if ($this->translation_linked) {
-            \ilObjLanguageAccess::_saveUsages();
-        }
+        // save language usages as late as possible
+        \ilObjLanguageAccess::_saveUsages();
 
         return $html;
     }

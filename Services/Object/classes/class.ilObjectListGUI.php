@@ -2451,11 +2451,11 @@ class ilObjectListGUI
     /**
     * insert all commands into html code
     *
-	 * @param bool $a_use_asynch
-	 * @param bool $a_get_asynch_commands
-	 * @param string $a_asynch_url
-	 * @param bool $a_header_actions
-	 * @return string
+     * @param bool $a_use_asynch
+     * @param bool $a_get_asynch_commands
+     * @param string $a_asynch_url
+     * @param bool $a_header_actions
+     * @return string
     */
     public function insertCommands(
         $a_use_asynch = false,
@@ -2617,7 +2617,7 @@ class ilObjectListGUI
         // public area, category, no info tab
         // todo: make this faster and remove type specific implementation if possible
         if ($a_use_asynch && !$a_get_asynch_commands && !$a_header_actions) {
-            if ($ilUser->getId() == ANONYMOUS_USER_ID && $this->type == "cat") {
+            if ($ilUser->getId() == ANONYMOUS_USER_ID && $this->checkInfoPageOnAsynchronousRendering()) {
                 include_once("./Services/Container/classes/class.ilContainer.php");
                 include_once("./Services/Object/classes/class.ilObjectServiceSettingsGUI.php");
                 if (!ilContainer::_lookupContainerSetting(
@@ -3242,8 +3242,10 @@ class ilObjectListGUI
                 $this->tpl->setVariable("ALT_ICON", $lng->txt("obj_" . $this->getIconImageType()));
             } else {
                 include_once("Services/Component/classes/class.ilPlugin.php");
-                $this->tpl->setVariable("ALT_ICON",
-                    ilObjectPlugin::lookupTxtById($this->getIconImageType(), "obj_" . $this->getIconImageType()));
+                $this->tpl->setVariable(
+                    "ALT_ICON",
+                    ilObjectPlugin::lookupTxtById($this->getIconImageType(), "obj_" . $this->getIconImageType())
+                );
             }
 
             $this->tpl->setVariable(
@@ -3860,8 +3862,8 @@ class ilObjectListGUI
 
         foreach ($this->current_selection_list->getItems() as $action_item) {
             $actions[] = $ui->factory()
-                ->button()
-                ->shy($action_item['title'], $action_item['link']);
+                            ->button()
+                            ->shy($action_item['title'], $action_item['link']);
         }
 
         $def_command = $this->getDefaultCommand();
@@ -3870,7 +3872,11 @@ class ilObjectListGUI
             $button =
                 $ui->factory()->button()->shy("Open", "")->withAdditionalOnLoadCode(function ($id) use ($def_command) {
                     return
-                        "$('#$id').click(function(e) { window.open('" . str_replace("&amp;", "&", $def_command["link"]) . "', '" . $def_command["frame"] . "');});";
+                        "$('#$id').click(function(e) { window.open('" . str_replace(
+                            "&amp;",
+                            "&",
+                            $def_command["link"]
+                        ) . "', '" . $def_command["frame"] . "');});";
                 });
             $actions[] = $button;
         }
@@ -3898,19 +3904,28 @@ class ilObjectListGUI
             $this->modifySAHSlaunch($def_command["link"], $def_command["frame"]);
 
         $image = $this->ui->factory()
-            ->image()
-            ->responsive($path, '');
+                          ->image()
+                          ->responsive($path, '');
         if ($def_command['link'] != '') {    // #24256
             if ($def_command["frame"] != "" && ($modified_link == $def_command["link"])) {
                 $image = $image->withAdditionalOnLoadCode(function ($id) use ($def_command) {
                     return
-                        "$('#$id').click(function(e) { window.open('" . str_replace("&amp;", "&", $def_command["link"]) . "', '" . $def_command["frame"] . "');});";
+                        "$('#$id').click(function(e) { window.open('" . str_replace(
+                            "&amp;",
+                            "&",
+                            $def_command["link"]
+                        ) . "', '" . $def_command["frame"] . "');});";
                 });
 
                 $button =
-                    $ui->factory()->button()->shy($title, "")->withAdditionalOnLoadCode(function ($id) use ($def_command) {
+                    $ui->factory()->button()->shy($title, "")->withAdditionalOnLoadCode(function ($id) use ($def_command
+                    ) {
                         return
-                            "$('#$id').click(function(e) { window.open('" . str_replace("&amp;", "&", $def_command["link"]) . "', '" . $def_command["frame"] . "');});";
+                            "$('#$id').click(function(e) { window.open('" . str_replace(
+                                "&amp;",
+                                "&",
+                                $def_command["link"]
+                            ) . "', '" . $def_command["frame"] . "');});";
                     });
                 $title = $ui->renderer()->render($button);
             } else {
@@ -3931,14 +3946,14 @@ class ilObjectListGUI
         }
 
         $icon = $this->ui->factory()
-            ->symbol()
-            ->icon()
-            ->standard($type, $this->lng->txt('obj_' . $type))
-            ->withIsOutlined(true);
+                         ->symbol()
+                         ->icon()
+                         ->standard($type, $this->lng->txt('obj_' . $type))
+                         ->withIsOutlined(true);
 
         // card title action
         $card_title_action = "";
-        if ($def_command["link"] != "" && ($def_command["frame"] == "" || $modified_link != $def_command["link"])) {	// #24256
+        if ($def_command["link"] != "" && ($def_command["frame"] == "" || $modified_link != $def_command["link"])) {    // #24256
             $card_title_action = $modified_link;
         } elseif ($def_command['link'] == "" &&
             $this->getInfoScreenStatus() &&
@@ -3990,12 +4005,20 @@ class ilObjectListGUI
 
             $card = $card->withProgress(
                 $ui->factory()
-                    ->chart()
-                    ->progressMeter()
-                    ->mini(100, $percentage)
+                   ->chart()
+                   ->progressMeter()
+                   ->mini(100, $percentage)
             );
         }
 
         return $card;
+    }
+
+    /**
+     * @return bool
+     */
+    public function checkInfoPageOnAsynchronousRendering() : bool
+    {
+        return false;
     }
 }

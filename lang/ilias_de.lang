@@ -153,7 +153,7 @@ survey#:#svy_notification_tutor_results_info#:#Nach dem Ablauf des Enddatum wird
 survey#:#svy_notification_tutor_results_alert#:#Diese Funktion erfordert ein Enddatum.
 survey#:#survey_results_tutor_subject#:#Ergebnisse der Umfrage "%s"
 survey#:#survey_results_tutor_body#:#Im Anhang finden Sie die Ergebnisse der folgenden Umfrage
-content#:#cont_lpe_openid_connect_login#:#OpenId-Connect-Login
+content#:#cont_lpe_openid_connect_login#:#OpenID-Connect-Login
 common#:#msg_wrong_filetypes#:#Erlaubte Dateiendungen:
 obj#:#cont_filter_empty#:#Bitte nutzen Sie den Filter zur Anzeige von Objekten.
 obj#:#obj_tool_setting_filter#:#Filter
@@ -213,9 +213,9 @@ lti#:#auth_lti#:#LTI Auth
 lti#:#lti_edit_consumer#:#LTI-Konsument bearbeiten
 lti#:#lti_obj_active#:#LTI-Tool-Provider
 lti#:#lti_obj_active_info#:#Wenn aktiviert, kann dieses Objekt über die LTI-Schnittstelle von anderen Plattformen eingebunden werden.
-lti#:#lti_admin#:#LTI-Administrator
-lti#:#lti_tutor#:#LTI-Tutor
-lti#:#lti_member#:#LTI-Member
+lti#:#lti_admin#:#LTI-Rolle Administrator
+lti#:#lti_tutor#:#LTI-Rolle Tutor
+lti#:#lti_member#:#LTI-Rolle Mitglied
 auth#:#lti_consumer_inactive#:#LTI-Tool-Consumer ist deaktivert
 crs#:#crs_timings_activate_optional#:#Freiwilligen-Modus des studyplans des Benutzers
 crs#:#crs_timings_activate_optional_own#:#Freiwilligen-Modus meines studyplans
@@ -1711,6 +1711,7 @@ assessment#:#tst_title_output_hide_points#:#Nur Fragentitel
 assessment#:#tst_title_output_no_title#:#Weder Fragentitel noch erreichbare Punkte
 assessment#:#tst_type#:#Test-Typ
 assessment#:#exam_id#:#ILIAS-Prüfungsnummer:
+assessment#:#exam_id_label#:#ILIAS-Prüfungsnummer
 assessment#:#examid_in_test_pass#:#ILIAS-Prüfungsnummer anzeigen
 assessment#:#examid_in_test_pass_desc#:#Im Test wird eine ILIAS-Prüfungsnummer angezeigt. Für jeden Testdurchlauf wird eine eigene Nummer erzeugt.
 assessment#:#examid_in_test_res#:#ILIAS-Prüfungsnummer anzeigen
@@ -1854,9 +1855,11 @@ assessment#:#feedback_all#:#Zeige Rückmeldungen zu allen Antwortmöglichkeiten.
 assessment#:#feedback_checked#:#Zeige Rückmeldungen zu ausgewählten Antworten des Teilnehmers.
 assessment#:#feedback_correct_sc_mc#:#Zeige Rückmeldung für richtige Antworten (richtige Antworten sind solche, für die es bei Auswahl positive Punkte gibt).
 assessment#:#feedback_correct_kprim#:#Zeige Rückmeldung für korrekte Antworten (korrekte Antworten sind solche, bei denen die positive Option zu wählen ist).
-assessment#:#tst_add_quest_cont_edit_mode#:#Editor für Rückmeldungen und Lösungshinweise
-assessment#:#tst_add_quest_cont_edit_mode_default#:#Rich-Text-Editor für das Editieren von Rückmeldungen und Lösungshinweisen nutzen
-assessment#:#tst_add_quest_cont_edit_mode_page_object#:#ILIAS-Seiteneditor für das Editieren von Rückmeldungen und Lösungshinweisen nutzen
+assessment#:#tst_add_quest_cont_edit_mode#:#Editor
+assessment#:#tst_add_quest_cont_edit_mode_default#:#Rich-Text-Editor (TinyMCE) für das Editieren der Fragen, Antworten, Rückmeldungen und Lösungshinweisen
+assessment#:#tst_add_quest_cont_edit_mode_RTE_info#:#Erlaubt formatierten Text für Fragen, Antworten, Rückmeldungen und Lösungshinweise. Rückmeldungen und Lösungshinweise werden aber beim Einbinden von Fragen in ILIAS-Lernmodule nicht übernommen.
+assessment#:#tst_add_quest_cont_edit_mode_page_object#:#Unformatierter Text für Fragen und Antworten und ILIAS-Seiteneditor für Rückmeldungen und Lösungshinweise
+assessment#:#tst_add_quest_cont_edit_mode_IPE_info#:#Bietet keine Formatierung von Text in Fragen und Antworten, erlaubt aber Gestaltung der Rückmeldungen und Lösungshinweise mit ILIAS-Seiteneditor und Wiederverwendung bei Fragen in ILIAS-Lernmodulen.
 assessment#:#tst_question_feedback_edit_page#:#Inhalt bearbeiten
 assessment#:#tst_question_feedback_back_to_feedback_form#:#Zurück zur aufrufenden Frage
 assessment#:#enable_examview#:#Übersicht gegebener Antworten
@@ -1899,6 +1902,7 @@ assessment#:#sign_submission_info#:#Das Signatur-Plugin muss installiert und akt
 assessment#:#tst_corrections_manscore_reset_warning#:#Es liegen %s manuelle Bewertungen für die Frage "%s (ID: %s)" vor. Alle manuellen Bewertungen werden zurückgesetzt wenn die Frage gespeichert wird.
 assessment#:#tst_qst_added_to_pool_s#:#Die Frage wurde erfolgreich in den Fragenpool übernommen.
 assessment#:#tst_qst_added_to_pool_p#:#Die Fragen wurden erfolgreich in den Fragenpool übernommen.
+assessment#:#autosavecontent#:#Inhalt Autosave
 auth#:#auth_account_code#:#Code
 auth#:#auth_account_code_info#:#Um Ihr Benutzerkonto zu reaktivieren, können Sie einen ILIAS-Benutzerkonten-Code benutzen.
 auth#:#auth_account_code_title#:#Benutzerkonten-Code
@@ -1912,11 +1916,11 @@ auth#:#auth_info_migrate#:#Wenn Sie bereits ein ILIAS-Benutzerkonto besitzen, ge
 auth#:#auth_login_editor#:#Loginseite gestalten
 auth#:#auth_oidc_login_element_info#:#Bei ILIAS anmelden über OpenID Connect
 sess#:#sess_title#:#Titel der Sitzung
-auth#:#auth_oidc_role_info#:#OpenID Connect Attribut::Wert (zum Beispiel: "roles::Mitarbeitende").
-auth#:#auth_oidc#:#OpenId Connect
-auth#:#auth_oidc_mapping_table#:#Zuordnung von ILIAS-Benutzerdaten zu OpenId Connect Attributen
+auth#:#auth_oidc_role_info#:#OpenID-Connect-Attribut::Wert (zum Beispiel: "roles::Mitarbeitende").
+auth#:#auth_oidc#:#OpenID Connect
+auth#:#auth_oidc_mapping_table#:#Zuordnung von ILIAS-Benutzerdaten zu OpenID-Connect-Attributen
 auth#:#auth_oidc_profile#:#Zuordnung der Profildaten
-auth#:#auth_oidc_role_mapping_table#:#Zurodnung von ILIAS-Rollen zu OpenId Connect Attributen
+auth#:#auth_oidc_role_mapping_table#:#Zuordnung von ILIAS-Rollen zu OpenID-Connect-Attributen
 auth#:#auth_oidc_roles#:#Rollenzuordnung
 auth#:#auth_oidc_settings#:#Server-Einstellungen
 auth#:#auth_oidc_settings_activation#:#OpenID Connect aktivieren
@@ -1929,25 +1933,25 @@ auth#:#auth_oidc_settings_custom_session_duration_type#:#Einstellungen zur Sitzu
 auth#:#auth_oidc_settings_default_role#:#Rollenzuordnung
 auth#:#auth_oidc_settings_default_role_info#:#Bitte wählen Sie eine globale Rolle für neu anzulegende ILIAS-Benutzer
 auth#:#auth_oidc_settings_img#:#Bild
-auth#:#auth_oidc_settings_img_file_info#:#Laden Sie ein Bild hoch das auf der Anmeldeseite angezeigt werden soll. Das Bild verlinkt automatisch auf das OpenId Connect Anmeldeskript.
+auth#:#auth_oidc_settings_img_file_info#:#Laden Sie ein Bild hoch das auf der Anmeldeseite angezeigt werden soll. Das Bild verlinkt automatisch auf das OpenID-Connect-Anmeldeskript.
 auth#:#auth_oidc_settings_le#:#Darstellung Anmeldeseite
 auth#:#auth_oidc_settings_login_option_default#:#Anmeldung nicht erzwingen
-auth#:#auth_oidc_settings_login_option_default_info#:#Eine Anmeldung beim OpenId Connect Server ist nicht notwendig, wenn bereits eine gültige Sitzung vorliegt.
+auth#:#auth_oidc_settings_login_option_default_info#:#Eine Anmeldung beim OpenID-Connect-Server ist nicht notwendig, wenn bereits eine gültige Sitzung vorliegt.
 auth#:#auth_oidc_settings_login_option_enforce#:#Anmeldung erzwingen
-auth#:#auth_oidc_settings_login_option_enforce_info#:#Eine Anmeldung beim OpenId Connect Server ist in jedem Fall notwendig - auch wenn bereits eine gültige Sitzung vorliegt.
+auth#:#auth_oidc_settings_login_option_enforce_info#:#Eine Anmeldung beim OpenID-Connect-Server ist in jedem Fall notwendig – auch wenn bereits eine gültige Sitzung vorliegt.
 auth#:#auth_oidc_settings_login_options#:#Anmeldeoptionen
 auth#:#auth_oidc_settings_logout_scope#:#Verhalten beim Abmelden
 auth#:#auth_oidc_settings_logout_scope_global#:#Global abmelden
-auth#:#auth_oidc_settings_logout_scope_global_info#:#Wenn aktiviert, wird beim Abmelden sowohl die OpenId Connect Sitzung als auch die ILIAS-Sitzung beendet.
+auth#:#auth_oidc_settings_logout_scope_global_info#:#Wenn aktiviert, wird beim Abmelden sowohl die OpenID-Connect-Sitzung als auch die ILIAS-Sitzung beendet.
 auth#:#auth_oidc_settings_logout_scope_local#:#nur bei ILIAS abmelden
 auth#:#auth_oidc_settings_logout_scope_local_info#:#Wenn aktiviert, wird beim Abmelden nur die ILIAS-Sitzung beendet.
 auth#:#auth_oidc_settings_provider#:#Provider-Url
 auth#:#auth_oidc_settings_secret#:#Client-Schlüssel
 auth#:#auth_oidc_settings_section_user_sync#:#Einstellungen zur Benutzersynchronisierung
 auth#:#auth_oidc_settings_session_duration#:#Dauer
-auth#:#auth_oidc_settings_title#:#OpenID Connect Authentifizierung konfigurieren
+auth#:#auth_oidc_settings_title#:#OpenID-Connect-Authentifizierung konfigurieren
 auth#:#auth_oidc_settings_txt#:#Text
-auth#:#auth_oidc_settings_txt_val_info#:#Tragen Sie einen Text ein der auf der Anmeldeseite angezeigt werden soll. Der Text verlinkt automatisch auf das OpenId Connect Anmeldeskript.
+auth#:#auth_oidc_settings_txt_val_info#:#Tragen Sie einen Text ein der auf der Anmeldeseite angezeigt werden soll. Der Text verlinkt automatisch auf das OpenID-Connect-Anmeldeskript.
 auth#:#auth_oidc_settings_user_attr#:#Attributname der Benutzerzugänge
 auth#:#auth_oidc_settings_user_sync#:#Automatische Synchronisierung
 auth#:#auth_oidc_settings_user_sync_info#:#Wenn aktiviert, wird für Benutzer, die sich erfolgreich gegen Open ID Connect authentifiziert haben aber kein ILIAS-Benutzerkonto besitzen, automatisch ein neues Benutzerkonto erzeugt.
@@ -3101,7 +3105,7 @@ common#:#firstname#:#Vorname
 common#:#flatview#:#Baumansicht aus
 common#:#fold#:#Ordner
 common#:#fold_add#:#Ordner anlegen
-common#:#fold_added#:#Ordner angelegt-
+common#:#fold_added#:#Ordner angelegt
 rbac#:#fold_copy#:#Ordner kopieren
 rbac#:#fold_delete#:#Ordner löschen oder verschieben
 common#:#fold_edit#:#Ordner bearbeiten
@@ -4289,7 +4293,7 @@ common#:#shib_department#:#Attribut für Departement
 common#:#shib_email#:#Attribut für E-Mailadresse
 common#:#shib_federation_name#:#Name der Shibboleth-Föderation
 common#:#shib_firstname#:#Attribut für Vornamen
-common#:#shib_gender#:#Attribut für Anrede (muss 'm' oder 'f' sein)
+common#:#shib_gender#:#Attribut für Anrede (muss 'n', 'm' oder 'f' sein)
 common#:#shib_general_login_instructions#:#Um sich über %s anzumelden, klicken Sie bitte auf den Anmelde-Button und wählen Sie auf der folgenden Seite Ihre Organisation aus.<br />Bei Fragen dazu, wenden Sie sich bitte an den
 common#:#shib_general_wayf_login_instructions#:#Falls Sie keiner der angegebenen Organisationen angehören und Zugang zu einem Kurs auf diesem Server benötigen, wenden Sie sich bitte an den
 common#:#shib_idp_list#:#Bitte geben Sie eine Liste von Identity-Providern an, aus denen der Benutzer auf der ILIAS-Anmeldeseite auswählen kann.<br />In jeder Zeile muss ein Komma-getrenntes Tupel sein, welches aus der<strong>providerID eines IdP</strong> (schauen Sie dazu die Shibboleth-Metadaten an) und dem <strong>Namen eines IdP</strong> besteht, so wie er in der Drop-Down Liste angezeigt werden soll.<br />Als optionaler dritter Parameter kann die <strong>Location eines Shibboleth Session Initiators</strong> angegeben werden, welcher benutzt werden kann falls Ihre ILIAS-Installation Teil von mehreren Föderationen ist.
@@ -4729,7 +4733,7 @@ content#:#cont_active_areas#:#Auslöser
 content#:#cont_add_area#:#Bereich hinzufügen
 content#:#cont_add_change_comment#:#Überarbeitungskommentar hinzufügen
 content#:#cont_add_definition#:#Definition hinzufügen
-content#:#cont_add_elements#:#Klicken Sie auf einen Platzhalter, um ein neues Element hinzuzufügen.
+content#:#cont_add_elements#:#<b>Klicken</b> Sie auf ein <b>Plus-Symbol</b>, um ein neues Element <b>hinzuzufügen</b>.
 content#:#cont_add_file#:#Datei hinzufügen
 content#:#cont_add_images#:#Bild hinzufügen
 content#:#cont_add_popup#:#Popup hinzufügen
@@ -4843,7 +4847,7 @@ content#:#cont_deactivated#:#Deaktiviert
 content#:#cont_debug#:#Testwerkzeug bereitstellen
 content#:#cont_debug_deactivate#:#Es wird ein Testwerkzeug angezeigt. Es liefert im Präsentationsmodus des SCORM-Lernmoduls Daten, anhand welcher überprüft werden kann, wie das Lernmodul mit ILIAS interagiert. Um das Testwerkzeug aufzurufen, muss der linke Navigationsbaum angezeigt werden.
 content#:#cont_debug_deactivate12#:#Es wird ein Testwerkzeug angezeigt. Es liefert im Präsentationsmodus des SCORM-Lernmoduls Daten, anhand welcher überprüft werden kann, wie das Lernmodul mit ILIAS interagiert.
-content#:#cont_debug_deactivated#:#Hinweis: Das Werkzeug zum Überprüfen des Lernmoduls auf SCORM-Konformität ist global für alle Lernmodule deaktiviert.
+content#:#cont_debug_deactivated#:#Hinweis: Das Werkzeug zum Überprüfen des Lernmoduls auf SCORM-Konformität ist global für alle Lernmodule deaktiviert (Administration » Magazin und Objekte » Lernmodule).
 content#:#cont_decimal#:#Dezimal
 content#:#cont_def_layout#:#Standard-Layout
 content#:#cont_def_lesson_mode#:#Bearbeitungsdaten aufzeichnen
@@ -4860,14 +4864,16 @@ content#:#cont_dir_created#:#Verzeichnis wurde angelegt.
 content#:#cont_dir_deleted#:#Das Verzeichnis wurde gelöscht.
 content#:#cont_dir_file#:#Verzeichnis/Datei
 content#:#cont_dir_renamed#:#Das Verzeichnis wurde umbenannt.
-content#:#cont_double_click_to_delete#:#Mit einem Doppel-Klick auf ein Content-Element wählen Sie dieses für die De-/Aktivierung und für das Löschen aus.
+content#:#cont_shift_click_to_select#:#Mit <b>Shift + Klick</b> <b>wählen</b> Sie ein Seitenelement <b>aus</b> und wechseln in den Auswahlmodus.
+content#:#cont_click_multi_select#:#<b>Klicken</b> Sie Seitenelemente um diese <b>auszuwählen</b> oder die Auswahl wieder aufzuheben.
+content#:#cont_click_edit#:#<b>Klicken</b> Sie ein <b>Seitenelement</b>, um es zu <b>bearbeiten</b>.
 content#:#cont_download_no_download#:#Die Download-Funktion ist zur Zeit deaktiviert. Daher wird die Datei den Lernenden nicht angeboten.
 content#:#cont_download_no_menu#:#Das Lernmodulmenü ist zur Zeit deaktiviert. Daher wird die Datei den Lernenden nicht angeboten.
 content#:#cont_download_title#:#Titel der Download-Datei
 content#:#cont_downloads#:#Download
 content#:#cont_downloads_desc#:#Der Reiter "Download" wird in der Präsentationsansicht angezeigt. Dort können Benutzer freigegebene Exportdateien herunterladen, zum Beispiel für Offline-Nutzung oder Import.
 content#:#cont_downloads_public_desc#:#Erlaubt das Herunterladen auch für nichtangemeldete Benutzer (Öffentlicher Bereich)
-content#:#cont_drag_and_drop_elements#:#Um Content-Elemente zu bewegen, ziehen Sie diese mit der Maus auf die Platzhalter.
+content#:#cont_drag_and_drop_elements#:#<b>Ziehen</b> Sie ein Seitenelement mit der Maus auf einen Platzhalter um es zu <b>bewegen</b>.
 content#:#cont_drag_element_click_save#:#Bewegen Sie das Element an die gewünschte Position und klicken dann auf "Speichern".
 content#:#cont_ed_align_center#:#Mittig ausrichten
 content#:#cont_ed_align_left#:#Links ausrichten
@@ -4902,19 +4908,19 @@ content#:#cont_ed_insert_flst#:#Dateiliste einfügen
 content#:#cont_ed_insert_iim#:#Interaktives Bild einfügen
 content#:#cont_ed_insert_incl#:#Inhaltsbaustein einfügen
 content#:#cont_ed_insert_list#:#Erweiterte Liste einfügen
-content#:#cont_ed_insert_login_page_element#:#Login-Seitenelement einfügen
+content#:#cont_ed_insert_lpe#:#Login-Seitenelement einfügen
 content#:#cont_ed_insert_map#:#Karte einfügen
 content#:#cont_ed_insert_media#:#Bild/Audio/Video einfügen
 content#:#cont_ed_insert_par#:#Text einfügen
 content#:#cont_ed_insert_pcqst#:#Frage einfügen
 content#:#cont_ed_insert_plach#:#Platzhalter einfügen
-content#:#cont_ed_insert_profile#:#Persönliche Daten einfügen
+content#:#cont_ed_insert_prof#:#Persönliche Daten einfügen
 content#:#cont_ed_insert_qover#:#Fragenübersicht einfügen
 content#:#cont_ed_insert_repobj#:#Materialienliste einfügen
 content#:#cont_ed_insert_sec#:#Block einfügen
 content#:#cont_ed_insert_skills#:#Kompetenzen einfügen
 content#:#cont_ed_insert_tabs#:#Akkordeon einfügen
-content#:#cont_ed_insert_verification#:#Zertifikat einfügen
+content#:#cont_ed_insert_vrfc#:#Zertifikat einfügen
 content#:#cont_ed_item_down#:#Eintrag nach unten verschieben
 content#:#cont_ed_item_up#:#Eintrag nach oben verschieben
 content#:#cont_ed_list#:#Erweiterte Liste
@@ -5402,7 +5408,7 @@ content#:#cont_text_placehl#:#Text-Platzhalter
 content#:#cont_text_quot#:#Zitat:
 content#:#cont_text_str#:#Stark betonter Text:
 content#:#cont_text_tex#:#LaTeX-Code:
-content#:#cont_text_xln_link#:#Externer Link
+content#:#cont_text_xln#:#Externer Link
 content#:#cont_third_and_more#:#Dritte oder später
 content#:#cont_time#:#Zeit
 content#:#cont_time_from_lms#:#ILIAS bestimmt Bearbeitungszeiten
@@ -6523,6 +6529,7 @@ form#:#form_password_required_for_auth#:#Für die gewählte Authentifizierungmet
 form#:#form_please_select#:#Bitte auswählen
 form#:#form_retype_password#:#Passwort nochmals eingeben
 form#:#form_seconds#:#Sekunden
+form#:#form_msg_max_upload#:#Maximale Anzahl von gleichzeitig hochladbaren Dateien:
 forum#:#activate_new_posts#:#Neue Beiträge freischalten
 forum#:#activate_only_current#:#Beitrag freischalten
 forum#:#activate_post#:#Freischalten
@@ -6815,6 +6822,8 @@ ldap#:#ldap_deleted_rule#:#Ausgewählte Rollenzuordnung gelöscht
 ldap#:#ldap_dn_info#:#Wählen Sie hier den kompletten DN der LDAP-Gruppe.
 ldap#:#ldap_edit_role_ass_rule#:#Regel zur Rollenzuordnung bearbeiten
 ldap#:#ldap_err_missing_plugin_id#:#Bitte geben Sie eine gültige Plugin-Id ein.
+ldap#:#ldap_escapedn#:#DN maskieren
+ldap#:#ldap_escapedn_info#:#Wenn aktiviert, werden reservierte Zeichen im "Distinguished Name (DN)" für Abfragen von Gruppenzugehörigkeiten maskiert.
 ldap#:#ldap_filter_info#:#Filter, der dem Suchfilter folgendermaßen hinzugefügt wird: (&(userattr=username)<strong>(userfilter)</strong>)
 ldap#:#ldap_global_role#:#Globale Rolle
 ldap#:#ldap_global_role_assignment#:#Rollenzuordnung
@@ -6912,7 +6921,6 @@ ldap#:#ldap_user_scope_info#:#Bereich für die Benutzersuche. Wählen Sie im Zwe
 ldap#:#ldap_user_sync#:#Einstellungen zur Benutzersynchronisierung
 ldap#:#ldap_user_sync_info#:#Legt fest, ob noch nicht in ILIAS vorhandene Benutzer automatisch beim ersten Login oder aber regelmäßig per Cron-Job angelegt werden.
 mail#:#mail_serial_letter_placeholders#:#Platzhalter für Serienbrief
-mail#:#activate_serial_letter_placeholders#:#Platzhalter für Serienbrief aktivieren
 mail#:#bc#:#BCC
 chatroom#:#chat_select_room#:#Chatraum auswählen
 mail#:#back_to_folder#:#Zurück zum Ordner
@@ -7064,7 +7072,7 @@ mail#:#placeholders_advise#:#Persönliche Platzhalter werden nur für Empfänger
 mail#:#search_recipients#:#Empfänger suchen
 mail#:#send_mail_to#:#Mail an
 mail#:#mail_tbl_head_attachments#:#Anhang
-mail#:#mail_firstname_last_name_superior#:#A comma separated list for firstname and lastname of the user's superior(s).
+mail#:#mail_firstname_last_name_superior#:#Kommaseparierte Liste mit den Vor- und Nachnamen der Vorgesetzten eines Benutzers
 mail#:#mail_email_usr_subject#:#Test E-Mail Benutzer Mail
 mail#:#mail_email_usr_body#:#Dies ist eine Test-E-Mail um den Versand einer von einem Benutzer initiierten E-Mail an externe E-Mail-Adressen zu testen.
 mail#:#mail_email_sys_subject#:#Test E-Mail System Mail
@@ -7482,7 +7490,7 @@ meta#:#meta_education#:#Ausbildung
 meta#:#meta_educational#:#Pädagogik
 meta#:#meta_educational_level#:#Ausbildungsstufe
 meta#:#meta_educational_objective#:#Ausbildungsziel
-meta#:#meta_educationalvalidator#:#Educational Validator
+meta#:#meta_educationalvalidator#:#Pädagogische Abnahme
 meta#:#meta_entity#:#Instanz
 meta#:#meta_entry#:#Eintrag
 meta#:#meta_exam#:#Prüfung
@@ -8729,6 +8737,7 @@ skmg#:#skmg_skill#:#Kompetenz
 skmg#:#skmg_skill_level#:#Kompetenzausprägung
 skmg#:#skmg_skill_level_trigger#:#Auslöser
 skmg#:#skmg_skill_levels#:#Kompetenzausprägungen
+skmg#:#skmg_target_levels#:#Zielausprägungen
 skmg#:#skmg_skill_management_deactivated#:#Das Kompetenzmanagement ist momentan deaktiviert.
 skmg#:#skmg_skill_template#:#Vorlage
 skmg#:#skmg_skill_templates#:#Vorlagen
@@ -9212,7 +9221,7 @@ survey#:#median#:#Median
 survey#:#median_between#:#zwischen
 survey#:#menuback#:#Zurück
 survey#:#menubacktosurvey#:#Zurück zur Umfrage
-survey#:#message_content_info#:#Geben Sie einen Benachrichtigungstext für das Versenden des Zugangscodes ein. Sie sollten die Platzhalter [code] (Zugangsschlüssel), [url] (die URL zu dieser Umfrage) verwenden und Platzhalter, die Sie in den Importdaten der Mailempfänger verwendet haben: %s. Die Platzhalter werden mit den importierten Teilnehmerdaten ersetzt.
+survey#:#message_content_info#:#Geben Sie einen Benachrichtigungstext für das Versenden des Zugangsschlüssels ein. Sie sollten die Platzhalter [code] (Zugangsschlüssel), [url] (die URL zu dieser Umfrage) verwenden und Platzhalter, die Sie in den Importdaten der Mailempfänger verwendet haben: %s. Die Platzhalter werden mit den importierten Teilnehmerdaten ersetzt.
 survey#:#metric_question_floating_point#:#Der angegebene Wert ist eine Fließkommazahl. Fließkommazahlen sind für diesen Fragetyp nicht erlaubt!
 survey#:#metric_question_not_a_value#:#Der angegebene Wert ist kein nummerischer Wert!
 survey#:#metric_question_out_of_bounds#:#Der von Ihnen eingegebene Wert liegt nicht zwischen dem Minimalwert und dem Maximalwert!
@@ -9260,7 +9269,7 @@ survey#:#percentage_of_selections#:#Anteil an den insgesamt ausgewählten Antwor
 survey#:#phrase_added#:#Phrase hinzugefügt
 survey#:#phrase_new#:#Neue Phrase erstellen
 survey#:#phrase_saved#:#Die Phrase wurde erfolgreich gespeichert
-survey#:#please_enter_mail_code#:#Bitte verwenden Sie den Platzhalter für den Zugangscode [code].
+survey#:#please_enter_mail_code#:#Bitte verwenden Sie den Platzhalter für den Zugangsschlüssel [code].
 survey#:#please_enter_mail_url#:#Bitte verwenden Sie den Platzhalter für die URL [url].
 survey#:#please_select#:#-- bitte auswählen --
 survey#:#preview#:#Vorschau
@@ -10028,7 +10037,7 @@ dcl#:#dcl_activate_notification#:#Benachrichtigung
 dcl#:#dcl_table_id#:#Tabellen ID
 dcl#:#dcl_add_new_record#:#Eintrag hinzufügen
 dcl#:#dcl_list_fields#:#Felder
-dcl#:#dcl_list_visibility_and_filter#:#Liste
+dcl#:#dcl_list_visibility_and_filter#:#Übersicht
 dcl#:#dcl_view_settings#:#Ansichtseinstellungen
 dcl#:#dcl_view_configuration#:#Ansichtskonfiguration
 dcl#:#dcl_configuration_complete#:#Konfiguration abgeschlossen
@@ -10335,15 +10344,15 @@ ecs#:#ecs_tst_export_disabled#:#Nicht freigeben
 ecs#:#ecs_tst_export_enabled#:#Freigeben
 rtst#:#rtst_call#:#ECS-Test aufrufen
 rbac#:#contribute#:#Beiträge erstellen
-dateplaner#:#cal_setting_global_vis_repos#:#Anzeige im Magazin
-dateplaner#:#cal_setting_global_crs_act#:#Aktivierung in Kursen
-dateplaner#:#cal_setting_global_grp_act#:#Aktivierung in Gruppen
-dateplaner#:#cal_setting_global_crs_act_info#:#Wenn ausgewählt, ist der Kurskalender standardmäßig in Kursen aktiviert. Unabhängig davon kann der Kalender in den Kurseinstellungen de/aktiviert werden.
-dateplaner#:#cal_setting_global_grp_act_info#:#Wenn ausgewählt, ist der Gruppenkalender standardmäßig in Gruppen aktiviert. Unabhängig davon kann der Kalender in den Gruppeneinstellungen de/aktiviert werden.
-dateplaner#:#cal_setting_global_crs_vis#:#Anzeige in Kursen
-dateplaner#:#cal_setting_global_grp_vis#:#Anzeige in Gruppen
-dateplaner#:#cal_setting_global_crs_vis_info#:#Wenn aktiviert, wird der Kurskalender standardmäßig in Kursen angezeigt. Unabhängig davon kann der Kalender in den Kurseinstellungen de/aktiviert werden.
-dateplaner#:#cal_setting_global_grp_vis_info#:#Wenn aktiviert, wird der Gruppenkalender standardmäßig in Gruppen angezeigt. Unabhängig davon kann der Kalender in den Gruppeneinstellungen de/aktiviert werden.
+dateplaner#:#cal_setting_global_vis_repos#:#Anzeige in Magazinobjekten
+dateplaner#:#cal_setting_global_crs_act#:#Kurskalender
+dateplaner#:#cal_setting_global_grp_act#:#Gruppenkalender
+dateplaner#:#cal_setting_global_crs_act_info#:#In neu erstellten Kursen ist der Kalender standardmäßig aktiviert.
+dateplaner#:#cal_setting_global_grp_act_info#:#In neu erstellten Gruppen ist der Kalender standardmäßig aktiviert.
+dateplaner#:#cal_setting_global_crs_vis#:#Kalenderblock
+dateplaner#:#cal_setting_global_grp_vis#:#Kalenderblock
+dateplaner#:#cal_setting_global_crs_vis_info#:#Der Kurskalender wird standardmäßig als Block im Reiter „Inhalt“ angezeigt.
+dateplaner#:#cal_setting_global_grp_vis_info#:#Der Gruppenkalender wird standardmäßig als Block im Reiter „Inhalt“ angezeigt.
 dcl#:#dcl_change_notification_subject#:#Die Datensatzsammlung "%s" wurde bearbeitet.
 dcl#:#dcl_change_notification_link#:#Zur Datensammlung gehen
 dcl#:#dcl_change_notification_dcl_new_record#:#Der folgende Eintrag wurde erzeugt
@@ -10406,8 +10415,8 @@ dcl#:#dcl_tableviews#:#Ansichten
 dcl#:#dcl_tableviews_table#:#Ansichten der ausgewählten Tabelle
 dcl#:#dcl_tableview#:#Ansicht
 dcl#:#dcl_detailed_view#:#Einzelansicht
-dcl#:#dcl_edit_entry_rules#:#Bearbeitung
-dcl#:#dcl_create_entry_rules#:#Erstellung
+dcl#:#dcl_edit_entry_rules#:#Eintragsbearbeitung
+dcl#:#dcl_create_entry_rules#:#Eintragserstellung
 dcl#:#dcl_tableview_copy#:#Ansicht erfolgreich kopiert
 dcl#:#dcl_tableview_default_value_fail#:#Einige numerische Standardwerte konnten nicht kopiert werden, da sich Zeichen darin befanden. Bitte versuchen Sie es erneut.
 dcl#:#dcl_tableview_add#:#Neue Ansicht hinzufügen
@@ -10572,6 +10581,7 @@ content#:#cont_resources_of_type#:#Inhalte vom Typ
 content#:#cont_element_refers_removed_itgr#:#Dieses Inhaltselement verweist auf einen Objekteblock, der in der Zwischenzeit gelöscht wurde.
 common#:#search_globally#:#Im gesamten Magazin
 common#:#search_at_current_position#:#An der aktuellen Position
+common#:#label_search_options#:#Suchbereich
 survey#:#svy_copy#:#Umfrage kopieren
 blog#:#blog_authors#:#Autoren
 blog#:#blog_author#:#Beiträge von
@@ -11120,12 +11130,12 @@ survey#:#survey_360_add_self_appraisee#:#Fügen Sie sich selbst als Feedback-Neh
 survey#:#survey_360_list_title#:#360°-Modus
 survey#:#survey_360_select_appraisee#:#Auswählen
 survey#:#survey_360_appraisee#:#Feedback-Nehmer
-skmg#:#skmg_skill_profiles#:#Profile
+skmg#:#skmg_skill_profiles#:#Kompetenzprofile
 skmg#:#skmg_add_local_profile#:#Lokales Profil hinzufügen
 skmg#:#skmg_add_profile#:#Profil hinzufügen
 skmg#:#skmg_edit_profile#:#Profil bearbeiten
 skmg#:#skmg_delete_profiles#:#Wollen Sie wirklich die folgenden Profile löschen?
-skmg#:#skmg_assigned_skill_levels#:#Zugeordnete Kompetenzausprägungen
+skmg#:#skmg_assigned_skill_levels#:#Zugeordnete Zielausprägungen
 skmg#:#skmg_assign_level#:#Ausprägung zuordnen
 skmg#:#skmg_profile#:#Profil
 skmg#:#skmg_remove_levels#:#Ausprägungen entfernen
@@ -11195,6 +11205,7 @@ survey#:#survey_reminder_frequency_days#:#Tage
 survey#:#survey_notification_target_group#:#Zielgruppe
 survey#:#survey_notification_target_group_parent_course#:#Alle Teilnehmer des übergeordneten Kurses/Gruppe, welche die Umfrage noch nicht abgeschlossen haben
 survey#:#survey_notification_target_group_parent_course_inactive#:#Kein übergeordneter Kurs/Gruppe - keine Erinnerung möglich!
+survey#:#survey_notification_target_group_invited#:#Alle Teilnehmenden, die manuell eingeladen wurden
 survey#:#survey_notification_target_group_invited_info#:#Aktuelle Anzahl der Empfänger: %s
 survey#:#survey_notification_tutor_setting#:#Eine E-Mail nachdem alle Teilnehmer beendet haben
 survey#:#survey_notification_tutor_recipients#:#Tutoren (Benutzername[n])
@@ -11747,7 +11758,7 @@ grp#:#grp_mail_tutors_only#:#Nur für Administratoren
 grp#:#grp_mail_all#:#Für alle Mitglieder
 grp#:#grp_mail_tutors_only_info#:#Nur Administratoren können die Funktion "Mail an Mitglieder" im Reiter Mitglieder nutzen.
 grp#:#grp_mail_all_info#:#Mitglieder und Administratoren können die Funktion "Mail an Mitglieder" im Reiter Mitglieder nutzen.
-content#:#cont_ed_insert_consultation_hours#:#Sprechstunden einfügen
+content#:#cont_ed_insert_cach#:#Sprechstunden einfügen
 content#:#cont_insert_consultation_hours#:#Sprechstunden hinzufügen
 content#:#cont_update_consultation_hours#:#Sprechstunden bearbeiten
 content#:#cont_cach_mode#:#Modus
@@ -11951,8 +11962,8 @@ auth#:#auth_auth_settings#:#Einstellungen
 book#:#book_reservation_failed_overbooked#:#Die Buchung ist fehlgeschlagen, da das Objekt nicht mehr verfügbar ist.
 blog#:#blog_edit_posting#:#Beitrag bearbeiten
 common#:#offline_mode#:#Offline-Modus
-sop#:#sop_check_system_requirements#:#Systemvoraussetzungen werden überprüft
-sop#:#sop_system_check_error#:#Ihr Browser unterstützt die erforderlichen HTML5-Funktionen nicht.
+sop#:#sop_check_system_requirements#:#Systemvoraussetzungen werden überprüft. Bitte beachten Sie: Ab Firefox Version 81 muss browser.cache.offline.storage.enable aktiviert werden. Bitte navigieren Sie zu "about:config", suchen Sie nach "browser.cache.offline.storage.enable" und setzen Sie den Wert auf true.
+sop#:#sop_system_check_error#:#Ihr Browser unterstützt die erforderlichen HTML5-Funktionen nicht. Nutzen Sie Mozilla Firefox.
 sop#:#sop_system_check_https#:#Sie müssen https anstelle von http für die erforderlichen HTML5-Funktionen verwenden.
 sop#:#sop_lm_not_exists#:#Das Lernmodul konnte nicht im Offline Speicher des Browsers gefunden werden.<br />Bitte benutzen Sie dasselbe Gerät und denselben Browser, den Sie beim Exportieren des Lernmoduls verwendet haben.<br /><br />Sollte dies der korrekte Browser sein, dann scheint das Lernmodul durch das Löschen des Browser Caches entfernt worden zu sein. Bitte kontaktieren Sie Ihren Administrator.
 sop#:#sop_already_exported#:#Das Lernmodul befindet sich schon im Offline-Modus. Bitte rufen Sie diese Seite mit Ihrem Firefox-Browser auf, in dem das SCORM-Offline-Player-Addon installiert ist.
@@ -12065,7 +12076,8 @@ rep#:#rep_time_period#:#Zeitraum
 cntr#:#exc_next_deadline_single#:#Abgabefrist
 trac#:#trac_object_statistics_info#:#Wenn aktiviert, werden Daten für die Zugriffsstatistiken gesammelt.
 ldap#:#ldap_user_sync_cron_info#:#Wenn aktiviert, werden Benutzerkonten aus dem LDAP-Verzeichnis importiert und optional laufend synchronisiert.
-survey#:#survey_reminder_cron_info#:#Wenn aktiviert, werden Benutzer an die Teilnahme an Umfragen erinnert.
+survey#:#survey_reminder_cron#:#Benutzer an Teilnahme erinnern / Tutoren Ergebnisse zusenden
+survey#:#survey_reminder_cron_info#:#Wenn aktiviert, werden Benutzer an die Teilnahme an Umfragen erinnert und Tutoren erhalten die Ergebnisse zugesendet.
 cron#:#cron_action_activate_sure_multi#:#Wollen Sie wirklich die folgenden Cron-Jobs aktivieren?
 cron#:#cron_action_deactivate_sure_multi#:#Wollen Sie wirklich die folgenden Cron-Jobs deaktivieren?
 cron#:#cron_action_reset_sure_multi#:#Wollen Sie wirklich die folgenden Cron-Jobs zurücksetzen?
@@ -12097,7 +12109,7 @@ skmg#:#skmg_cannot_delete_nodes_in_use#:#Einige Objekte können nicht gelöscht 
 skmg#:#skmg_status_draft#:#In Vorbereitung (Offline)
 skmg#:#skmg_status_draft_info#:#Eintrag wird Benutzern nicht angezeigt.
 skmg#:#skmg_status_publish#:#Veröffentlicht
-skmg#:#skmg_status_publish_info#:#Die Kompetenz kann von Benutzern genutzt werden falls alle übergeordneten Einträge ebenfalls freigegeben sind. Sobald die Kompetenz genutzt wird, kann sie nicht mehr gelöscht oder der Status "In Vorbereitung" gesetzt werden.
+skmg#:#skmg_status_publish_info#:#Die Kompetenz kann von Benutzern genutzt werden falls alle übergeordneten Einträge ebenfalls freigegeben sind.
 skmg#:#skmg_status_outdated#:#Veraltet
 skmg#:#skmg_status_outdated_info#:#Der Eintrag kann von Benutzer nicht mehr als persönliche Kompetenz neu ausgewählt werden. Wurde die Kompetenz bereits früher ausgewählt, so bleibt diese Auswahl weiterhin bestehen.
 skmg#:#skmg_status#:#Status
@@ -12129,7 +12141,7 @@ init#:#init_error_redirect_info#:#Weiterleitungen werden durch Kontext nicht unt
 init#:#init_error_maintenance#:#Der Server ist aufgrund von Wartungsarbeiten aktuell nicht verf&uuml;gbar. Wir bitten um Verst&auml;ndnis. Versuchen Sie es sp&auml;ter noch einmal.
 init#:#init_error_authentication_fail#:#Authentifizierung fehlgeschlagen.
 obj#:#obj_select_master_lang#:#Bitte wählen Sie die Standardsprache aus. Bestehende Inhalte werden dieser Sprache zugeordnet. Die Standardsprache kann anschließend nicht geändert werden.
-obj#:#obj_master_lang#:#Standardsprache
+obj#:#obj_master_lang#:#Basissprache
 obj#:#obj_additional_langs#:#Zusätzliche Sprachen
 obj#:#obj_deactivate_content_lang#:#Mehrsprachigkeit für Seiteneditor deaktivieren.
 obj#:#obj_multilinguality#:#Mehrsprachigkeit
@@ -12193,7 +12205,7 @@ blog#:#blog_abstract_image_info#:#Das erste Bild des Beitrags wird auf die hier 
 blog#:#blog_abstract_image_width#:#Breite
 blog#:#blog_abstract_image_height#:#Höhe
 blog#:#blog_abstract_image_pixels#:#Px
-content#:#cont_ed_insert_my_courses#:#Meine Kurse einfügen
+content#:#cont_ed_insert_mcrs#:#Meine Kurse einfügen
 content#:#cont_insert_my_courses#:#Meine Kurse einfügen
 content#:#cont_update_my_courses#:#Meine Kurse bearbeiten
 prtf#:#prtf_page_element_teaser_my_courses#:#Innerhalb des Portfolios erscheint an dieser Stelle eine Liste Ihrer Kurse.
@@ -12290,7 +12302,7 @@ survey#:#svy_mail_own_results_subject#:#Umfrage "%s" - Ihre Antworten
 survey#:#svy_results_view_own#:#Teilnehmer kann eigene Antworten einsehen
 wiki#:#wiki_wpg#:#Wiki-Seite
 wiki#:#wiki_advmd_block_title#:#Benutzerdefinierte Metadaten der Seite
-content#:#cont_ed_insert_amd_page_list#:#Seitenliste einfügen
+content#:#cont_ed_insert_amdpl#:#Seitenliste einfügen
 content#:#cont_insert_amd_page_list#:#Seitenliste einfügen
 content#:#cont_update_amd_page_list#:#Seitenliste bearbeiten
 obj#:#obj_tool_setting_taxonomies#:#Taxonomien
@@ -13225,6 +13237,7 @@ note#:#note_comment_notification_subject#:#Neuer Kommentar in "%s".
 note#:#note_comment_notification_subjectc#:#Geänderter Kommentar in "%s".
 note#:#note_comment_notification_salutation#:#Hallo %s,
 note#:#note_comment_notification_link#:#Link
+lng#:#language_detection#:#Automatische Spracherkennung
 lng#:#lng_enable_language_detection#:#Automatische Spracherkennung aktivieren
 lng#:#lng_disable_language_detection#:#Automatische Spracherkennung deaktivieren
 trac#:#trac_mode_content_visited#:#Besuch
@@ -13308,13 +13321,13 @@ content#:#cont_upload_multi_srt_howto#:#Erlaubt das Hochladen mehrerer Untertite
 content#:#cont_moved_srt_files#:#Die Untertitel-Dateien wurden den Medienobjekten zugeordnet.
 content#:#cont_subtitle_file#:#SRT-ZIP-Datei
 content#:#cont_multi_srt_files#:#SRT-Dateien
-content#:#cont_master_language_only#:#Hauptsprache für Übersetzung - Master
+content#:#cont_master_language_only#:#Basissprache für Übersetzung - Master
 content#:#cont_import#:#Import
-content#:#cont_trans_import_info#:#Wenn Sie dieses Modul als "XML (Hauptsprache für Übersetzung - Master)" in eine andere Installation exportiert haben, können Sie hier die übersetzten Export-Dateien dieser Installation wieder importieren.
+content#:#cont_trans_import_info#:#Wenn Sie dieses Modul als "XML (Basissprache für Übersetzung - Master)" in eine andere Installation exportiert haben, können Sie hier die übersetzten Export-Dateien dieser Installation wieder importieren.
 content#:#cont_import_trans#:#Übersetzung importieren
 content#:#cont_import_lang#:#Zielsprache
-mep#:#mep_master_language_only#:#Hauptsprache für Übersetzung - Master
-mep#:#mep_trans_import_info#:#Wenn Sie dieses Modul als "XML (Hauptsprache für Übersetzung - Master)" in eine andere Installation exportiert haben, können Sie hier die übersetzten Export-Dateien dieser Installation wieder importieren.
+mep#:#mep_master_language_only#:#Basissprache für Übersetzung - Master
+mep#:#mep_trans_import_info#:#Wenn Sie dieses Modul als "XML (Basissprache für Übersetzung - Master)" in eine andere Installation exportiert haben, können Sie hier die übersetzten Export-Dateien dieser Installation wieder importieren.
 mep#:#mep_import_trans#:#Übersetzung importieren
 mep#:#mep_import_lang#:#Zielsprache
 content#:#cont_snippet_from_another_installation#:#Inhaltsbaustein stammt von einer anderen ILIAS-Installation.
@@ -13722,9 +13735,9 @@ rbac#:#svy_edit_learning_progress#:#Benutzer kann Lernfortschrittseinstellungen 
 rbac#:#sess_edit_learning_progress#:#Benutzer kann Lernfortschrittseinstellungen bearbeiten
 rbac#:#read_results#:#Umfrageergebnisse
 rbac#:#svy_read_results#:#Benutzer hat Zugriff auf alle Umfrageergebnisse
-maps#:#maps_custom_tile_server_info#:#Server URL to provide tile-data. Multiple inputs should be separated by spaces. Defaults is "%s".###23 12 2015 new variable
-maps#:#maps_custom_geolocation_server_info#:#Server URL to provide geolocation-data using Nominatim. Your entry should contain the placeholder [QUERY] to define a position for request information. Example: nominatim.example.com/search/[QUERY]?format=json.###23 12 2015 new variable
-maps#:#configure_geolocation#:#Please finish the geolocation configuration in the "Third Party Software" administration menu to enable address search.###23 12 2015 new variable
+maps#:#maps_custom_tile_server_info#:#URL des Servers für die Bereitstellung der Kacheln. Mehrere Einträge müssen mit Leerzeichen getrennt werden. Standardeingabe ist "%s".
+maps#:#maps_custom_geolocation_server_info#:#URL des Servers, über den die Geolocation-Daten mithilfe des Nominatim-Dienstes bereitgestellt werden. Der Eintrag muss den Platzhalter [QUERY] enthalten, um die Anfrageposition festzulegen. Beispiel: nominatim.example.com/search/[QUERY]?format=json.
+maps#:#configure_geolocation#:#Um nach Adressen suchen zu können, schließen Sie bitte die Konfiguration für die Geolocation im Administrationsmenü „Software von Drittanbietern“ ab.
 crs#:#event_user_selection_include_role#:#Binde alle Benutzer der Rolle "%1$s" ein
 crs#:#event_user_selection_include_waiting_list#:#Binde alle Benutzer der "Warteliste" ein
 crs#:#event_user_selection_include_requests#:#Binde alle Benutzer der Liste "Aufnahmeanträge" ein
@@ -14211,7 +14224,7 @@ iass#:#iass_internal_note#:#Interne Anmerkungen zur Prüfung
 iass#:#iass_status_completed#:#Bestanden
 iass#:#iass_status_failed#:#Nicht bestanden
 iass#:#iass_status_pending#:#Noch nicht bewertet
-iass#:#iass_notify#:#Teilnehmer nach abschließender Bewertung benachrichtigen
+iass#:#iass_notify#:#Ergebnis dem Teilnehmer zugänglich machen
 iass#:#iass_finalize#:#Abschließen
 iass#:#il_iass_member#:#Teilnehmer
 iass#:#il_iass_members#:#Teilnehmer
@@ -14310,7 +14323,7 @@ usr#:#user_action#:#Benutzeraktion
 chatroom#:#chtr_activation_online_info#:#Wählen Sie diese Einstellung, um den Chatraum für Benutzer verfügbar zumachen.
 chatroom#:#chtr_activation_limited_visibility_info#:#Außerhalb des angegebenen Zeitraums wird der Chatraumtitel angezeigt, die Inhalte aber nicht.
 chatroom#:#chtr_server_status#:#Server-Status
-chatroom#:#chtr_ban_actor_tbl_head#:#Actor
+chatroom#:#chtr_ban_actor_tbl_head#:#gesperrt durch
 chatroom#:#chtr_ban_ts_tbl_head#:#Zeitpunkt
 common#:#chtr_import#:#Chatraum importieren
 buddysystem#:#buddy_handle_contact_request#:#Kontaktanfrage
@@ -14508,6 +14521,7 @@ auth#:#auth_saml_idp#:#IDP
 auth#:#auth_saml_configure_idp#:#SAML-IDP konfigurieren: %s
 auth#:#saml_tab_head_idp#:#IDP
 auth#:#auth_saml_idp_settings#:#IDP Einstellungen
+auth#:#auth_saml_err_sqlite_driver#:#Die SAML-Authentifizierung benötigt die SQLite-Treiber für PHP. Bitte installieren Sie diese und versuchen Sie es erneut.
 dateplaner#:#cal_origin#:#Herkunft
 dateplaner#:#cal_list#:#Liste
 dateplaner#:#cal_grp_curr_crs_cons#:#Sprechstunden
@@ -14549,10 +14563,10 @@ common#:#second_email#:#Zweite E-Mail
 iass#:#iass_usr_amend#:#Prüfungsdaten nachträglich ändern
 iass#:#iass_place#:#Ort der Prüfung
 iass#:#iass_event_time#:#Datum der Prüfung
-skmg#:#skmg_assigned_profiles#:#Zugewiesene Profile
+skmg#:#skmg_assigned_profiles#:#Zugewiesene Kompetenzprofile
 skmg#:#skmg_selected_skills#:#Kompetenzeinträge
-skmg#:#skmg_hide_profile_self_eval#:#Profilwerte nach Selbsteinschätzung anzeigen
-skmg#:#skmg_hide_profile_self_eval_info#:#Für einzelne Kompetenzwerte werden Profilwerte erst angezeigt, nachdem der Benutzer eine Selbsteinschätzung abgegeben hat.
+skmg#:#skmg_hide_profile_self_eval#:#Profil-Zielausprägung nach Selbsteinschätzung anzeigen
+skmg#:#skmg_hide_profile_self_eval_info#:#Für einzelne Kompetenzen wird die Profil-Zielausprägung erst angezeigt, nachdem der Benutzer eine Selbsteinschätzung abgegeben hat.
 skmg#:#skmg_local_assignment_profiles#:#Lokale Zuordnung von globalen Profilen erlauben
 skmg#:#skmg_allow_local_profiles#:#Erstellung von lokalen Profilen erlauben
 skmg#:#skmg_allow_local_profiles_info#:#Nutzer mit dem Recht 'Einstellungen bearbeiten' in Kursen und Gruppen können lokale Kompetenzprofile erstellen und dabei global definierte Kompetenzen verwenden.
@@ -14644,8 +14658,8 @@ prtf#:#prtf_add_existing_blog#:#Vorhandenes Blog nutzen
 blog#:#blog_draft_text#:#Unveröffentlichter Beitrag
 user#:#usr_letter_avatars#:#Letter-Avatare
 user#:#usr_letter_avatars_info#:#Zeigt die Initialen des Benutzernamens oder Logins an, wenn kein öffentliches Profilbild vorliegt.
-mep#:#mep_master_language_only_no_media#:#Hauptsprache für Übersetzung - ohne Medienobjekte
-content#:#cont_master_language_only_no_media#:#Hauptsprache für Übersetzung - ohne Medienobjekte
+mep#:#mep_master_language_only_no_media#:#Basissprache für Übersetzung - ohne Medienobjekte
+content#:#cont_master_language_only_no_media#:#Basissprache für Übersetzung - ohne Medienobjekte
 mep#:#mep_content#:#Medienobjekte
 mep#:#mep_media_subtitles#:#Untertitel
 content#:#cont_last_visited_page#:#Zuletzt besuchte Seite
@@ -14740,12 +14754,12 @@ prtf#:#prtf_date_of_print#:#Datum des Ausdrucks
 prtf#:#prtf_signature#:#Feld für Unterschrift
 prtf#:#prtf_signature_info#:#Das PDF enthält ein Feld, in welchem die Benutzer unterschreiben können.
 prtf#:#prtf_signature_date#:#Datum, Unterschrift
-lti#:#lti_not_allowed#:#Zugriff nicht erlaubt. Sie wurden in den ursprünglichen LTI Bereich umgeleitet.
+lti#:#lti_not_allowed#:#Zugriff nicht erlaubt. Sie wurden in den ursprünglichen LTI-Bereich umgeleitet.
 lti#:#lti_navigation#:#Navigation
-lti#:#lti_session#:#LTI Sitzung
-lti#:#lti_exit#:#LTI Sitzung beenden
-lti#:#lti_exited#:#LTI Sitzung beendet
-lti#:#lti_exited_info#:#Die LTI Sitzung wurde erfolgreich beendet
+lti#:#lti_session#:#LTI-Sitzung
+lti#:#lti_exit#:#LTI-Sitzung beenden
+lti#:#lti_exited#:#LTI-Sitzung beendet
+lti#:#lti_exited_info#:#Die LTI-Sitzung wurde erfolgreich beendet.
 blog#:#blog_nav_mode_month_list_num_month_with_post#:#Anzahl Monate mit Links zu allen Beiträgen
 blog#:#blog_nav_mode_month_list_num_month_with_post_info#:#Für diese Anzahl aktuellster Monate werden im Seitenblock Links zu allen Beiträge angezeigt.
 orgu#:#org_op_access_enrolments#:#Einschreibe-Status einsehen
@@ -14903,17 +14917,17 @@ mail#:#mail_bg_task_desc#:#Betreff: %s
 mob#:#mob_no_fixed_size_map_editing#:#Bitte bestimmen Sie eine feste Größe für ihr Bild, bevor Sie verlinkte Bereiche definieren. Die Bereiche werden nicht angepasst, wenn ihr Bild durch einen Content-Style oder andere CSS-Regeln skaliert wird.
 common#:#presentation_table_more#:#Mehr anzeigen
 exc#:#exc_global_feedback_file_after_date#:#Nach festem Datum
-exc#:#feedback_given#:#Feedback given
+exc#:#feedback_given#:#Gegebenes Feedback
 exc#:#feedback#:#Feedback
-exc#:#feedback_received#:#Feedback received
-exc#:#feedback_from#:#Feedback from
-exc#:#text_assignment#:#Text Assignment
-exc#:#not_yet#:#not yet
+exc#:#feedback_received#:#Gegebenes Feedback
+exc#:#feedback_from#:#Feedback von
+exc#:#text_assignment#:#Text Übungseinheit
+exc#:#not_yet#:#noch nicht
 exc#:#grade_evaluate#:#Bewerten/Benoten
 exc#:#submissions_feedback#:#Abgaben und Peer-Feedback
 exc#:#submissions_only#:#Nur Abgaben
 exc#:#filter#:#Filter
-exc#:#fiter_no_results#:#The current filter did not match any submission.
+exc#:#fiter_no_results#:#Zu den aktuellen Einstellungen des Filters passen kein Abgaben.
 exc#:#exc_reminder_link#:#URL
 exc#:#exc_mail_context_grade_reminder_info#:#Die Tutoren werden an die Bewertung der Enireichungen erinnert.
 exc#:#exc_mail_context_grade_reminder_title#:#Übung: Erinnerung an Bewertung
@@ -15103,7 +15117,7 @@ prtf#:#prtf_decl_authorship#:#Selbständigkeitserklärung
 pd#:#pd_achievements#:#Lernerfolge
 content#:#cont_got_lock_release#:#Diese Seite wurde für Ihre Bearbeitung gesperrt bis %1. Andere Benutzer können in dieser Zeit keine Änderungen an der Seite vornehmen. Bitte geben Sie die Seite nach der Bearbeitung wieder frei.
 prtf#:#prtf_download_submission#:#Kopie der Abgabe herunterladen
-content#:#cont_ed_insert_learning_history#:#Lernverlauf
+content#:#cont_ed_insert_lhist#:#Lernverlauf einfügen
 lhist#:#lhist_all#:#All
 lhist#:#lhist_selected#:#Selected
 lhist#:#lhist_manual#:#Manual
@@ -15583,7 +15597,7 @@ dash#:#dash_member_main_alt#:#Eine Ansicht der Mitgliedschaften kann auch direkt
 dash#:#dash_click_here#:#Hier klicken
 svy#:#svy_remove_all_participants#:#Alle Teilnehmer entfernen
 svy#:#svy_invite_participants#:#Teilnehmer einladen
-svy#:#svy_codes#:#Zugriffscodes
+svy#:#svy_codes#:#Zugangsschlüssel
 svy#:#svy_part_overview#:#Übersicht
 svy#:#svy_remove_participants#:#Teilnehmer entfernen
 svy#:#svy_status#:#Status
@@ -15753,26 +15767,26 @@ lti#:#lti_con_prov_keywords#:#Schlagwörter
 lti#:#lti_con_prov_keywords_info#:#Die Schlagwörter müssen durch ein Semikolon (;) getrennt sein. Die Schlagwörter werden automatisch als Schlagwörter in die Metadaten übernommen.
 lti#:#lti_con_prov_category#:#Kategorie
 lti#:#lti_con_prov_category_info#:#Kategorie, um Einträge zu filtern, wenn ein LTI-Konsument-Objekt erstellt wird.
-lti#:#conf_user_ident#:#Benutzeridentifikation
-lti#:#conf_user_ident_info#:#Standard ist häufig die E-Mail-Adresse. Die eindeutige ILIAS-Plattform-ID lautet:
-lti#:#conf_user_ident_il_uuid_user_id#:#ILIAS-Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist.
-lti#:#conf_user_ident_il_uuid_user_id_info#:#Dies ist identisch mit jedem Aufruf, erlaubt aber keine direkte Rückschlüsse auf den ILIAS-Benutzer.
-lti#:#conf_user_ident_il_uuid_login#:#ILIAS-Login kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist.
-lti#:#conf_user_ident_il_uuid_login_info#:#Dies ist identisch mit jedem Aufruf, kann aber direkte Rückschlüsse auf den ILIAS-Benutzer zulassen.
-lti#:#conf_user_ident_il_uuid_ext_account#:#Externe Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist.
-lti#:#conf_user_ident_il_uuid_ext_account_info#:#Dies ist identisch mit jedem Aufruf, kann aber direkte Rückschlüsse auf den Benutzer zulassen.
-lti#:#conf_user_ident_real_email#:#E-Mail Adresse
-lti#:#conf_user_ident_real_email_info#:#Sendet die E-Mail-Adresse des Benutzers als Identifikation (Achtung: eine E-Mail-Adresse kann von mehreren Benutzern verwendet werden!)
-lti#:#conf_user_name#:#Benutzername
-lti#:#conf_user_name_info#:#Das Senden eines Benutzernamens ist in der Regel nicht erforderlich.
-lti#:#conf_user_name_none#:#Keiner
-lti#:#conf_user_name_none_info#:#Sendet '-' anstelle eines Namens
-lti#:#conf_user_name_firstname#:#Vorname
-lti#:#conf_user_name_firstname_info#:#Sendet den Vornamen.
-lti#:#conf_user_name_lastname#:#Titel und Nachname
-lti#:#conf_user_name_lastname_info#:#Sendet Herr oder Frau (sofern nicht anders angegeben) und den Nachnamen.
-lti#:#conf_user_name_fullname#:#Vollständiger Name
-lti#:#conf_user_name_fullname_info#:#Sendet Titel, Vorname und Nachname.
+lti#:#conf_privacy_ident#:#Benutzeridentifikation
+lti#:#conf_privacy_ident_info#:#Standard ist häufig die E-Mail-Adresse. Die eindeutige ILIAS-Plattform-ID lautet:
+lti#:#conf_privacy_ident_il_uuid_user_id#:#ILIAS-Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist.
+lti#:#conf_privacy_ident_il_uuid_user_id_info#:#Dies ist identisch mit jedem Aufruf, erlaubt aber keine direkte Rückschlüsse auf den ILIAS-Benutzer.
+lti#:#conf_privacy_ident_il_uuid_login#:#ILIAS-Login kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist.
+lti#:#conf_privacy_ident_il_uuid_login_info#:#Dies ist identisch mit jedem Aufruf, kann aber direkte Rückschlüsse auf den ILIAS-Benutzer zulassen.
+lti#:#conf_privacy_ident_il_uuid_ext_account#:#Externe Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist.
+lti#:#conf_privacy_ident_il_uuid_ext_account_info#:#Dies ist identisch mit jedem Aufruf, kann aber direkte Rückschlüsse auf den Benutzer zulassen.
+lti#:#conf_privacy_ident_real_email#:#E-Mail Adresse
+lti#:#conf_privacy_ident_real_email_info#:#Sendet die E-Mail-Adresse des Benutzers als Identifikation (Achtung: eine E-Mail-Adresse kann von mehreren Benutzern verwendet werden!)
+lti#:#conf_privacy_name#:#Benutzername
+lti#:#conf_privacy_name_info#:#Das Senden eines Benutzernamens ist in der Regel nicht erforderlich.
+lti#:#conf_privacy_name_none#:#Keiner
+lti#:#conf_privacy_name_none_info#:#Sendet '-' anstelle eines Namens
+lti#:#conf_privacy_name_firstname#:#Vorname
+lti#:#conf_privacy_name_firstname_info#:#Sendet den Vornamen.
+lti#:#conf_privacy_name_lastname#:#Titel und Nachname
+lti#:#conf_privacy_name_lastname_info#:#Sendet Herr oder Frau (sofern nicht anders angegeben) und den Nachnamen.
+lti#:#conf_privacy_name_fullname#:#Vollständiger Name
+lti#:#conf_privacy_name_fullname_info#:#Sendet Titel, Vorname und Nachname.
 lti#:#lti_con_prov_privacy_setting_conf#:#Konfigurationsoptionen
 lti#:#lti_con_prov_privacy_setting_info#:#Konfigurationsoptionen für die Datenschutzeinstellungen
 lti#:#lti_con_prov_privacy_setting_default#:#Standardeinstellungen, änderbar für Objekte
@@ -15935,28 +15949,28 @@ cmix#:#conf_keep_lp#:#Verschlechterung des Lernfortschritts vermeiden
 cmix#:#conf_keep_lp_info#:#Der Status 'bearbeitet' des ILIAS-Lernfortschritts wird eingefroren.
 cmix#:#conf_external_lrs#:#Externer LRS
 cmix#:#info_external_lrs#:#Bei einem externen Learning Record Store (LRS) wird dem Anwender ein Hinweis angezeigt. Ein externer LRS ist gekennzeichnet durch einen unzureichenden Einfluss auf den LRS und durch den Betreiber von ILIAS. Dies ist der Fall, wenn es keine Rechte zum Löschen gibt.
-cmix#:#conf_user_ident#:#Benutzeridentifikation
-cmix#:#conf_user_ident_info#:#Standard ist häufig die E-Mail-Adresse. Die eindeutige ILIAS-Plattform-ID lautet:
-cmix#:#conf_user_ident_il_uuid_user_id#:#ILIAS-Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist
-cmix#:#conf_user_ident_il_uuid_user_id_info#:#Dies ist identisch mit jedem Aufruf, erlaubt aber keine direkte Rückschlüsse auf den ILIAS-Benutzer.
-cmix#:#conf_user_ident_il_uuid_login#:#ILIAS-Login kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist
-cmix#:#conf_user_ident_il_uuid_login_info#:#Dies ist identisch mit jedem Aufruf, kann aber eine direkte Rückschlüsse auf den ILIAS-Benutzer zulassen.
-cmix#:#conf_user_ident_il_uuid_ext_account#:#Externe Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist
-cmix#:#conf_user_ident_il_uuid_ext_account_info#:#Dies ist identisch mit jedem Aufruf, kann aber eine direkte Rückschlüsse auf den Benutzer zulassen.
-cmix#:#conf_user_ident_il_uuid_random#:#Zufalls-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist
-cmix#:#conf_user_ident_il_uuid_random_info#:#Pro ILIAS-Objekt und ILIAS-Benutzer wird eine Zufalls-ID erzeugt, die bei jedem Aufruf identisch bleibt. Rückschlüsse auf einen Benutzer sind sehr eingeschränkt, da Objekt-übergreifende Nutzerprofile praktisch nicht erstellt werden können.
-cmix#:#conf_user_ident_real_email#:#E-Mail Adresse
-cmix#:#conf_user_ident_real_email_info#:#Sendet die E-Mail-Adresse des Benutzers als Identifikation (Achtung: eine E-Mail-Adresse kann von mehreren Benutzern verwendet werden!)
-cmix#:#conf_user_name#:#Benutzername
-cmix#:#conf_user_name_info#:#Das Senden eines Benutzernamens ist in der Regel nicht erforderlich.
-cmix#:#conf_user_name_none#:#Keiner
-cmix#:#conf_user_name_none_info#:#Sendet '-' anstelle eines Namens
-cmix#:#conf_user_name_firstname#:#Vorname
-cmix#:#conf_user_name_firstname_info#:#Sendet den Vornamen
-cmix#:#conf_user_name_lastname#:#Titel und Nachname
-cmix#:#conf_user_name_lastname_info#:#Sendet Herr oder Frau (sofern nicht anders angegeben) und den Nachnamen.
-cmix#:#conf_user_name_fullname#:#Vollständiger Name
-cmix#:#conf_user_name_fullname_info#:#Sendet Titel, Vorname und Nachname.
+cmix#:#conf_privacy_ident#:#Benutzeridentifikation
+cmix#:#conf_privacy_ident_info#:#Standard ist häufig die E-Mail-Adresse. Die eindeutige ILIAS-Plattform-ID lautet:
+cmix#:#conf_privacy_ident_il_uuid_user_id#:#ILIAS-Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist
+cmix#:#conf_privacy_ident_il_uuid_user_id_info#:#Dies ist identisch mit jedem Aufruf, erlaubt aber keine direkte Rückschlüsse auf den ILIAS-Benutzer.
+cmix#:#conf_privacy_ident_il_uuid_login#:#ILIAS-Login kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist
+cmix#:#conf_privacy_ident_il_uuid_login_info#:#Dies ist identisch mit jedem Aufruf, kann aber eine direkte Rückschlüsse auf den ILIAS-Benutzer zulassen.
+cmix#:#conf_privacy_ident_il_uuid_ext_account#:#Externe Benutzer-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist
+cmix#:#conf_privacy_ident_il_uuid_ext_account_info#:#Dies ist identisch mit jedem Aufruf, kann aber eine direkte Rückschlüsse auf den Benutzer zulassen.
+cmix#:#conf_privacy_ident_il_uuid_random#:#Zufalls-ID kombiniert mit einer eindeutigen ILIAS-Plattform-ID, die als E-Mail-Adresse formatiert ist
+cmix#:#conf_privacy_ident_il_uuid_random_info#:#Pro ILIAS-Objekt und ILIAS-Benutzer wird eine Zufalls-ID erzeugt, die bei jedem Aufruf identisch bleibt. Rückschlüsse auf einen Benutzer sind sehr eingeschränkt, da Objekt-übergreifende Nutzerprofile praktisch nicht erstellt werden können.
+cmix#:#conf_privacy_ident_real_email#:#E-Mail Adresse
+cmix#:#conf_privacy_ident_real_email_info#:#Sendet die E-Mail-Adresse des Benutzers als Identifikation (Achtung: eine E-Mail-Adresse kann von mehreren Benutzern verwendet werden!)
+cmix#:#conf_privacy_name#:#Benutzername
+cmix#:#conf_privacy_name_info#:#Das Senden eines Benutzernamens ist in der Regel nicht erforderlich.
+cmix#:#conf_privacy_name_none#:#Keiner
+cmix#:#conf_privacy_name_none_info#:#Sendet '-' anstelle eines Namens
+cmix#:#conf_privacy_name_firstname#:#Vorname
+cmix#:#conf_privacy_name_firstname_info#:#Sendet den Vornamen
+cmix#:#conf_privacy_name_lastname#:#Titel und Nachname
+cmix#:#conf_privacy_name_lastname_info#:#Sendet Herr oder Frau (sofern nicht anders angegeben) und den Nachnamen.
+cmix#:#conf_privacy_name_fullname#:#Vollständiger Name
+cmix#:#conf_privacy_name_fullname_info#:#Sendet Titel, Vorname und Nachname.
 cmix#:#conf_privacy_setting_conf#:#Konfigurationsoptionen
 cmix#:#conf_privacy_setting_info#:#Konfigurationsoptionen für die Datenschutzeinstellungen
 cmix#:#conf_privacy_setting_default#:#Standardeinstellungen, änderbar für Objekte
@@ -16302,6 +16316,10 @@ survey#:#svy_sum_score#:#Skalenpunktesumme
 survey#:#svy_max_sum_score#:#Maximale Skalenpunktesumme
 content#:#cont_select_none#:#Auswahl aufheben
 feed#:#feed_no_local_url#:#Bitte geben sie eine gültige externe Feed URL an.
+common#:#lso_admin_form_title#:#Einstellungen
+common#:#lso_admin_form_byline#:#Allgemeine Einstellungen für Lernsequenzen
+common#:#lso_admin_interval_label#:#Abfrageintervall Lernfortschritt (Sekunden)
+common#:#lso_admin_interval_byline#:#Alle x Sekunden wird der Lernfortschritt für nicht vollständig integrierte Objekte abgefragt. Achtung! Je niedriger der Wert, desto häufiger wird eine Abfrage ausgeführt. Das kann sich sehr negativ auf die Systemlast auswirken; entsprechend sollte der Wert möglichst hoch gewählt werden. 
 common#:#mainbar_more_label#:#Mehr
 common#:#obj_wbdv#:#WebDAV
 common#:#obj_wbdv_desc#:#Konfiguration der WebDAV Einstellungen.
@@ -16412,6 +16430,7 @@ adn#:#administrative_notification#:#Ankündigung
 adn#:#administrative_notification_description#:#Bereitstellen systemweiter Ankündigungen in der Kopfzeile von ILIAS
 common#:#obj_adn#:#Ankündigungen
 adn#:#main#:#Ankündigungen
+adn#:#msg_type_0#:#Hinweis
 adn#:#msg_type_1#:#Hinweis
 adn#:#msg_type_2#:#Wichtig
 adn#:#msg_type_3#:#Eilmeldung
@@ -16438,6 +16457,7 @@ adn#:#msg_limit_to_roles_info#:#Nur ausgewählte Rollen sehen die Ankündigung.
 adn#:#msg_form_title#:#Ankündigung
 adn#:#msg_table_title#:#Ankündigungen
 adn#:#common_actions#:#Aktionen
+adn#:#msg_error_false_date_configuration#:#Mit dieser Konfiguration von Daten kann keine Benachrichtigung erstellt werden. Das Ereignis muss innerhalb der Anzeigezeit liegen.
 adn#:#common_add_msg#:#Ankündigung hinzufügen
 adn#:#btn_reset#:#Zurücksetzen
 adn#:#btn_reset_confirm#:#Möchten Sie diese Ankündigung für alle Benutzer zurücksetzen?
@@ -16448,6 +16468,7 @@ adn#:#btn_edit#:#Bearbeiten
 adn#:#msg_success_deleted#:#Ankündigung erfolgreich gelöscht
 adn#:#msg_success_created#:#Ankündigung erstellt
 adn#:#msg_success_reset#:#Ankündigung zurückgesetzt
+adn#:#msg_success_updated#:#Ankündigung aktualisiert
 common#:#objs_prgr#:#Links zu Studienprogrammen
 rbac#:#prgr_copy#:#Links zu Studienprogrammen kopieren
 rbac#:#prgr_delete#:#Links zu Studienprogrammen verschieben oder löschen
@@ -16498,3 +16519,40 @@ rbac#:#cmis_write#:#Einstellungen in Administration für xAPI/cmi5 ändern
 rbac#:#cmis_edit_permissions#:#Rechteeinstellungen der Administration für xAPI/cmi5 ändern
 prg#:#no_srctype_or_id#:#Id und Typ dürfen nicht leer sein.
 prg#:#auto_add_success#:#Automatismus erfolgreich hinzugefügt.
+maps#:#maps_https_for_reverse_lookup#:#Https für Reverse Lookup
+tagging#:#no_tag_text_1#:#Sie haben aktuell noch keine Tags genutzt. Um dies zu tun, müssen Sie zwei Schritte machen:
+tagging#:#no_tag_text_2#:#Klicken Sie auf '%s' und wählen Sie aus dem verfügbaren Angebot ein Lernobjekt aus, z. B. ein Lernmodul oder ein Forum.
+tagging#:#no_tag_text_3#:#Öffnen Sie dann das <i>Aktionen</i>-Menü des Objektes und wählen Sie "<i>Tags setzen</i>".
+form#:#form_invalid_uri#:#Ungültiges URI-Format.
+common#:#installation_status#:#Status Installation
+copg#:#copg_an_error_occured#:#Es ist leider ein Problem aufgetreten.
+copg#:#copg_details#:#Details
+copg#:#copg_error#:#Problem
+copg#:#copg_page_element_not_found#:#Unbekanntes Seitenelement.
+adve#:#adve_autosave_info_min_10#:#Bitte setzen sie den Wert auf mindestens 10 Sekunden, falls sie Funktion nutzen.
+content#:#cont_keyword#:#Schlagwort
+content#:#cont_footnote#:#Fußnote
+content#:#cont_Book#:#Buchdruck
+content#:#cont_Numbers#:#Zahlen
+content#:#cont_Verse#:#Lyrik/Strophe
+content#:#cont_choose_from_clipboard#:#Aus Medien-Clipboard
+content#:#cont_open_clipboard#:#Medien-Clipboard öffnen
+obj#:#obj_fallback_lang#:#Standardsprache
+obj#:#obj_set_fallback_lang#:#Standardsprache setzen
+obj#:#obj_select_one_language#:#Bitte genau eine Sprache auswählen
+common#:#user_avatar#:#Profilbild
+common#:#current_user_avatar#:#Ihr Profilbild
+common#:#user_avatar_of#:#Profilbild von
+awrn#:#awrn_filter#:#Benutzerfilter
+help#:#help_search_label#:#Suche in Hilfe
+rbac#:#delete_xapi_data#:#xAPI/cmi5-Daten löschen
+trac#:#trac_mode_cmix_completed#:#'Bearbeitet', wenn 'completed' gesendet wurde; 'failed' setzt den Lernfortschritt von ILIAS auf 'in Bearbeitung'.
+trac#:#trac_mode_cmix_compl_with_failed#:#'Bearbeitet', wenn 'completed' gesendet wurde; 'failed' setzt den Lernfortschritt von ILIAS auf 'nicht bestanden'.
+trac#:#trac_mode_cmix_passed#:#'Bearbeitet', wenn 'passed' oder 'satisfied' gesendet wurde; 'failed' setzt den Lernfortschritt von ILIAS auf 'in Bearbeitung'.
+trac#:#trac_mode_cmix_passed_with_failed#:#'Bearbeitet', wenn 'passed' oder 'satisfied' gesendet wurde; 'failed' setzt den Lernfortschritt von ILIAS auf 'nicht bestanden'.
+trac#:#trac_mode_cmix_completed_or_passed#:#'Bearbeitet', wenn 'completed' oder 'passed' oder 'satisfied' gesendet wurde; 'failed' setzt den Lernfortschritt von ILIAS auf 'in Bearbeitung'.
+trac#:#trac_mode_cmix_compl_or_passed_with_failed#:#'Bearbeitet', wenn 'completed' oder 'passed' oder 'satisfied' gesendet wurde; 'failed' setzt den Lernfortschritt von ILIAS auf 'nicht bestanden'.
+cmix#:#toplist_top_n_results#:#Bestenliste
+cmix#:#toplist_your_result#:#Eigener Rang
+lti#:#toplist_top_n_results#:#Bestenliste
+lti#:#toplist_your_result#:#Eigener Rang

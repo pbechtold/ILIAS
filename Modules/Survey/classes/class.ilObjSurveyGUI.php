@@ -169,10 +169,14 @@ class ilObjSurveyGUI extends ilObjectGUI
                 break;
             
             case "ilsurveyevaluationgui":
-                $ilTabs->activateTab("svy_results");
-                $this->addHeaderAction();
-                $eval_gui = new ilSurveyEvaluationGUI($this->object);
-                $this->ctrl->forwardCommand($eval_gui);
+
+                if ($this->checkRbacOrPositionPermission('read_results', 'access_results') ||
+                ilObjSurveyAccess::_hasEvaluationAccess($this->object->getId(), $this->user->getId())) {
+                    $ilTabs->activateTab("svy_results");
+                    $this->addHeaderAction();
+                    $eval_gui = new ilSurveyEvaluationGUI($this->object);
+                    $this->ctrl->forwardCommand($eval_gui);
+                }
                 break;
 
             case "ilsurveyexecutiongui":
@@ -738,7 +742,7 @@ class ilObjSurveyGUI extends ilObjectGUI
                         if (!$template_settings["evaluation_access"]["hide"]) {
                             $this->object->setEvaluationAccess($_POST["evaluation_access"]);
                         }
-                        $this->object->setCalculateSumScore((int)$_POST["calculate_sum_score"]);
+                        $this->object->setCalculateSumScore((int) $_POST["calculate_sum_score"]);
                         $hasDatasets = ilObjSurvey::_hasDatasets($this->object->getSurveyId());
                         if (!$hasDatasets) {
                             $hide_codes = $template_settings["acc_codes"]["hide"];
@@ -1407,7 +1411,7 @@ class ilObjSurveyGUI extends ilObjectGUI
                 array(
                         ilObjectServiceSettingsGUI::ORGU_POSITION_ACCESS
                     )
-                );
+            );
         }
         
         $form->addCommandButton("saveProperties", $this->lng->txt("save"));
